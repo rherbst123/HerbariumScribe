@@ -1,0 +1,1 @@
+Extract All text In this image. Display the text as closley to the origional image. 
