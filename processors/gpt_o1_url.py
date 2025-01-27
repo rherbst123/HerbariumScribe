@@ -3,6 +3,8 @@ import base64
 from PIL import Image
 from io import BytesIO
 
+
+# Depreciated as o1 is not available for Image + prompt. hopefully it comes later
 class GPTo1mageProcessorThread:
     """
     URL-based processor for GPT-o1.

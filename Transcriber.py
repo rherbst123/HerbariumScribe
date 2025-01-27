@@ -5,7 +5,7 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 
-
+#Claude API
 from processors.claude_url import ClaudeImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
 
@@ -16,10 +16,12 @@ from processors.gpt_4o_local import GPT4oLocalImageProcessorThread
 from processors.gpt_o1_url import GPTo1mageProcessorThread
 from processors.gpt_o1_local import GPTo1LocalImageProcessorThread
 
+
+
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 
 def main():
-    st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
+    st.set_page_config(page_title="Field Museum Parser", layout="wide")
 
     # ---------------------
     # Session State Setup
@@ -93,9 +95,7 @@ def main():
             accept_multiple_files=True
         )
 
-    # ---------------
-    # Process Images Button
-    # ---------------
+    #input
     st.button(
         "Process Images",
         on_click=process_images_callback,
@@ -109,10 +109,10 @@ def main():
             local_image_files
         )
     )
+    
+    
 
-    # ---------------
-    # Output Display
-    #---------------
+    #Output
     col1, col2 = st.columns([1, 2])
 
     with col1:
@@ -171,15 +171,10 @@ def main():
             mime="text/plain",
             help="Save the combined output file to your local machine"
         )
+        
+    
 
-    with col_toggle:
-        st.button("Toggle Theme", on_click=lambda: st.info("Theme toggling is just a placeholder."))
-
-    st.write("### Final Output (Combined)")
-    st.text_area("Combined Output:", st.session_state.final_output, height=600)
-
-
-# ----------------
+   
 # Callback Functions
 # ----------------
 
@@ -240,12 +235,10 @@ def process_images_callback(
 
         st.session_state.urls = urls
 
-        # Pick processor
+        # Pick processor for url images
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
-        if selected_llm == "GPT-o1":
-            processor_thread = GPTo1mageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
-        else:
+        if selected_llm == "GPT-4o":
             processor_thread = GPT4oImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
 
         processor_thread.process_images()
@@ -266,12 +259,12 @@ def process_images_callback(
 
         st.session_state.local_images = local_images_list
 
+        
+        # Local Images
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
-        if selected_llm == "GPT-o1":
-            processor_thread = GPTo1LocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
-        else:
-            processor_thread = GPT4oLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
+        if selected_llm == "GPT-4o":
+            processor_thread = GPT4oLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)   
 
         processor_thread.process_images()
 

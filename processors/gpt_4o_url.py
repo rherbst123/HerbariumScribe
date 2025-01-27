@@ -14,7 +14,8 @@ class GPT4oImageProcessorThread:
         self.urls = urls
         self.result_queue = result_queue
         print("Gpt 4o (URL-based)")
-        def process_images(self):
+    
+    def process_images(self):
             headers = {
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.api_key}"
