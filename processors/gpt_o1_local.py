@@ -4,6 +4,8 @@ import base64
 from PIL import Image
 from io import BytesIO
 
+
+# Depreciated as o1 is not available for Image + prompt. hopefully it comes later
 class GPTo1LocalImageProcessorThread:
     """
     Local-image-based processor for GPT-4o.
@@ -14,7 +16,7 @@ class GPTo1LocalImageProcessorThread:
         self.prompt_text = prompt_text
         self.local_images = local_images  
         self.result_queue = result_queue
-        print("Initializing GPTImageProcessor (Local images)")
+        print("GPT o1 (Local images)")
 
     def process_images(self):
         headers = {

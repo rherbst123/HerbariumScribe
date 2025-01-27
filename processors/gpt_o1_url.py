@@ -13,7 +13,7 @@ class GPTo1mageProcessorThread:
         self.prompt_text = prompt_text
         self.urls = urls
         self.result_queue = result_queue
-        print("GPTImageProcessor (URL-based)")
+        print("GPT o1 (URL-based)")
         def process_images(self):
             headers = {
                 "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class GPTo1mageProcessorThread:
 
                     print("  Preparing API request payload...")
                     payload = {
-                        "model": "o1-2024-12-17",
+                        "model": "o1-preview",
                         "messages": [
                             {
                                 "role": "user",
