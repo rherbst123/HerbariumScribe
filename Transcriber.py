@@ -5,11 +5,16 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 
-# Replace with your real processor classes if you want
+
 from processors.claude_url import ClaudeImageProcessorThread
-from processors.gpt_url import GPTImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
-from processors.gpt_local import GPTLocalImageProcessorThread
+
+#OpenAi stuff
+from processors.gpt_4o_url import GPT4oImageProcessorThread
+from processors.gpt_4o_local import GPT4oLocalImageProcessorThread
+
+from processors.gpt_o1_url import GPTo1mageProcessorThread
+from processors.gpt_o1_local import GPTo1LocalImageProcessorThread
 
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 
@@ -66,7 +71,7 @@ def main():
     # ---------------
     st.write("## Input Settings")
 
-    # LLM Choice
+    # TODO: Add Gpt-o1
     llm_options = ["Claude 3.5 Sonnet", "GPT-4o"]
     selected_llm = st.selectbox("Select LLM:", llm_options, index=0)
 
@@ -238,8 +243,10 @@ def process_images_callback(
         # Pick processor
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
+        if selected_llm == "GPT-o1":
+            processor_thread = GPTo1mageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
         else:
-            processor_thread = GPTImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
+            processor_thread = GPT4oImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
 
         processor_thread.process_images()
 
@@ -261,8 +268,10 @@ def process_images_callback(
 
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
+        if selected_llm == "GPT-o1":
+            processor_thread = GPTo1LocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
         else:
-            processor_thread = GPTLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
+            processor_thread = GPT4oLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
 
         processor_thread.process_images()
 

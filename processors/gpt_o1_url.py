@@ -3,9 +3,9 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-class GPTImageProcessorThread:
+class GPTo1mageProcessorThread:
     """
-    URL-based processor for GPT-4o.
+    URL-based processor for GPT-o1.
     """
 
     def __init__(self, api_key, prompt_text, urls, result_queue):
@@ -39,7 +39,7 @@ class GPTImageProcessorThread:
 
                     print("  Preparing API request payload...")
                     payload = {
-                        "model": "gpt-4o",
+                        "model": "o1-2024-12-17",
                         "messages": [
                             {
                                 "role": "user",
