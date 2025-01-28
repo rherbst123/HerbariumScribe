@@ -10,6 +10,8 @@ from processors.claude_url import ClaudeImageProcessorThread
 from processors.gpt_url import GPTImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
 from processors.gpt_local import GPTLocalImageProcessorThread
+from processors.deepseek_url import DeepSeekImageProcessorThread
+from processors.deepseek_local import DeepSeekLocalImageProcessorThread
 
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 
@@ -167,8 +169,7 @@ def main():
             help="Save the combined output file to your local machine"
         )
 
-    with col_toggle:
-        st.button("Toggle Theme", on_click=lambda: st.info("Theme toggling is just a placeholder."))
+    
 
     st.write("### Final Output (Combined)")
     st.text_area("Combined Output:", st.session_state.final_output, height=600)
@@ -238,6 +239,8 @@ def process_images_callback(
         # Pick processor
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
+        if selected_llm == "DeepSeek":
+            processor_thread = DeepSeekImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
         else:
             processor_thread = GPTImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
 
@@ -261,6 +264,8 @@ def process_images_callback(
 
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
+        if selected_llm == "DeepSeek":
+            processor_thread = DeepSeekLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
         else:
             processor_thread = GPTLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
 
