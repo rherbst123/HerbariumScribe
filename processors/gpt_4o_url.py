@@ -3,7 +3,7 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-class GPTImageProcessorThread:
+class GPT4oImageProcessorThread:
     """
     URL-based processor for GPT-4o.
     """
@@ -13,8 +13,9 @@ class GPTImageProcessorThread:
         self.prompt_text = prompt_text
         self.urls = urls
         self.result_queue = result_queue
-        print("GPTImageProcessor (URL-based)")
-        def process_images(self):
+        print("Gpt 4o (URL-based)")
+    
+    def process_images(self):
             headers = {
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.api_key}"

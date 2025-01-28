@@ -4,7 +4,7 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-class GPTLocalImageProcessorThread:
+class GPT4oLocalImageProcessorThread:
     """
     Local-image-based processor for GPT-4o.
     """
@@ -14,7 +14,7 @@ class GPTLocalImageProcessorThread:
         self.prompt_text = prompt_text
         self.local_images = local_images  # List of (PIL Image, filename)
         self.result_queue = result_queue
-        print("Initializing GPTImageProcessor (Local images)")
+        print("Initializing Gpt 4o (Local images)")
 
     def process_images(self):
         headers = {

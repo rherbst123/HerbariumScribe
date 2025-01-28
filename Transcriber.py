@@ -5,18 +5,27 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 
-# Replace with your real processor classes if you want
+#Claude API
 from processors.claude_url import ClaudeImageProcessorThread
-from processors.gpt_url import GPTImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
-from processors.gpt_local import GPTLocalImageProcessorThread
 from processors.deepseek_url import DeepSeekImageProcessorThread
 from processors.deepseek_local import DeepSeekLocalImageProcessorThread
+
+#OpenAi stuff
+from processors.gpt_4o_url import GPT4oImageProcessorThread
+from processors.gpt_4o_local import GPT4oLocalImageProcessorThread
+
+#from processors.gpt_o1_url import GPTo1mageProcessorThread
+#from processors.gpt_o1_local import GPTo1LocalImageProcessorThread
+
+
 
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 
 def main():
-    st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
+    
+    st.set_page_config(page_title="Field Museum Parser", layout="wide")
+    st.write("# Field Museum Parser")
 
     # ---------------------
     # Session State Setup
@@ -46,7 +55,7 @@ def main():
     # ---------------
     # Prompt Selection
     # ---------------
-    st.write("## Prompt Selection")
+    st.write("### Prompt Selection")
     if not os.path.isdir(PROMPT_FOLDER):
         st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
         prompt_files = []
@@ -66,9 +75,9 @@ def main():
     # ---------------
     # Input Settings
     # ---------------
-    st.write("## Input Settings")
+    st.write("### Input Settings")
 
-    # LLM Choice
+    # TODO: Add Gpt-o1
     llm_options = ["Claude 3.5 Sonnet", "GPT-4o"]
     selected_llm = st.selectbox("Select LLM:", llm_options, index=0)
 
@@ -90,9 +99,7 @@ def main():
             accept_multiple_files=True
         )
 
-    # ---------------
-    # Process Images Button
-    # ---------------
+    #input
     st.button(
         "Process Images",
         on_click=process_images_callback,
@@ -106,10 +113,10 @@ def main():
             local_image_files
         )
     )
+    
+    
 
-    # ---------------
-    # Output Display
-    #---------------
+    #Output
     col1, col2 = st.columns([1, 2])
 
     with col1:
@@ -168,6 +175,8 @@ def main():
             mime="text/plain",
             help="Save the combined output file to your local machine"
         )
+        
+    
 
     
 
@@ -236,13 +245,13 @@ def process_images_callback(
 
         st.session_state.urls = urls
 
-        # Pick processor
+        # Pick processor for url images
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
         if selected_llm == "DeepSeek":
             processor_thread = DeepSeekImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
         else:
-            processor_thread = GPTImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
+            processor_thread = GPT4oImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
 
         processor_thread.process_images()
 
@@ -262,12 +271,14 @@ def process_images_callback(
 
         st.session_state.local_images = local_images_list
 
+        
+        # Local Images
         if selected_llm == "Claude 3.5 Sonnet":
             processor_thread = ClaudeLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
         if selected_llm == "DeepSeek":
             processor_thread = DeepSeekLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
         else:
-            processor_thread = GPTLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
+            processor_thread = GPT4oLocalImageProcessorThread(api_key, st.session_state.prompt_text, local_images_list, result_queue)
 
         processor_thread.process_images()
 
@@ -351,7 +362,7 @@ def show_fullscreen_image():
     Displays the current image in a 'full screen' style section,
     plus a button to close it.
     """
-    st.write("## Full-Screen Image Viewer")
+    st.write("### Full-Screen Image Viewer")
     idx = st.session_state.current_image_index
     image = st.session_state.processed_images[idx]
     st.image(image, caption=f"Full Screen of Image {idx + 1}", use_container_width=True)
