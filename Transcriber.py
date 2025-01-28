@@ -21,7 +21,9 @@ from processors.gpt_o1_local import GPTo1LocalImageProcessorThread
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 
 def main():
+    
     st.set_page_config(page_title="Field Museum Parser", layout="wide")
+    st.write("# Field Museum Parser")
 
     # ---------------------
     # Session State Setup
@@ -51,7 +53,7 @@ def main():
     # ---------------
     # Prompt Selection
     # ---------------
-    st.write("## Prompt Selection")
+    st.write("### Prompt Selection")
     if not os.path.isdir(PROMPT_FOLDER):
         st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
         prompt_files = []
@@ -71,7 +73,7 @@ def main():
     # ---------------
     # Input Settings
     # ---------------
-    st.write("## Input Settings")
+    st.write("### Input Settings")
 
     # TODO: Add Gpt-o1
     llm_options = ["Claude 3.5 Sonnet", "GPT-4o"]
@@ -348,7 +350,7 @@ def show_fullscreen_image():
     Displays the current image in a 'full screen' style section,
     plus a button to close it.
     """
-    st.write("## Full-Screen Image Viewer")
+    st.write("### Full-Screen Image Viewer")
     idx = st.session_state.current_image_index
     image = st.session_state.processed_images[idx]
     st.image(image, caption=f"Full Screen of Image {idx + 1}", use_container_width=True)
