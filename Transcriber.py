@@ -8,8 +8,8 @@ from io import BytesIO
 #Claude API
 from processors.claude_url import ClaudeImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
-from processors.deepseek_url import DeepSeekImageProcessorThread
-from processors.deepseek_local import DeepSeekLocalImageProcessorThread
+#from processors.deepseek_url import DeepSeekImageProcessorThread
+#from processors.deepseek_local import DeepSeekLocalImageProcessorThread
 
 #OpenAi stuff
 from processors.gpt_4o_url import GPT4oImageProcessorThread
