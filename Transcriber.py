@@ -4,9 +4,15 @@ import queue
 from datetime import datetime
 from PIL import Image
 from io import BytesIO
+from llm_interfaces.transcript import Transcript
+from llm_interfaces.utility import extract_info_from_text
+import time
+import json
+import re
 
 # Replace with your real processor classes if you want
-from processors.claude_url import ClaudeImageProcessorThread
+#from processors.claude_url import ClaudeImageProcessorThread
+from llm_interfaces.claude_interface import ClaudeImageProcessorThread
 from processors.gpt_url import GPTImageProcessorThread
 from processors.claude_local import ClaudeLocalImageProcessorThread
 from processors.gpt_local import GPTLocalImageProcessorThread
@@ -23,6 +29,10 @@ def main():
         st.session_state.processed_images = []
     if "processed_outputs" not in st.session_state:
         st.session_state.processed_outputs = []
+    if "processed_versions" not in st.session_state:
+        st.session_state.processed_versions = []   
+    if "processed_urls" not in st.session_state:
+        st.session_state.processed_urls = []        
     if "current_image_index" not in st.session_state:
         st.session_state.current_image_index = 0
     if "final_output" not in st.session_state:
@@ -40,7 +50,19 @@ def main():
         st.session_state.selected_llm = ""
     if "selected_prompt" not in st.session_state:
         st.session_state.selected_prompt = ""
+    if "user_name" not in st.session_state:
+        st.session_state.user_name = ""
+    if "session_name" not in st.session_state:
+        st.session_state.session_name = ""
+    if "session_folder" not in st.session_state:
+        st.session_state.session_folder = "single_transcriptions/" 
+    if "filename_to_edit" not in st.session_state:
+        st.session_state.filename_to_edit = ""               
 
+    st.write("## Enter User Name")
+    st.session_state.user_name = st.text_input("Enter your name:", value=st.session_state.user_name)
+    set_session_name()
+    print(f"{st.session_state.session_name = }")
     # ---------------
     # Prompt Selection
     # ---------------
@@ -91,19 +113,27 @@ def main():
     # ---------------
     # Process Images Button
     # ---------------
-    st.button(
-        "Process Images",
-        on_click=process_images_callback,
-        args=(
-            api_key_file,
-            prompt_text_from_file,
-            selected_llm,
-            selected_prompt_file,
-            input_type,
-            url_file,
-            local_image_files
+    col_process, col_re_edit = st.columns(2)
+    with col_process:
+        st.button(
+            "Process Images",
+            on_click=process_images_callback,
+            args=(
+                api_key_file,
+                prompt_text_from_file,
+                selected_llm,
+                selected_prompt_file,
+                input_type,
+                url_file,
+                local_image_files
+            )
         )
-    )
+
+    with col_re_edit:
+        st.button(
+            "Re-Edit Latest Version",
+            on_click=re_edit_callback,
+        )
 
     # ---------------
     # Output Display
@@ -134,8 +164,6 @@ def main():
         else:
             current_output = ""
 
-        st.text_area("Output Text:", current_output, height=300, key="output_text_area")
-
     # ---------------
     # Full-Screen View (if enabled)
     #---------------
@@ -145,7 +173,7 @@ def main():
     # ---------------
     # Bottom Buttons
     #---------------
-    col_save, col_download, col_toggle = st.columns(3)
+    col_save, col_download, col_save_to_json = st.columns(3)
 
     with col_save:
         st.button("Save Edits in Memory", on_click=save_edits)
@@ -167,8 +195,8 @@ def main():
             help="Save the combined output file to your local machine"
         )
 
-    with col_toggle:
-        st.button("Toggle Theme", on_click=lambda: st.info("Theme toggling is just a placeholder."))
+    with col_save_to_json:
+        st.button("Save edits to JSON", on_click=save_edits_to_json)
 
     st.write("### Final Output (Combined)")
     st.text_area("Combined Output:", st.session_state.final_output, height=600)
@@ -177,6 +205,64 @@ def main():
 # ----------------
 # Callback Functions
 # ----------------
+
+# session state functions
+
+def set_session_name():
+    timestamp = get_timestamp() 
+    st.session_state.session_name = f"{st.session_state.user_name}-{timestamp}" 
+
+def get_timestamp():
+    return  time.strftime("%Y-%m-%d-%H%M-%S")        
+
+# file handling callbacks
+
+def save_edits_to_json():
+    for output, version_name, url in zip(st.session_state.processed_outputs, st.session_state.processed_versions, st.session_state.processed_urls):
+        transcript = Transcript(url, st.session_state.selected_prompt)
+        transciption_dict = extract_info_from_text(output)
+        costs = get_costs()
+        transcript.create_version(created_by=st.session_state.user_name, content=transciption_dict, data=costs, old_version_name=version_name)
+
+
+# editing callbacks
+
+def re_edit_callback():
+    st.write("## Re-Edit File Selection")
+    reedit_files = [f for f in os.listdir(st.session_state.session_folder) if f.endswith(".json")]
+
+    if reedit_files:
+        selected_reedit_file = st.selectbox("Select a File:", reedit_files)
+        with open(os.path.join(st.session_state.session_folder, selected_reedit_file), "r", encoding="utf-8") as rf:
+            reedit_file = json.load(rf)
+            print(f"{reedit_file = }")
+    else:
+        st.warning("No .json prompt files found in the session folder.")
+
+# version handling callbacks
+
+# version creation/editing callbacks
+
+def get_costs():
+        return {
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0
+        }
+
+# formatting strings
+# color keys red using CSS
+def color_keys(text):
+    text = re.sub(r'(\w+):', r'<span style="color: red">\1:</span>', text)
+    return text
+
+
+
+
+
+
+
 
 def process_images_callback(
     api_key_file,
@@ -212,6 +298,8 @@ def process_images_callback(
     st.session_state.prompt_text = prompt_text_from_file
     st.session_state.processed_images.clear()
     st.session_state.processed_outputs.clear()
+    st.session_state.processed_versions.clear()
+    st.session_state.processed_urls.clear()
     st.session_state.current_image_index = 0
     st.session_state.final_output = ""
     st.session_state.urls.clear()
@@ -237,7 +325,7 @@ def process_images_callback(
 
         # Pick processor
         if selected_llm == "Claude 3.5 Sonnet":
-            processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
+            processor_thread = ClaudeImageProcessorThread(api_key, st.session_state.selected_prompt, st.session_state.prompt_text, urls, result_queue)
         else:
             processor_thread = GPTImageProcessorThread(api_key, st.session_state.prompt_text, urls, result_queue)
 
@@ -269,14 +357,16 @@ def process_images_callback(
     # Retrieve results
     while True:
         try:
-            image, output = result_queue.get_nowait()
+            image, output, version_name, url = result_queue.get_nowait()
         except queue.Empty:
             break
-        if image is None and output is None:
+        if image is None and output is None and version_name is None:
             break
         if image:
             st.session_state.processed_images.append(image)
         st.session_state.processed_outputs.append(output)
+        st.session_state.processed_versions.append(version_name)
+        st.session_state.processed_urls.append(url)
         st.session_state.final_output += output + "\n" + ("=" * 50) + "\n"
 
     if st.session_state.processed_images:
@@ -340,6 +430,8 @@ def save_current_output_in_session():
         idx = st.session_state.current_image_index
         if idx < len(st.session_state.processed_outputs):
             st.session_state.processed_outputs[idx] = st.session_state.output_text_area
+
+            
 
 def show_fullscreen_image():
     """
