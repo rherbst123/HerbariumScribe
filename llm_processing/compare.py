@@ -10,7 +10,7 @@ import csv
 import json
 import time
 import math
-from llm_interfaces.edit_distance import WeightedLevenshtein
+from llm_processing.edit_distance import WeightedLevenshtein
 
 class TranscriptComparer:
     def __init__(self, transcript, edit_distance_config=None):

@@ -13,7 +13,7 @@ import csv
 import json
 import time
 import math
-from llm_interfaces.compare import TranscriptComparer
+from llm_processing.compare import TranscriptComparer
 
 
 class Transcript:
@@ -48,7 +48,7 @@ class Transcript:
         self.is_user = is_user
         data = self.update_data(data, created_by, old_version_name)
         new_version_name = self.get_version_name(created_by)
-        self.versions[new_version_name] = {"content": content, "data": data}
+        self.versions[new_version_name] = {"content": content, "data": data, "editing": {"time started": 0}}
         comparison_dict = self.get_comparsion_dict(old_version_name)
         self.versions[new_version_name] = self.versions[new_version_name] | {f"comparison to old version": comparison_dict}
         self.update_costs(new_version_name)
@@ -73,13 +73,21 @@ class Transcript:
         return d | data
 
     def update_costs(self, current_version_name):
-        costs_list = ["input tokens", "output tokens", "input cost $", "output cost $"]
+        costs_list = ["input tokens", "output tokens", "input cost $", "output cost $", "time to create/edit"]
         overall_costs_dict = {f"overall {cost}": 0 for cost in costs_list}
         history = self.get_version_history(self.versions, current_version_name)
         for version_name, version in history[::-1]:
             for cost in costs_list:
                 overall_costs_dict[f"overall {cost}"] += version["data"][cost]
-            self.versions[version_name]["data"] = self.versions[version_name]["data"] | overall_costs_dict          
+            self.versions[version_name]["data"] = self.versions[version_name]["data"] | overall_costs_dict
+
+    def update_time_to_edit(self, current_version_name, start=True):
+        if start:
+            self.versions[current_version_name]["editing"] = {"time started": time.time()}
+        else:
+            editing_time = time.time() - self.versions[current_version_name]["editing"]["time started"]
+            self.versions[current_version_name]["data"]["time to create/edit"] += editing_time
+            self.versions[current_version_name]["editing"]["time started"] = 0                   
 
     def get_version_history(self, versions, current_version_name: str, up_to="base"):
         history = []
@@ -116,7 +124,7 @@ class Transcript:
         if "comparison to old version" not in self.versions[version_name]:
             return 0
         comparison = self.versions[version_name]["comparison to old version"]
-        if not comparison or not math.floor(comparison[fieldname]):
+        if not comparison or fieldname not in comparison or not math.floor(comparison[fieldname]):
             return 0
         if "created by types" not in comparison:
             return 1    
