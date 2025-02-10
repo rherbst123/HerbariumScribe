@@ -163,6 +163,8 @@ def main():
             current_output = st.session_state.processed_outputs[st.session_state.current_image_index]
         else:
             current_output = ""
+        st.write("https://ipa.typeit.org/full/") 
+        st.write("https://translate.google.com/")   
 
     # ---------------
     # Full-Screen View (if enabled)

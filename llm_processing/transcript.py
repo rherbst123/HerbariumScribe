@@ -48,12 +48,20 @@ class Transcript:
         self.is_user = is_user
         data = self.update_data(data, created_by, old_version_name)
         new_version_name = self.get_version_name(created_by)
-        self.versions[new_version_name] = {"content": content, "data": data, "editing": {"time started": 0}}
+        editing_dict = self.get_editing_dict(created_by, old_version_name)
+        self.versions[new_version_name] = {"content": content, "data": data, "editing": editing_dict}
         comparison_dict = self.get_comparsion_dict(old_version_name)
         self.versions[new_version_name] = self.versions[new_version_name] | {f"comparison to old version": comparison_dict}
         self.update_costs(new_version_name)
         self.save_to_json(self.versions)
         return new_version_name
+
+    def get_editing_dict(self, created_by, old_version_name):
+        if old_version_name == "base":
+            history = [created_by]
+        else:
+            history = self.versions[old_version_name]["editing"]["history"] + [created_by]
+        return {"time started": 0, "history": history}    
 
     def get_comparsion_dict(self, old_version_name):
         if old_version_name == "base":
@@ -87,6 +95,7 @@ class Transcript:
         else:
             editing_time = time.time() - self.versions[current_version_name]["editing"]["time started"]
             self.versions[current_version_name]["data"]["time to create/edit"] += editing_time
+            self.versions[current_version_name]["data"]["overall time to create/edit"] += editing_time
             self.versions[current_version_name]["editing"]["time started"] = 0                   
 
     def get_version_history(self, versions, current_version_name: str, up_to="base"):
@@ -127,9 +136,11 @@ class Transcript:
         if not comparison or fieldname not in comparison or not math.floor(comparison[fieldname]):
             return 0
         if "created by types" not in comparison:
-            return 1    
+            return 0    
         created_by_types = comparison["created by types"]
-        return 1 if "model" in created_by_types else 2  
+        created_by_types = list(created_by_types)
+        return 1 if created_by_types==["model", "model"] else 2 if "model" in created_by_types else 3
+  
 
     
     def get_legal_json_filename(self):

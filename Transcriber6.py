@@ -131,7 +131,7 @@ def color_keys(fieldname):
     print(f"{fieldname = }")
     rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
     return f":red[{st.session_state.current_fieldname}]" if rating==0 else f":orange[{st.session_state.current_fieldname}]" if rating==1 else f":blue[{st.session_state.current_fieldname}]" if rating==2 else f":green[{st.session_state.current_fieldname}]" if rating ==3 else fieldname
-
+ 
 def close_fullscreen():
     """Callback to switch 'fullscreen' off."""
     st.session_state.fullscreen = False
@@ -453,7 +453,7 @@ def save_edits():
         combined_text += dict_to_text(output_dict) + "\n" + ("=" * 50) + "\n"
 
     # Prepend a short header with model + prompt
-    model_info = f"Model used: {st.session_state.selected_llm}\n"
+    model_info = f"Model(s) used: {st.session_state.selected_llms}\n"
     prompt_info = f"Prompt used: {st.session_state.selected_prompt}\n\n"
     final_text = model_info + prompt_info + combined_text
 
@@ -517,215 +517,237 @@ def update_processed_outputs():
 
 def main():
     st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
+    
+    st.markdown("""
+        <style>
+        div.stButton > button {
+            background-color: #E0E0E0 ;
+        }
+        [data-testid="stHorizontalBlock"] {
+            background-color: #FFFDD0 !important;  /* Added !important */
+            padding: .5rem !important;
+            border-radius: 5px !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     set_up()
-    st.session_state.user_name = st.text_input("Enter your name:", value=st.session_state.user_name)
+    st.session_state.user_name = st.text_input("username:", value=st.session_state.user_name)
+    if st.session_state.user_name == "":
+        st.warning("Please enter your name.")
+        st.stop()
     set_session_name()
     update_overall_session_time()
-    # ---------------
-    # Input Settings
-    # ---------------
-    with st.container(border=True):
-            
-        st.write("## Input Settings")
+    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images"])
+    if processing_type == "Process New Images":
+        #reset_processed_elements()
         # ---------------
-        # Prompt Selection
+        # Input Settings
         # ---------------
-        if not os.path.isdir(PROMPT_FOLDER):
-            st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
-            prompt_files = []
-        else:
-            prompt_files = [f for f in os.listdir(PROMPT_FOLDER) if f.endswith(".txt")]
-            prompt_files.sort()
+        
+        with st.container(border=True):
+                
+            st.write("## Input Settings")
+            # ---------------
+            # Prompt Selection
+            # ---------------
+            if not os.path.isdir(PROMPT_FOLDER):
+                st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
+                prompt_files = []
+            else:
+                prompt_files = [f for f in os.listdir(PROMPT_FOLDER) if f.endswith(".txt")]
+                prompt_files.sort()
 
-        if prompt_files:
-            selected_prompt_file = st.selectbox("Select a Prompt:", prompt_files)
-            with open(os.path.join(PROMPT_FOLDER, selected_prompt_file), "r", encoding="utf-8") as pf:
-                prompt_text_from_file = pf.read().strip()
-        else:
-            st.warning("No .txt prompt files found in the prompt folder.")
-            selected_prompt_file = ""
-            prompt_text_from_file = ""
+            if prompt_files:
+                selected_prompt_file = st.selectbox("Select a Prompt:", prompt_files)
+                with open(os.path.join(PROMPT_FOLDER, selected_prompt_file), "r", encoding="utf-8") as pf:
+                    prompt_text_from_file = pf.read().strip()
+            else:
+                st.warning("No .txt prompt files found in the prompt folder.")
+                selected_prompt_file = ""
+                prompt_text_from_file = ""
 
 
-        # LLM Choice
-        llm_options = ["claude-3.5-sonnet", "gpt-4o"]
-        selected_llms = st.multiselect("Select LLM(s):", llm_options, default=[llm_options[0]])
+            # LLM Choice
+            llm_options = ["claude-3.5-sonnet", "gpt-4o"]
+            selected_llms = st.multiselect("Select LLM(s):", llm_options, default=[llm_options[0]])
 
-        # API key file
-        api_key_dict = {}
-        for llm in selected_llms:
-            api_key_dict[llm] = st.file_uploader(f"Upload API Key File For {llm} (TXT)", type=["txt"])
+            # API key file
+            api_key_dict = {}
+            for llm in selected_llms:
+                api_key_dict[llm] = st.file_uploader(f"Upload API Key File For {llm} (TXT)", type=["txt"])
 
-        # Radio for "Local Images" vs. "URL List"
-        input_type = st.radio("Select Image Input Type:", ["URL List", "Local Images"], index=0)
+            # Radio for "Local Images" vs. "URL List"
+            input_type = st.radio("Select Image Input Type:", ["URL List", "Local Images"], index=0)
 
-        # File uploaders
-        if input_type == "URL List":
-            url_file = st.file_uploader("Upload URL File (TXT)", type=["txt"])
-            local_image_files = None
-        else:
-            url_file = None
-            local_image_files = st.file_uploader(
-                "Upload One or More Images",
-                type=["png", "jpg", "jpeg"],
-                accept_multiple_files=True
-            )
+            # File uploaders
+            if input_type == "URL List":
+                url_file = st.file_uploader("Upload URL File (TXT)", type=["txt"])
+                local_image_files = None
+            else:
+                url_file = None
+                local_image_files = st.file_uploader(
+                    "Upload One or More Images",
+                    type=["png", "jpg", "jpeg"],
+                    accept_multiple_files=True
+                )
 
+        # ---------------
+        # Process Images Button
     # ---------------
-    # Process Images Button
-    # ---------------
-    col_process, col_re_edit = st.columns(2)
-    with col_process:
         st.button(
-            "Process Images",
-            on_click=process_images_callback,
-            args=(
-                api_key_dict,
-                prompt_text_from_file,
-                selected_llms,
-                selected_prompt_file,
-                input_type,
-                url_file,
-                local_image_files
+                "Process Images",
+                on_click=process_images_callback,
+                args=(
+                    api_key_dict,
+                    prompt_text_from_file,
+                    selected_llms,
+                    selected_prompt_file,
+                    input_type,
+                    url_file,
+                    local_image_files
+                )
             )
-        )
-
-    with col_re_edit:
-        update_overall_session_time()
-        if not st.session_state.reedit_mode:
-            st.button("Load Latest Versions", on_click=lambda: setattr(st.session_state, 'reedit_mode', True))
-        else:
-            reedit_files = [f for f in os.listdir(f"{TRANCRIPTION_FOLDER}/versions") if f.endswith(".json")]
-            if reedit_files:
-                selected_files = st.multiselect("Select Files:", reedit_files)
-                col1, col2 = st.columns(2)
-                with col1:
-                    if selected_files:
-                        if st.button("Load Selected Files"):
-                            re_edit_saved_versions(selected_files)
-                with col2:
+    else:     
+        #reset_processed_elements()
+        with st.container(border=True):
+            update_overall_session_time()
+            if not st.session_state.reedit_mode:
+                st.button("Load Latest Versions", on_click=lambda: setattr(st.session_state, 'reedit_mode', True))
+            else:
+                reedit_files = [f for f in os.listdir(f"{TRANCRIPTION_FOLDER}/versions") if f.endswith(".json")]
+                if reedit_files:
+                    selected_files = st.multiselect("Select Files:", reedit_files)
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if selected_files:
+                            if st.button("Load Selected Files"):
+                                re_edit_saved_versions(selected_files)
+                    with col2:
+                        if st.button("Cancel"):
+                            st.session_state.reedit_mode = False
+                            st.rerun()
+                else:
+                    st.warning("No .json files found in the session folder.")
                     if st.button("Cancel"):
                         st.session_state.reedit_mode = False
                         st.rerun()
-            else:
-                st.warning("No .json files found in the session folder.")
-                if st.button("Cancel"):
-                    st.session_state.reedit_mode = False
-                    st.rerun()
 
     # ---------------
     # Output Display
     #---------------
-    with st.container(border=True):
-        st.write("## Editor")
-        col1, col2 = st.columns(2)
-        with col1:
-            col_text, col_button = st.columns([2,1])
-            with col_text:
-                current_image_idx = st.session_state.current_image_index + 1 if st.session_state.processed_images else 0
-                st.write(f"### Image {current_image_idx}")
-            if st.session_state.processed_images:
-                idx = st.session_state.current_image_index
-                image = st.session_state.processed_images[idx]
-                with col_button:
-                    st.button("Open Full Screen", on_click=open_fullscreen) 
-                st.image(image, caption=f"Image {idx+1}", use_container_width=True)
-            else:
-                st.write("No processed images to display.")
-
-        with col2:
-            nav_prev, nav_next = st.columns(2)
-            with nav_prev:
-                st.button("Previous", on_click=go_previous)
-            with nav_next:
-                st.button("Next", on_click=go_next)
-            content_opt, __ = st.columns(2)    
-            with content_opt:
-                content_options = get_content_options()
-                selected_content = st.selectbox("Select Content To View or Edit:", content_options)
-                st.session_state.content_option = "content" if selected_content=="transcript" else selected_content
-                if st.session_state.processed_outputs:
-                    st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-                    st.session_state.current_version_name = get_current_version_name()   
-            if st.session_state.processed_outputs and st.session_state.current_version_name:
-                st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                output_as_text = dict_to_text(st.session_state.current_output_dict)
-                update_time_to_edit(start=True)
-                st.text_area("*Press Ctrl+Enter to accept edits*", output_as_text, height=475)
-            else:    
-                st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=475)
-            col_prev_field, col_next_field, col_fieldname = st.columns([1,1,5])
-            with col_fieldname:
-                if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
-                    ######
-                    st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                    st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
-                    st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
-                    colored_fieldname = color_keys(st.session_state.current_fieldname)
-                    st.write(f"### {colored_fieldname}")
+    if st.session_state.processed_outputs and st.session_state.processed_images: 
+        with st.container(border=True):
+            st.write("## Editor")
+            col1, col2 = st.columns(2)
+            with col1:
+                col_text, col_button = st.columns([2,1])
+                with col_text:
+                    current_image_idx = st.session_state.current_image_index + 1 if st.session_state.processed_images else 0
+                    st.write(f"### Image {current_image_idx}")
+                if st.session_state.processed_images:
+                    idx = st.session_state.current_image_index
+                    image = st.session_state.processed_images[idx]
+                    with col_button:
+                        st.button("Open Full Screen", on_click=open_fullscreen)
+                    image_ref = st.session_state.current_transcript_obj.image_ref if st.session_state.current_transcript_obj else f"Image {current_image_idx}"   
+                    st.image(image, caption=image_ref, use_container_width=True)
                 else:
-                    st.write("No processed outputs to display.")
-            with col_next_field:
-                if st.session_state.processed_outputs and st.session_state.processed_images:
-                    st.button("NEXT", on_click=go_to_next_field)         
-            with col_prev_field:       
-                if st.session_state.processed_outputs and st.session_state.processed_images:
-                    st.button("PREV", on_click=go_to_previous_field)
-            if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
-                #####
-                st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
-                st.session_state.current_fieldvalue = st.session_state.current_output_dict[st.session_state.current_fieldname]
-                st.session_state.text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.current_fieldvalue, height=75)
-                col_link1, col_link2 = st.columns(2)
-                with col_link1:
-                    st.write("https://ipa.typeit.org/full/")
-                    #st.button("Open IPA Link", on_click=open_ipa_link)
-                with col_link2:
-                    st.write("https://translate.google.com/") 
-                    #st.button("Open Google Translate", on_click=open_google_translate)    
-                #st.write("https://ipa.typeit.org/full/") 
-                #st.write("https://translate.google.com/") 
-            else:
-                st.write("No processed outputs to display.")       
+                    st.write("No processed images to display.")
+
+            with col2:
+                nav_prev, nav_next = st.columns(2)
+                with nav_prev:
+                    st.button("Previous", on_click=go_previous)
+                with nav_next:
+                    st.button("Next", on_click=go_next)
+                content_opt, __ = st.columns(2)    
+                with content_opt:
+                    content_options = get_content_options()
+                    selected_content = st.selectbox("Select Content To View or Edit:", content_options)
+                    st.session_state.content_option = "content" if selected_content=="transcript" else selected_content
+                    if st.session_state.processed_outputs:
+                        st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
+                        st.session_state.current_version_name = get_current_version_name()   
+                if st.session_state.processed_outputs and st.session_state.current_version_name:
+                    st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                    output_as_text = dict_to_text(st.session_state.current_output_dict)
+                    update_time_to_edit(start=True)
+                    st.text_area("*Press Ctrl+Enter to accept edits*", output_as_text, height=425)
+                else:    
+                    st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=425)
+                col_prev_field, col_next_field, col_fieldname = st.columns([1,1,5])
+                with col_fieldname:
+                    if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
+                        ######
+                        st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                        st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
+                        st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
+                        colored_fieldname = color_keys(st.session_state.current_fieldname)
+                        st.write(f"### {colored_fieldname}")
+                    else:
+                        st.write("No processed outputs to display.")
+                with col_next_field:
+                    if st.session_state.processed_outputs and st.session_state.processed_images:
+                        st.button("next", on_click=go_to_next_field)         
+                with col_prev_field:       
+                    if st.session_state.processed_outputs and st.session_state.processed_images:
+                        st.button("prev", on_click=go_to_previous_field)
+                if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
+                    #####
+                    st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                    st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
+                    st.session_state.current_fieldvalue = st.session_state.current_output_dict[st.session_state.current_fieldname]
+                    st.session_state.text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.current_fieldvalue, height=75)
+                    col_link1, col_link2 = st.columns(2)
+                    with col_link1:
+                        st.write("https://ipa.typeit.org/full/")
+                        #st.button("Open IPA Link", on_click=open_ipa_link)
+                    with col_link2:
+                        st.write("https://translate.google.com/") 
+                        #st.button("Open Google Translate", on_click=open_google_translate)    
+                    #st.write("https://ipa.typeit.org/full/") 
+                    #st.write("https://translate.google.com/") 
+                else:
+                    st.write("No processed outputs to display.")       
+            # ---------------
+        # Full-Screen View (if enabled)
+        #---------------
+        if st.session_state.fullscreen and st.session_state.processed_images:
+            show_fullscreen_image()
+
         # ---------------
-    # Full-Screen View (if enabled)
-    #---------------
-    if st.session_state.fullscreen and st.session_state.processed_images:
-        show_fullscreen_image()
+        # Bottom Buttons
+        #---------------
+        col_save, col_download, col_save_to_json = st.columns(3)
 
-    # ---------------
-    # Bottom Buttons
-    #---------------
-    col_save, col_download, col_save_to_json = st.columns(3)
+        with col_save:
+            st.button("Save Edits in Memory", on_click=save_edits)
 
-    with col_save:
-        st.button("Save Edits in Memory", on_click=save_edits)
+        with col_download:
+            # Build a filename containing model name and prompt
+            # Replace spaces or special chars if desired
+            if st.session_state.selected_llms and st.session_state.selected_prompt:
+                model_short = st.session_state.selected_llms[-1].replace(" ", "_")
+                prompt_short = st.session_state.selected_prompt.replace(" ", "_").replace(".txt", "")
+                timestamp_str = datetime.now().strftime("%m_%d_%y-%I_%M%p")
 
-    with col_download:
-        # Build a filename containing model name and prompt
-        # Replace spaces or special chars if desired
-        if st.session_state.selected_llms and st.session_state.selected_prompt:
-            model_short = st.session_state.selected_llms[-1].replace(" ", "_")
-            prompt_short = st.session_state.selected_prompt.replace(" ", "_").replace(".txt", "")
-            timestamp_str = datetime.now().strftime("%m_%d_%y-%I_%M%p")
+                out_filename = f"Transcription_{model_short}_{prompt_short}_{timestamp_str}.txt"
 
-            out_filename = f"Transcription_{model_short}_{prompt_short}_{timestamp_str}.txt"
+                st.download_button(
+                    label="Download Output",
+                    data=st.session_state.final_output,
+                    file_name=out_filename,
+                    mime="text/plain",
+                    help="Save the combined output file to your local machine"
+                )
 
-            st.download_button(
-                label="Download Output",
-                data=st.session_state.final_output,
-                file_name=out_filename,
-                mime="text/plain",
-                help="Save the combined output file to your local machine"
-            )
+        with col_save_to_json:
+            update_overall_session_time()
+            st.button("Save edits to JSON", on_click=save_edits_to_json)
 
-    with col_save_to_json:
-        update_overall_session_time()
-        st.button("Save edits to JSON", on_click=save_edits_to_json)
-
-    st.write("### Final Output (Combined)")
-    st.text_area("Combined Output:", st.session_state.final_output, height=600) 
+        st.write("### Final Output (Combined)")
+        st.text_area("Combined Output:", st.session_state.final_output, height=600) 
 
 
 if __name__ == "__main__":

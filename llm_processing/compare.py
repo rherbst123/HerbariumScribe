@@ -34,7 +34,7 @@ class TranscriptComparer:
         latest_version_creator = latest_version["data"]["created by"] 
         old_version_type = "user" if old_version["data"]["is user"] else "model"
         old_version_creator = old_version["data"]["created by"]
-        return {"created by names": (old_version_creator, latest_version_creator), "created by types": (old_version_type, latest_version_type)}   
+        return {"created by names": [old_version_creator, latest_version_creator], "created by types": [old_version_type, latest_version_type]}   
 
     def compare_last_two_versions(self):
         latest_version_name, latest_version = self.transcript.get_latest_version(self.transcript.versions)
