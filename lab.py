@@ -1,17 +1,15 @@
-import streamlit as st
-import pandas as pd
-import re
 
-text = "test"
 
-text = "test"
-st.markdown(f"<span style='color: red'>{text}</span>", unsafe_allow_html=True)
-df = pd.DataFrame(
-    [
-        {"command": f"{text}", "rating": 4, "is_widget": True},
-        {"command": "st.balloons", "rating": 5, "is_widget": False},
-        {"command": "st.time_input", "rating": 3, "is_widget": True},
-    ]
-)
+class Test:
+    def __init__(self):
+        self.test1 = "test1"
+        self.test2 = "test2"
+        self.dict1 = {"data": {1:"1", 2:"2", 3:"3"}}
 
-edited_df = st.data_editor(df)
+objs = [Test(), Test(), Test()]
+obj1 = objs[0]
+obj1.test1 = "test10"
+print(f"{obj1.test1 = }, {objs[0].test1 = }") 
+obj2 = objs[1]
+obj2.dict1["data"][1] = "10"
+print(f"{obj2.dict1 = }, {objs[1].dict1 = }")       

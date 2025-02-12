@@ -113,36 +113,48 @@ class ClaudeImageProcessorThread:
                 "created by": self.modelname,
                 "is user": False,
                 "time to create/edit": time_elapsed,
-                } | self.get_token_costs()     
+                } | self.get_token_costs()
 
-    def get_response(self, prompt_text, image_name, image_path):
-        base64_image = self.encode_image_to_base64(image_path)
-        message = self.client.messages.create(
-            model=self.model,
-            max_tokens=2500,
-            temperature=0,
-            system="You are an assistant that has a job to extract text from an image and parse it out.",
-            messages=[
+    def get_image_content_dict(self, url):
+        response = requests.get(url)
+        response.raise_for_status()
+        image = Image.open(BytesIO(response.content))
+        buffered = BytesIO()
+        image.save(buffered, format="JPEG")
+        base64_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
+        return {
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": "image/jpeg",
+                "data": base64_image,
+            },
+        }                 
+
+    def chat(self, prompt_text, url=None):
+        print(f"chatting: {prompt_text = }, {url = }")
+        messages=[
                 {
                     "role": "user",
                     "content": [
                         {
                             "type": "text",
                             "text": prompt_text
-                        },
-                        {
-                            "type": "image",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "image/jpeg",
-                                "data": base64_image
-                            }
                         }
                     ]
                 }
             ]
+        if url:
+            messages[0]["content"].append(self.get_image_content_dict(url))
+        message = self.client.messages.create(
+            model=self.model,
+            max_tokens=2500,
+            temperature=0,
+            system="You are an assistant that has a job to answer questions about an herbarium specimen label. A picture of the label may or may not be provided",
+            messages=messages
         )
         response_data = message.content
-        formatted_result = self.format_response(image_name, response_data)
+        print(f"{response_data = }")
         self.update_usage(message)
-        return formatted_result
+        return response_data[0].text, self.get_token_costs()
+            

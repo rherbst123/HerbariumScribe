@@ -44,11 +44,11 @@ class Transcript:
     def get_version_name(self, created_by):
         return f"{created_by}-{self.time_started}"                 
 
-    def create_version(self, created_by, content, data, is_user=False, old_version_name="base"):
+    def create_version(self, created_by, content, data, is_user=False, old_version_name="base", editing={}):
         self.is_user = is_user
         data = self.update_data(data, created_by, old_version_name)
         new_version_name = self.get_version_name(created_by)
-        editing_dict = self.get_editing_dict(created_by, old_version_name)
+        editing_dict = self.get_editing_dict(created_by, old_version_name) | editing
         self.versions[new_version_name] = {"content": content, "data": data, "editing": editing_dict}
         comparison_dict = self.get_comparsion_dict(old_version_name)
         self.versions[new_version_name] = self.versions[new_version_name] | {f"comparison to old version": comparison_dict}
@@ -58,9 +58,9 @@ class Transcript:
 
     def get_editing_dict(self, created_by, old_version_name):
         if old_version_name == "base":
-            history = [created_by]
+            history = [old_version_name]
         else:
-            history = self.versions[old_version_name]["editing"]["history"] + [created_by]
+            history = self.versions[old_version_name]["editing"]["history"] + [old_version_name]
         return {"time started": 0, "history": history}    
 
     def get_comparsion_dict(self, old_version_name):
