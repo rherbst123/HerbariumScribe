@@ -7,12 +7,11 @@ import json
 import os
 import time
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript import Transcript
+from llm_processing.transcript2 import Transcript
 
 class GPTImageProcessorThread:
-                # (api_key, st.session_state.prompt_text, urls, result_queue)
+
     def __init__(self, api_key, prompt_name, prompt_text):
-        print(f"{api_key = }")
         self.api_key = api_key.strip()
         self.prompt_name = prompt_name
         self.prompt_text = prompt_text

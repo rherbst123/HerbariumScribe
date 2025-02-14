@@ -7,7 +7,7 @@ import json
 import os
 import time
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript import Transcript
+from llm_processing.transcript2 import Transcript
 
 class ClaudeImageProcessorThread:
     def __init__(self, api_key, prompt_name, prompt_text):

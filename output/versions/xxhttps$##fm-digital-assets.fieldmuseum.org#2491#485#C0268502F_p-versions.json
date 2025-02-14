@@ -1,4 +1,3202 @@
 {
+    "eric-2025-02-13-1801-03": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "eric",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "rick-2025-02-13-1715-13",
+            "time to create/edit": 33.38392424583435,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 323.29132080078125
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1715-13",
+                    "rick"
+                ],
+                [
+                    "eric-2025-02-13-1801-03",
+                    "eric"
+                ]
+            ],
+            "time started": "2025-02-13-1800-56",
+            "time editing": 33.38392424583435,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "rick-2025-02-13-1715-13",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "rick",
+                "eric"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "eric-2025-02-13-1800-56": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "eric",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "rick-2025-02-13-1715-13",
+            "time to create/edit": 32.62280774116516,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 322.53020429611206
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1715-13",
+                    "rick"
+                ],
+                [
+                    "eric-2025-02-13-1800-56",
+                    "eric"
+                ]
+            ],
+            "time started": "2025-02-13-1800-52",
+            "time editing": 32.62280774116516,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "rick-2025-02-13-1715-13",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "rick",
+                "eric"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "eric-2025-02-13-1759-49": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "eric",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "rick-2025-02-13-1715-13",
+            "time to create/edit": 0.18000030517578125,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 290.0873968601227
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1715-13",
+                    "rick"
+                ],
+                [
+                    "eric-2025-02-13-1759-49",
+                    "eric"
+                ]
+            ],
+            "time started": "2025-02-13-1729-28",
+            "time editing": 0.18000030517578125,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "rick-2025-02-13-1715-13",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "rick",
+                "eric"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "eric-2025-02-13-1728-52": {
+        "content": {
+            "verbatimCollectors": "Timbo",
+            "collectedBy": "Timbo",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "eric",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "skip-2025-02-13-1707-30",
+            "time to create/edit": 5.517973899841309,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 261.6807882785797
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1707-30",
+                    "skip"
+                ],
+                [
+                    "eric-2025-02-13-1728-52",
+                    "eric"
+                ]
+            ],
+            "time started": "2025-02-13-1728-50",
+            "time editing": 5.517973899841309,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "skip-2025-02-13-1707-30",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "skip",
+                "eric"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "eric-2025-02-13-1728-03": {
+        "content": {
+            "verbatimCollectors": "Timbo",
+            "collectedBy": "Timbo",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "eric",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "skip-2025-02-13-1707-30",
+            "time to create/edit": 4.896770000457764,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 261.05958437919617
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1707-30",
+                    "skip"
+                ],
+                [
+                    "eric-2025-02-13-1728-03",
+                    "eric"
+                ]
+            ],
+            "time started": "2025-02-13-1727-56",
+            "time editing": 4.896770000457764,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "skip-2025-02-13-1707-30",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "skip",
+                "eric"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "rick-2025-02-13-1715-13": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "rick",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "harry-2025-02-13-1711-17",
+            "time to create/edit": 15.021374225616455,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 289.9073965549469
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1715-13",
+                    "rick"
+                ]
+            ],
+            "time started": "2025-02-13-1714-50",
+            "time editing": 15.021374225616455,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "harry-2025-02-13-1711-17",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "harry",
+                "rick"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "rick-2025-02-13-1714-50": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "rick",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "harry-2025-02-13-1711-17",
+            "time to create/edit": 14.695412635803223,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 289.58143496513367
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1714-50",
+                    "rick"
+                ]
+            ],
+            "time started": "2025-02-13-1714-40",
+            "time editing": 14.695412635803223,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "harry-2025-02-13-1711-17",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "harry",
+                "rick"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "rick-2025-02-13-1714-40": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "rick",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "harry-2025-02-13-1711-17",
+            "time to create/edit": 14.068854331970215,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 288.95487666130066
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ],
+                [
+                    "rick-2025-02-13-1714-40",
+                    "rick"
+                ]
+            ],
+            "time started": "2025-02-13-1714-28",
+            "time editing": 14.068854331970215,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "harry-2025-02-13-1711-17",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "harry",
+                "rick"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "harry-2025-02-13-1711-17": {
+        "content": {
+            "verbatimCollectors": "Meg",
+            "collectedBy": "Meg",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "harry",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "skip-2025-02-13-1708-34",
+            "time to create/edit": 13.762696504592896,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 274.88602232933044
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ],
+                [
+                    "harry-2025-02-13-1711-17",
+                    "harry"
+                ]
+            ],
+            "time started": "2025-02-13-1714-14",
+            "time editing": 13.762696504592896,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "skip-2025-02-13-1708-34",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "skip",
+                "harry"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.0,
+            "collectedBy": 0.0,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "skip-2025-02-13-1708-34": {
+        "content": {
+            "verbatimCollectors": "Timbuktu",
+            "collectedBy": "Timbuktu",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "skip",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "tim-2025-02-13-1656-34",
+            "time to create/edit": 13.214627027511597,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 261.12332582473755
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1708-34",
+                    "skip"
+                ]
+            ],
+            "time started": "2025-02-13-1708-29",
+            "time editing": 13.214627027511597,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "tim-2025-02-13-1656-34",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "tim",
+                "skip"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.375,
+            "collectedBy": 0.375,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "skip-2025-02-13-1707-30": {
+        "content": {
+            "verbatimCollectors": "Timbo",
+            "collectedBy": "Timbo",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "skip",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "tim-2025-02-13-1656-34",
+            "time to create/edit": 8.254115581512451,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 256.1628143787384
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ],
+                [
+                    "skip-2025-02-13-1707-30",
+                    "skip"
+                ]
+            ],
+            "time started": "2025-02-13-1707-22",
+            "time editing": 8.254115581512451,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "tim-2025-02-13-1656-34",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "tim",
+                "skip"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.6,
+            "collectedBy": 0.6,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "tim-2025-02-13-1656-34": {
+        "content": {
+            "verbatimCollectors": "Tim",
+            "collectedBy": "Tim",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "tim",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "tim-2025-02-13-1656-22",
+            "time to create/edit": 1.1589767932891846,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 247.90869879722595
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ],
+                [
+                    "tim-2025-02-13-1656-34",
+                    "tim"
+                ]
+            ],
+            "time started": "2025-02-13-1705-25",
+            "time editing": 1.1589767932891846,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "tim-2025-02-13-1656-22",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "tim",
+                "tim"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "tim-2025-02-13-1656-22": {
+        "content": {
+            "verbatimCollectors": "Tim",
+            "collectedBy": "Tim",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "tim",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "bob-2025-02-13-1648-56",
+            "time to create/edit": 11.425020694732666,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 246.74972200393677
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ],
+                [
+                    "tim-2025-02-13-1656-22",
+                    "tim"
+                ]
+            ],
+            "time started": "2025-02-13-1656-16",
+            "time editing": 11.425020694732666,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "bob-2025-02-13-1648-56",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "bob",
+                "tim"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.0,
+            "collectedBy": 0.0,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "bob-2025-02-13-1648-56": {
+        "content": {
+            "verbatimCollectors": "Bob",
+            "collectedBy": "Bob",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "bob",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-13-1226-17",
+            "time to create/edit": 44.71291995048523,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 235.3247013092041
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1648-56",
+                    "bob"
+                ]
+            ],
+            "time started": "2025-02-13-1648-53",
+            "time editing": 44.71291995048523,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-13-1226-17",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "dan",
+                "bob"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.0,
+            "collectedBy": 0.0,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "bob-2025-02-13-1647-51": {
+        "content": {
+            "verbatimCollectors": "Bob",
+            "collectedBy": "Bob",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "bob",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-13-1226-17",
+            "time to create/edit": 42.06874680519104,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 232.6805281639099
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ],
+                [
+                    "bob-2025-02-13-1647-51",
+                    "bob"
+                ]
+            ],
+            "time started": "2025-02-13-1647-45",
+            "time editing": 42.06874680519104,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-13-1226-17",
+            "alignment rating": 0.9166666666666666,
+            "number matches": 22,
+            "created by names": [
+                "dan",
+                "bob"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.0,
+            "collectedBy": 0.0,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-13-1226-17": {
+        "content": {
+            "verbatimCollectors": "M. Fleischerxxxxxxxxxxx",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-13-1132-04",
+            "time to create/edit": 3.784715414047241,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 190.61178135871887
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1226-17",
+                    "dan"
+                ]
+            ],
+            "time started": "2025-02-13-1226-12",
+            "time editing": 3.784715414047241,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-13-1132-04",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "dan",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-13-1155-22": {
+        "content": {
+            "verbatimCollectors": "M. Fleischerxxxxxxxxxxx",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-13-1132-04",
+            "time to create/edit": 0.6624443531036377,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 187.48951029777527
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-13-1155-22",
+                    "dan"
+                ]
+            ],
+            "time started": "2025-02-13-1155-16",
+            "time editing": 0.6624443531036377,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-13-1132-04",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "dan",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-13-1132-04": {
+        "content": {
+            "verbatimCollectors": "M. Fleischerxxxxxxxxxxx",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "daniel-2025-02-12-2352-27",
+            "time to create/edit": 0.01854085922241211,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 186.82706594467163
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-13-1132-04",
+                    "dan"
+                ]
+            ],
+            "time started": "2025-02-13-1132-00",
+            "time editing": 0.01854085922241211,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "daniel-2025-02-12-2352-27",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "daniel",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "daniel-2025-02-12-2352-27": {
+        "content": {
+            "verbatimCollectors": "M. Fleischerxxxxxxxxxxx",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "daniel",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "daniel-2025-02-12-2254-46",
+            "time to create/edit": 113.8062732219696,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 186.80852508544922
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2352-27",
+                    "daniel"
+                ]
+            ],
+            "time started": "2025-02-12-2352-23",
+            "time editing": 113.8062732219696,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "daniel-2025-02-12-2254-46",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
+            "created by names": [
+                "daniel",
+                "daniel"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.5217391304347826,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "daniel-2025-02-12-2255-31": {
+        "content": {
+            "verbatimCollectors": "M. Fleischerxxxxxxxxxxx",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "daniel",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "daniel-2025-02-12-2254-46",
+            "time to create/edit": 57.235451221466064,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 130.23770308494568
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2255-31",
+                    "daniel"
+                ]
+            ],
+            "time started": "2025-02-12-2255-27",
+            "time editing": 57.235451221466064,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "daniel-2025-02-12-2254-46",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
+            "created by names": [
+                "daniel",
+                "daniel"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": 0.5217391304347826,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "daniel-2025-02-12-2254-46": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "daniel",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "daniel-2025-02-12-2242-16",
+            "time to create/edit": 36.3807647228241,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 73.00225186347961
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2254-46",
+                    "daniel"
+                ]
+            ],
+            "time started": "2025-02-12-2254-43",
+            "time editing": 36.3807647228241,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "daniel-2025-02-12-2242-16",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "daniel",
+                "daniel"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "daniel-2025-02-12-2242-37": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "daniel",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "daniel-2025-02-12-2242-16",
+            "time to create/edit": 35.075586795806885,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 71.6970739364624
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ],
+                [
+                    "daniel-2025-02-12-2242-37",
+                    "daniel"
+                ]
+            ],
+            "time started": "2025-02-12-2242-34",
+            "time editing": 35.075586795806885,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "daniel-2025-02-12-2242-16",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "daniel",
+                "daniel"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "daniel-2025-02-12-2242-16": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "daniel",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-12-2015-41",
+            "time to create/edit": 2.135891914367676,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 36.62148714065552
+        },
+        "editing": {
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54",
+                [
+                    "daniel-2025-02-12-2242-16",
+                    "daniel"
+                ]
+            ],
+            "time started": "2025-02-12-2242-13",
+            "time editing": 2.135891914367676,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-12-2015-41",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "dan",
+                "daniel"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-12-2015-41": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-11-2127-54",
+            "time to create/edit": 0.879307746887207,
+            "input tokens": 3164,
+            "output tokens": 337,
+            "input cost $": 0.0095,
+            "output cost $": 0.005,
+            "overall input tokens": 9793,
+            "overall output tokens": 1109,
+            "overall input cost $": 0.0326,
+            "overall output cost $": 0.0133,
+            "overall time to create/edit": 34.48559522628784
+        },
+        "editing": {
+            "time started": 1739412924.5844142,
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54"
+            ],
+            "time editing": 120019408122.09756,
+            "chats": "dan: dan: what does Urwald mean on this label?\n\nAssistant: \"Urwald\" is a German word that translates to \"primeval forest\" or \"virgin forest\" in English. It refers to an old-growth forest that has attained great age without significant disturbance and thereby exhibits unique ecological features. In the context of this herbarium label, it's indicating that the specimen was collected from such a pristine, undisturbed forest environment in Queensland, Australia.\ndan: "
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-11-2127-54",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
+            "created by names": [
+                "dan",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": 0.5714285714285714,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-12-2009-07": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-11-2127-54",
+            "time to create/edit": 0.7278435230255127,
+            "input tokens": 1577,
+            "output tokens": 248,
+            "input cost $": 0.0047,
+            "output cost $": 0.0037,
+            "overall input tokens": 8206,
+            "overall output tokens": 1020,
+            "overall input cost $": 0.0278,
+            "overall output cost $": 0.012,
+            "overall time to create/edit": 34.33413100242615
+        },
+        "editing": {
+            "time started": 1739412543.112421,
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54"
+            ],
+            "time editing": 111322344033.28513,
+            "chats": "dan: "
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-11-2127-54",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
+            "created by names": [
+                "dan",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": 0.5714285714285714,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
+    "dan-2025-02-12-1952-29": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2734",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "N/A",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+            "locality": "Eumundi (approximately 100 kilometers north of Brisbane)",
+            "habitat": "Mars",
+            "verbatimElevation": "way up there",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076713",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "dan-2025-02-11-2127-54",
+            "time to create/edit": 0.9777772426605225,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 6629,
+            "overall output tokens": 772,
+            "overall input cost $": 0.0231,
+            "overall output cost $": 0.0083,
+            "overall time to create/edit": 34.58406472206116
+        },
+        "editing": {
+            "time started": 1739411546.1954634,
+            "history": [
+                "claude-3.5-sonnet",
+                "gpt-4o",
+                "dan",
+                "dan",
+                "dan",
+                "dan",
+                "dan-2025-02-11-1910-12",
+                "dan-2025-02-11-2127-54"
+            ],
+            "time editing": 86970575557.35927,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "dan-2025-02-11-2127-54",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
+            "created by names": [
+                "dan",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": 0.5714285714285714,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
     "dan-2025-02-11-2127-54": {
         "content": {
             "verbatimCollectors": "M. Fleischer",
