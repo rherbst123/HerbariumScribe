@@ -776,16 +776,22 @@ def main():
                         st.button("Open Full Screen", on_click=open_fullscreen)
                     image_ref = st.session_state.current_transcript_obj.image_ref if st.session_state.current_transcript_obj else f"Image {current_image_idx}"   
                     st.image(image, caption=image_ref, use_container_width=True)
+                    nav_prev, nav_next = st.columns(2)
+                    with nav_prev:
+                        st.button("Previous Transcript", on_click=go_previous_image)
+                    with nav_next:
+                        st.button("Next Transcript", on_click=go_next_image)
+                    col_link1, col_link2 = st.columns(2)
+                    with col_link1:
+                        st.write("https://ipa.typeit.org/full/")
+                    with col_link2:
+                        st.write("https://translate.google.com/")    
                 else:
                     st.write("No processed images to display.")
 
             with col_editor:
                 workspace_option = st.radio("Editor View", ["fieldnames", "full transcript"])
-                nav_prev, nav_next = st.columns(2)
-                with nav_prev:
-                    st.button("Previous", on_click=go_previous_image)
-                with nav_next:
-                    st.button("Next", on_click=go_next_image)
+                
                 content_opt, add_note_opt = st.columns(2) 
                 with content_opt:
                     content_options = get_content_options()
@@ -823,11 +829,7 @@ def main():
                             st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
                             st.session_state.current_fieldvalue = st.session_state.current_output_dict[st.session_state.current_fieldname]
                             st.session_state.field_text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.current_fieldvalue, height=75)
-                            col_link1, col_link2 = st.columns(2)
-                            with col_link1:
-                                st.write("https://ipa.typeit.org/full/")
-                            with col_link2:
-                                st.write("https://translate.google.com/")
+                            
                         else:
                             st.write("No transcription to display.")       
                     # end workspace_fieldnames_container
@@ -839,11 +841,17 @@ def main():
                             st.session_state.current_version_name = get_current_version_name()
                             st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
                             output_as_text = dict_to_text(st.session_state.current_output_dict)
-                            head = 16*"*\n"
+                            head = 20*"*\n"
                             update_time_to_edit(start=True)
-                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", head+output_as_text, height=600)
+                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", head+output_as_text, height=850)
                         else:
                             st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=425)
+                
+                #col_link1, col_link2 = st.columns(2)
+                #with col_link1:
+                #    st.write("https://ipa.typeit.org/full/")
+                #with col_link2:
+                #    st.write("https://translate.google.com/")    
         # end editor_container
             # ---------------
         # Full-Screen View (if enabled)
