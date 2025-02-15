@@ -7,7 +7,7 @@ import json
 import os
 import time
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript2 import Transcript
+from llm_processing.transcript3 import Transcript
 
 class ClaudeImageProcessorThread:
     def __init__(self, api_key, prompt_name, prompt_text):
@@ -21,6 +21,7 @@ class ClaudeImageProcessorThread:
         self.input_tokens = 0
         self.output_tokens = 0
         self.set_token_costs_per_mil()
+        self.num_processed = 0
 
     def set_token_costs_per_mil(self):
         if "3-5-sonnet" in self.model:
@@ -53,7 +54,6 @@ class ClaudeImageProcessorThread:
         return formatted_result   
 
     def process_image(self, url, index, old_version_name):
-        print(f"processing: {url =}, {old_version_name} = ")
         url = url.strip()
         start_time = time.time()
         try:
@@ -97,7 +97,8 @@ class ClaudeImageProcessorThread:
             elapsed_time = end_time - start_time
             transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
             version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
-            print(f"returning: {version_name = }")
+            self.num_processed += 1
+            print(f"claude: {num_processed = }")
             return image, transcript_obj, version_name, url
 
         except requests.exceptions.RequestException as e:

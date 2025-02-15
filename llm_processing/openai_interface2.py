@@ -7,7 +7,7 @@ import json
 import os
 import time
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript2 import Transcript
+from llm_processing.transcript3 import Transcript
 
 class GPTImageProcessorThread:
 

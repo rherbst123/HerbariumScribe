@@ -5,7 +5,7 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 import requests
-from llm_processing.transcript2 import Transcript
+from llm_processing.transcript3 import Transcript
 from llm_processing.utility import extract_info_from_text
 import time
 import json
@@ -417,10 +417,14 @@ def re_edit_saved_versions(selected_reedit_files):
             with open(os.path.join(f"{TRANCRIPTION_FOLDER}/versions", selected_file), "r", encoding="utf-8") as rf:
                 transcript_dict = json.load(rf)
                 latest_version_name = [k for k in transcript_dict.keys()][0]
+                print("420")
                 latest_version_dict = transcript_dict[latest_version_name]
+                print("422")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
+                print("425")
                 transcript_obj.versions = transcript_dict
+                print("427")
                 try:
                     response = requests.get(image_ref)
                     response.raise_for_status()
@@ -434,10 +438,11 @@ def re_edit_saved_versions(selected_reedit_files):
                     st.error(error_message)
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
-        st.session_state.current_version_name = latest_version_name
+        st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
+        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
-        st.session_state.current_transcript_obj = transcript_obj
+        #st.session_state.current_transcript_obj = transcript_obj
         st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
         st.session_state.field_idx = 0
         st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
@@ -457,7 +462,11 @@ def re_edit_session(selected_session_file):
             session_dict = json.load(rf)
             for image_ref, transcript_dict in session_dict.items():
                 latest_version_name = [k for k in transcript_dict.keys()][0]
+                print(f"line 464")
+                print(f"{latest_version_name = }")
                 latest_version_dict = transcript_dict[latest_version_name]
+                print("line 467")
+                print(f"{latest_version_dict = }")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
@@ -474,10 +483,11 @@ def re_edit_session(selected_session_file):
                     st.error(error_message)
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
-        st.session_state.current_version_name = latest_version_name
+        st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
+        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
-        st.session_state.current_transcript_obj = transcript_obj
+        #st.session_state.current_transcript_obj = transcript_obj
         st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
         st.session_state.field_idx = 0
         st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
@@ -513,13 +523,15 @@ def save_edits_to_json():
     update_overall_session_time()
     update_processed_outputs()
     session_output_dict = {}
-    for transcript_obj, version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
+    for transcript_obj, p_version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
         transcript = Transcript(image_ref, st.session_state.selected_prompt)
+        s_version_name = transcript.get_latest_version_name()
+        print(f"in save_edits_to_json: {s_version_name = }")
         costs = editing_data["costs"]
         editing = editing_data["editing"]
-        output_dict = transcript_obj.versions[version_name]["content"]
+        output_dict = transcript_obj.versions[p_version_name]["content"]
         save_to_json(output_dict, image_ref)
-        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, data=costs, is_user=True, old_version_name=version_name, editing=editing)
+        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, data=costs, is_user=True, old_version_name=s_version_name, editing=editing)
         session_output_dict[image_ref] = transcript.versions
     session_filename = f"{TRANCRIPTION_FOLDER}/sessions/{st.session_state.user_name}-{get_timestamp()}-session.json"
     if session_output_dict:
@@ -751,8 +763,8 @@ def main():
         editor_container = st.container(border=True) 
         with editor_container:
             st.write("## Editor")
-            col1, col2 = st.columns(2)
-            with col1:
+            col_image, col_editor = st.columns(2)
+            with col_image:
                 col_text, col_button = st.columns([2,1])
                 with col_text:
                     current_image_idx = st.session_state.current_image_index + 1 if st.session_state.processed_images else 0
@@ -767,50 +779,71 @@ def main():
                 else:
                     st.write("No processed images to display.")
 
-            with col2:
+            with col_editor:
+                workspace_option = st.radio("Editor View", ["fieldnames", "full transcript"])
                 nav_prev, nav_next = st.columns(2)
                 with nav_prev:
                     st.button("Previous", on_click=go_previous_image)
                 with nav_next:
                     st.button("Next", on_click=go_next_image)
-                content_opt, __ = st.columns(2)    
+                content_opt, add_note_opt = st.columns(2) 
                 with content_opt:
                     content_options = get_content_options()
                     selected_content = st.selectbox("Select Content To View or Edit:", content_options)
                     st.session_state.content_option = "content" if selected_content=="transcript" else selected_content
                     if st.session_state.processed_outputs:
                         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-                        st.session_state.current_version_name = get_current_version_name()   
-                if st.session_state.processed_outputs and st.session_state.current_version_name:
-                    st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                    output_as_text = dict_to_text(st.session_state.current_output_dict)
-                    update_time_to_edit(start=True)
-                    st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", output_as_text, height=425)
-                else:    
-                    st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=425)
-                col_prev_field, col_next_field, col_fieldname = st.columns([1,1,5])
-                if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
-                    with col_fieldname:
-                        st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                        st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
-                        st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
-                        colored_fieldname = color_keys(st.session_state.current_fieldname)
-                        st.write(f"### {colored_fieldname}")
-                    with col_next_field:
-                        st.button("next", on_click=go_to_next_field)         
-                    with col_prev_field:       
-                        st.button("prev", on_click=go_to_previous_field)
-                    st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                    st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
-                    st.session_state.current_fieldvalue = st.session_state.current_output_dict[st.session_state.current_fieldname]
-                    st.session_state.field_text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.current_fieldvalue, height=75)
-                    col_link1, col_link2 = st.columns(2)
-                    with col_link1:
-                        st.write("https://ipa.typeit.org/full/")
-                    with col_link2:
-                        st.write("https://translate.google.com/")
+                        st.session_state.current_version_name = get_current_version_name()    
+                if workspace_option == "fieldnames":
+                    workspace_fieldnames_container = st.container(border=False) 
+                    with workspace_fieldnames_container:
+                           
+                          
+                        if st.session_state.processed_outputs and st.session_state.current_version_name:
+                            st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                            head = 10*"*\n"
+                            output_as_text = dict_to_text(st.session_state.current_output_dict)
+                            update_time_to_edit(start=True)
+                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", head+output_as_text, height=400)
+                        else:    
+                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=400)
+                        col_prev_field, col_next_field, col_fieldname = st.columns([1,1,5])
+                        if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
+                            with col_fieldname:
+                                st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                                st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
+                                st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
+                                colored_fieldname = color_keys(st.session_state.current_fieldname)
+                                st.write(f"### {colored_fieldname}")
+                            with col_next_field:
+                                st.button("next", on_click=go_to_next_field)         
+                            with col_prev_field:       
+                                st.button("prev", on_click=go_to_previous_field)
+                            st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                            st.session_state.current_fieldname = st.session_state.fieldnames[st.session_state.field_idx]
+                            st.session_state.current_fieldvalue = st.session_state.current_output_dict[st.session_state.current_fieldname]
+                            st.session_state.field_text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.current_fieldvalue, height=75)
+                            col_link1, col_link2 = st.columns(2)
+                            with col_link1:
+                                st.write("https://ipa.typeit.org/full/")
+                            with col_link2:
+                                st.write("https://translate.google.com/")
+                        else:
+                            st.write("No transcription to display.")       
+                    # end workspace_fieldnames_container
                 else:
-                    st.write("No transcription to display.")       
+                    workspace_full_transcript_container = st.container(border=False)
+                    with workspace_full_transcript_container:
+                        if st.session_state.processed_outputs:
+                            st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
+                            st.session_state.current_version_name = get_current_version_name()
+                            st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
+                            output_as_text = dict_to_text(st.session_state.current_output_dict)
+                            head = 16*"*\n"
+                            update_time_to_edit(start=True)
+                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", head+output_as_text, height=600)
+                        else:
+                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=425)
         # end editor_container
             # ---------------
         # Full-Screen View (if enabled)
