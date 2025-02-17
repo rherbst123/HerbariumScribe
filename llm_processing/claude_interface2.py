@@ -53,7 +53,7 @@ class ClaudeImageProcessorThread:
         formatted_result += "\n".join(lines)
         return formatted_result   
 
-    def process_image(self, url, index, old_version_name):
+    def process_image_from_url(self, url, index, old_version_name):
         url = url.strip()
         start_time = time.time()
         try:
@@ -98,7 +98,7 @@ class ClaudeImageProcessorThread:
             transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
             version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
             self.num_processed += 1
-            print(f"claude: {num_processed = }")
+            print(f"claude: {self.num_processed = }")
             return image, transcript_obj, version_name, url
 
         except requests.exceptions.RequestException as e:
@@ -108,6 +108,56 @@ class ClaudeImageProcessorThread:
             print(f"ERROR: {error_message}")
             return None, error_message, None, None
         
+    def process_local_image(self, local_image, index, old_version_name):
+        image, filename = local_image
+        start_time = time.time()
+        try:
+            buffered = BytesIO()
+            image.save(buffered, format="JPEG")
+            base64_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            message = self.client.messages.create(
+                model="claude-3-5-sonnet-20240620",
+                max_tokens=2500,
+                temperature=0,
+                system=(
+                    "You are an assistant that has a job to extract text from "
+                    "an image and parse it out. Only include the text that is "
+                    "relevant to the image. Do not Hallucinate"
+                ),
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": self.prompt_text},
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/jpeg",
+                                    "data": base64_image,
+                                },
+                            },
+                        ],
+                    }
+                ],
+            )
+            output = self.format_response(f"Image {index + 1}", message.content, filename)
+            self.update_usage(message)
+            transcription_dict = extract_info_from_text(output)
+            transcript_obj = Transcript(filename, self.prompt_name)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
+            version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            self.num_processed += 1
+            print(f"claude: {self.num_processed = }")
+            return image, transcript_obj, version_name, filename
+        except requests.exceptions.RequestException as e:
+            error_message = (
+                f"Error processing image {index + 1} from local image '{filename}': {str(e)}"
+            )
+            print(f"ERROR: {error_message}")
+            return None, error_message, None, None
 
     def get_transcript_processing_data(self, time_elapsed):
         return {

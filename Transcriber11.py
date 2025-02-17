@@ -368,7 +368,7 @@ def process_images_callback(
             st.error("Unable to read URL file. Check encoding or file format.")
             return
         st.session_state.urls = urls
-        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, urls, result_queue)
+        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, result_queue, urls=urls, )
         processor_manager.process_images()
     else:
         if not local_image_files:
@@ -382,7 +382,7 @@ def process_images_callback(
             except Exception as e:
                 st.warning(f"Could not open {uploaded_file.name}: {e}")
         st.session_state.local_images = local_images_list
-        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, local_images_list, result_queue)
+        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, result_queue, local_images_list=local_images_list)
         processor_manager.process_images()
     # Retrieve results
     num_returned_from_queue = 0
