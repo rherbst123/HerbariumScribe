@@ -1,0 +1,504 @@
+{
+    "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg": {
+        "gpt-4o-2025-02-14-0803-39": {
+            "content": {
+                "verbatimCollectors": "M. Fleischer",
+                "collectedBy": "M. Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "B 2754",
+                "verbatimEventDate": "25.3.1903",
+                "minimumEventDate": "1903-03-25",
+                "maximumEventDate": "N/A",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "unsure and check",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "N/A",
+                "verbatimLocality": "Dumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "locality": "Dumundi approximately 100 kilometers north of Brisbane",
+                "habitat": "Urwald",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "107784",
+                "originalMethod": "Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "gpt-4o",
+                "is user": false,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+                "old version name": "claude-3.5-sonnet-2025-02-14-0803-25",
+                "time to create/edit": 13.922088623046875,
+                "input tokens": 2258,
+                "output tokens": 209,
+                "input cost $": 0.01,
+                "output cost $": 0.0,
+                "overall input tokens": 5047,
+                "overall output tokens": 495,
+                "overall input cost $": 0.0184,
+                "overall output cost $": 0.0043,
+                "overall time to create/edit": 24.618693351745605
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-25",
+                        "claude-3.5-sonnet"
+                    ],
+                    [
+                        "gpt-4o-2025-02-14-0803-39",
+                        "gpt-4o"
+                    ]
+                ]
+            },
+            "comparison to old version": {
+                "compared to": "claude-3.5-sonnet-2025-02-14-0803-25",
+                "alignment rating": 0.5833333333333334,
+                "number matches": 14,
+                "created by names": [
+                    "claude-3.5-sonnet",
+                    "gpt-4o"
+                ],
+                "created by types": [
+                    "model",
+                    "model"
+                ],
+                "verbatimCollectors": 0.4,
+                "collectedBy": 0.75,
+                "secondaryCollectors": true,
+                "recordNumber": 0.6666666666666667,
+                "verbatimEventDate": 0.6666666666666667,
+                "minimumEventDate": 0.9,
+                "maximumEventDate": true,
+                "verbatimIdentification": true,
+                "latestScientificName": true,
+                "identifiedBy": 0,
+                "verbatimDateIdentified": true,
+                "associatedTaxa": true,
+                "country": true,
+                "firstPoliticalUnit": true,
+                "secondPoliticalUnit": true,
+                "municipality": true,
+                "verbatimLocality": 0.9333333333333333,
+                "locality": 0.6111111111111112,
+                "habitat": true,
+                "verbatimElevation": true,
+                "verbatimCoordinates": true,
+                "otherCatalogNumbers": 0.4,
+                "originalMethod": 0.1785714285714286,
+                "typeStatus": true
+            }
+        },
+        "claude-3.5-sonnet-2025-02-14-0803-25": {
+            "content": {
+                "verbatimCollectors": "leg H Fleischer nr 5-2754",
+                "collectedBy": "Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "5-2754",
+                "verbatimEventDate": "25 9 1903",
+                "minimumEventDate": "1903-09-25",
+                "maximumEventDate": "N/A",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "N/A",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "N/A",
+                "verbatimLocality": "Eumundi (ca 100 km nordlich Brisbane) Urwald",
+                "locality": "Eumundi (about 100 km north of Brisbane)",
+                "habitat": "Urwald",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "1076713 1044984",
+                "originalMethod": "Mix of Handwritten and Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "claude-3.5-sonnet",
+                "is user": false,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+                "old version name": "base",
+                "time to create/edit": 10.69660472869873,
+                "input tokens": 2789,
+                "output tokens": 286,
+                "input cost $": 0.0084,
+                "output cost $": 0.0043,
+                "overall input tokens": 2789,
+                "overall output tokens": 286,
+                "overall input cost $": 0.0084,
+                "overall output cost $": 0.0043,
+                "overall time to create/edit": 10.69660472869873
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-25",
+                        "claude-3.5-sonnet"
+                    ]
+                ]
+            },
+            "comparison to old version": {}
+        },
+        "andy-2025-02-14-0813-16": {
+            "content": {
+                "verbatimCollectors": "M. Fleischer",
+                "collectedBy": "M. Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "B 2734",
+                "verbatimEventDate": "25.3.1903",
+                "minimumEventDate": "1903-03-25",
+                "maximumEventDate": "N/A",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "N/A",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "N/A",
+                "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "locality": "Eumundi approximately 100 kilometers north of Brisbane",
+                "habitat": "Urwald",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "1076713",
+                "originalMethod": "Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "andy",
+                "is user": true,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+                "old version name": "gpt-4o-2025-02-14-0803-39",
+                "time to create/edit": 202.24901843070984,
+                "input tokens": 1602,
+                "output tokens": 188,
+                "input cost $": 0.0048,
+                "output cost $": 0.0028,
+                "overall input tokens": 6649,
+                "overall output tokens": 683,
+                "overall input cost $": 0.0232,
+                "overall output cost $": 0.0071,
+                "overall time to create/edit": 226.86771178245544
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-25",
+                        "claude-3.5-sonnet"
+                    ],
+                    [
+                        "gpt-4o-2025-02-14-0803-39",
+                        "gpt-4o"
+                    ],
+                    [
+                        "andy-2025-02-14-0813-16",
+                        "andy"
+                    ]
+                ],
+                "time started": "2025-02-14-0813-10",
+                "time editing": 202.24901843070984,
+                "chats": "andy: This specimen label mentions Eumundi. Is it better to count Eumundi as a locality or a municipality?\n\nAssistant: Based on the information provided in the specimen label, it would be more appropriate to consider Eumundi as a locality rather than a municipality.\n\nThe label provides a hierarchical description of the location:\n\n1. Australia (country)\n2. Queensland (state)\n3. Eumundi (specific location)\n\nThe label also provides additional context by stating \"ca. 100 km nördlich Brisbane,\" which means \"approximately 100 km north of Brisbane.\" This suggests that Eumundi is being used as a specific point of reference or collection site, rather than a larger administrative area like a municipality.\n\nIn herbarium specimens, locality typically refers to the specific place where the specimen was collected. Municipalities are usually larger administrative divisions. Given the level of detail provided (including the distance from a major city), Eumundi is best interpreted as a locality in this context.\nandy: "
+            },
+            "comparison to old version": {
+                "compared to": "gpt-4o-2025-02-14-0803-39",
+                "alignment rating": 0.7916666666666666,
+                "number matches": 19,
+                "created by names": [
+                    "gpt-4o",
+                    "andy"
+                ],
+                "created by types": [
+                    "model",
+                    "user"
+                ],
+                "verbatimCollectors": true,
+                "collectedBy": true,
+                "secondaryCollectors": true,
+                "recordNumber": 0.8333333333333334,
+                "verbatimEventDate": true,
+                "minimumEventDate": true,
+                "maximumEventDate": true,
+                "verbatimIdentification": true,
+                "latestScientificName": true,
+                "identifiedBy": 0,
+                "verbatimDateIdentified": true,
+                "associatedTaxa": true,
+                "country": true,
+                "firstPoliticalUnit": true,
+                "secondPoliticalUnit": true,
+                "municipality": true,
+                "verbatimLocality": 0.9777777777777777,
+                "locality": 0.9814814814814815,
+                "habitat": true,
+                "verbatimElevation": true,
+                "verbatimCoordinates": true,
+                "otherCatalogNumbers": 0.5714285714285714,
+                "originalMethod": true,
+                "typeStatus": true
+            }
+        }
+    },
+    "https://fm-digital-assets.fieldmuseum.org/2491/486/C0268508F_p.jpg": {
+        "gpt-4o-2025-02-14-0803-57": {
+            "content": {
+                "verbatimCollectors": "M. Fleischer",
+                "collectedBy": "M. Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "B 2692",
+                "verbatimEventDate": "25.3.1903",
+                "minimumEventDate": "1903-03-25",
+                "maximumEventDate": "1903-03-25",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "unsure and check",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "Eumundi",
+                "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane), Urwald",
+                "locality": "Eumundi, approximately 100 kilometers north of Brisbane",
+                "habitat": "Urwald",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "1076699",
+                "originalMethod": "Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "gpt-4o",
+                "is user": false,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/486/C0268508F_p.jpg",
+                "old version name": "claude-3.5-sonnet-2025-02-14-0803-49",
+                "time to create/edit": 8.23970913887024,
+                "input tokens": 4516,
+                "output tokens": 488,
+                "input cost $": 0.01,
+                "output cost $": 0.0,
+                "overall input tokens": 10094,
+                "overall output tokens": 1061,
+                "overall input cost $": 0.0267,
+                "overall output cost $": 0.0086,
+                "overall time to create/edit": 17.820836782455444
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-49",
+                        "claude-3.5-sonnet"
+                    ],
+                    [
+                        "gpt-4o-2025-02-14-0803-57",
+                        "gpt-4o"
+                    ]
+                ]
+            },
+            "comparison to old version": {
+                "compared to": "claude-3.5-sonnet-2025-02-14-0803-49",
+                "alignment rating": 0.625,
+                "number matches": 15,
+                "created by names": [
+                    "claude-3.5-sonnet",
+                    "gpt-4o"
+                ],
+                "created by types": [
+                    "model",
+                    "model"
+                ],
+                "verbatimCollectors": 0.47619047619047616,
+                "collectedBy": 0.9166666666666666,
+                "secondaryCollectors": true,
+                "recordNumber": true,
+                "verbatimEventDate": true,
+                "minimumEventDate": true,
+                "maximumEventDate": 0,
+                "verbatimIdentification": true,
+                "latestScientificName": true,
+                "identifiedBy": 0,
+                "verbatimDateIdentified": true,
+                "associatedTaxa": true,
+                "country": true,
+                "firstPoliticalUnit": true,
+                "secondPoliticalUnit": true,
+                "municipality": 0,
+                "verbatimLocality": 0.9565217391304348,
+                "locality": 0.7636363636363637,
+                "habitat": 0.25,
+                "verbatimElevation": true,
+                "verbatimCoordinates": true,
+                "otherCatalogNumbers": 0.375,
+                "originalMethod": true,
+                "typeStatus": true
+            }
+        },
+        "claude-3.5-sonnet-2025-02-14-0803-49": {
+            "content": {
+                "verbatimCollectors": "M Fleischer nr B 2692",
+                "collectedBy": "M Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "B 2692",
+                "verbatimEventDate": "25.3.1903",
+                "minimumEventDate": "1903-03-25",
+                "maximumEventDate": "N/A",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "N/A",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "N/A",
+                "verbatimLocality": "Eumundi (ca 100 km nordlich Brisbane), Urwald",
+                "locality": "Eumundi (about 100 kilometers north of Brisbane)",
+                "habitat": "Urwald (primeval forest)",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "1076659, 1411225",
+                "originalMethod": "Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "claude-3.5-sonnet",
+                "is user": false,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/486/C0268508F_p.jpg",
+                "old version name": "base",
+                "time to create/edit": 9.581127643585205,
+                "input tokens": 5578,
+                "output tokens": 573,
+                "input cost $": 0.0167,
+                "output cost $": 0.0086,
+                "overall input tokens": 5578,
+                "overall output tokens": 573,
+                "overall input cost $": 0.0167,
+                "overall output cost $": 0.0086,
+                "overall time to create/edit": 9.581127643585205
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-49",
+                        "claude-3.5-sonnet"
+                    ]
+                ]
+            },
+            "comparison to old version": {}
+        },
+        "andy-2025-02-14-0813-16": {
+            "content": {
+                "verbatimCollectors": "M. Fleischer",
+                "collectedBy": "M. Fleischer",
+                "secondaryCollectors": "N/A",
+                "recordNumber": "B 2692",
+                "verbatimEventDate": "25.3.1903",
+                "minimumEventDate": "1903-03-25",
+                "maximumEventDate": "1903-03-25",
+                "verbatimIdentification": "Macromitrium",
+                "latestScientificName": "Macromitrium",
+                "identifiedBy": "N/A",
+                "verbatimDateIdentified": "N/A",
+                "associatedTaxa": "N/A",
+                "country": "Australia",
+                "firstPoliticalUnit": "Queensland",
+                "secondPoliticalUnit": "N/A",
+                "municipality": "N/A",
+                "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane)",
+                "locality": "Eumundi, approximately 100 kilometers north of Brisbane",
+                "habitat": "Urwald",
+                "verbatimElevation": "N/A",
+                "verbatimCoordinates": "N/A",
+                "otherCatalogNumbers": "1076699",
+                "originalMethod": "Typed",
+                "typeStatus": "no type status"
+            },
+            "data": {
+                "prompt name": "1.1Stripped.txt",
+                "created by": "andy",
+                "is user": true,
+                "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/486/C0268508F_p.jpg",
+                "old version name": "gpt-4o-2025-02-14-0803-57",
+                "time to create/edit": 102.27571678161621,
+                "input tokens": 0,
+                "output tokens": 0,
+                "input cost $": 0,
+                "output cost $": 0,
+                "overall input tokens": 10094,
+                "overall output tokens": 1061,
+                "overall input cost $": 0.0267,
+                "overall output cost $": 0.0086,
+                "overall time to create/edit": 120.09655356407166
+            },
+            "editing": {
+                "history": [
+                    [
+                        "claude-3.5-sonnet-2025-02-14-0803-49",
+                        "claude-3.5-sonnet"
+                    ],
+                    [
+                        "gpt-4o-2025-02-14-0803-57",
+                        "gpt-4o"
+                    ],
+                    [
+                        "andy-2025-02-14-0813-16",
+                        "andy"
+                    ]
+                ],
+                "time started": "2025-02-14-0812-40",
+                "time editing": 102.27571678161621,
+                "chats": ""
+            },
+            "comparison to old version": {
+                "compared to": "gpt-4o-2025-02-14-0803-57",
+                "alignment rating": 0.875,
+                "number matches": 21,
+                "created by names": [
+                    "gpt-4o",
+                    "andy"
+                ],
+                "created by types": [
+                    "model",
+                    "user"
+                ],
+                "verbatimCollectors": true,
+                "collectedBy": true,
+                "secondaryCollectors": true,
+                "recordNumber": true,
+                "verbatimEventDate": true,
+                "minimumEventDate": true,
+                "maximumEventDate": true,
+                "verbatimIdentification": true,
+                "latestScientificName": true,
+                "identifiedBy": 0,
+                "verbatimDateIdentified": true,
+                "associatedTaxa": true,
+                "country": true,
+                "firstPoliticalUnit": true,
+                "secondPoliticalUnit": true,
+                "municipality": 0,
+                "verbatimLocality": 0.8260869565217391,
+                "locality": true,
+                "habitat": true,
+                "verbatimElevation": true,
+                "verbatimCoordinates": true,
+                "otherCatalogNumbers": true,
+                "originalMethod": true,
+                "typeStatus": true
+            }
+        }
+    }
+}
