@@ -170,8 +170,8 @@ def chat_with_llm():
                 processor = ClaudeImageProcessorThread(api_key, None, None)
                 # use a selectbox to ask user if they want to include the url
                 if st.session_state.include_image and st.session_state.current_transcript_obj:
-                    image_ref = st.session_state.current_transcript_obj.image_ref
-                    response, costs = processor.chat(new_message, image_ref)
+                    image = st.session_state.processed_images[st.session_state.current_image_index]
+                    response, costs = processor.chat(new_message, image)
                 else:
                     response, costs = processor.chat(new_message)
                 update_costs(costs)
@@ -390,7 +390,6 @@ def process_images_callback(
         try:
             image, transcript_obj, version_name, image_ref = result_queue.get_nowait()
             num_returned_from_queue += 1
-            print(f"{num_returned_from_queue = }")
         except queue.Empty:
             break
         if image is None and transcript_obj is None and version_name is None:
@@ -417,14 +416,10 @@ def re_edit_saved_versions(selected_reedit_files):
             with open(os.path.join(f"{TRANCRIPTION_FOLDER}/versions", selected_file), "r", encoding="utf-8") as rf:
                 transcript_dict = json.load(rf)
                 latest_version_name = [k for k in transcript_dict.keys()][0]
-                print("420")
                 latest_version_dict = transcript_dict[latest_version_name]
-                print("422")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
-                print("425")
                 transcript_obj.versions = transcript_dict
-                print("427")
                 try:
                     response = requests.get(image_ref)
                     response.raise_for_status()
@@ -462,11 +457,7 @@ def re_edit_session(selected_session_file):
             session_dict = json.load(rf)
             for image_ref, transcript_dict in session_dict.items():
                 latest_version_name = [k for k in transcript_dict.keys()][0]
-                print(f"line 464")
-                print(f"{latest_version_name = }")
                 latest_version_dict = transcript_dict[latest_version_name]
-                print("line 467")
-                print(f"{latest_version_dict = }")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
@@ -526,7 +517,6 @@ def save_edits_to_json():
     for transcript_obj, p_version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
         transcript = Transcript(image_ref, st.session_state.selected_prompt)
         s_version_name = transcript.get_latest_version_name()
-        print(f"in save_edits_to_json: {s_version_name = }")
         costs = editing_data["costs"]
         editing = editing_data["editing"]
         output_dict = transcript_obj.versions[p_version_name]["content"]
@@ -870,19 +860,12 @@ def main():
                 st.button("Update Combined Output", on_click=save_edits)
 
             with col_download:
-                # Build a filename containing model name and prompt
-                # Replace spaces or special chars if desired
-                if st.session_state.selected_llms and st.session_state.selected_prompt:
-                    model_short = st.session_state.selected_llms[-1].replace(" ", "_")
-                    prompt_short = st.session_state.selected_prompt.replace(" ", "_").replace(".txt", "")
-                    timestamp_str = datetime.now().strftime("%m_%d_%y-%I_%M%p")
-
-                    out_filename = f"Transcription_{model_short}_{prompt_short}_{timestamp_str}.txt"
-
+                if st.session_state.processed_outputs:
+                    session_filename = f"{TRANCRIPTION_FOLDER}/sessions/{st.session_state.user_name}-{get_timestamp()}-session.txt"
                     st.download_button(
-                        label="Download Output as TXT",
+                        label="Download Session as TXT",
                         data=st.session_state.final_output,
-                        file_name=out_filename,
+                        file_name=session_filename,
                         mime="text/plain",
                         help="Save the combined output file to your local machine"
                     )

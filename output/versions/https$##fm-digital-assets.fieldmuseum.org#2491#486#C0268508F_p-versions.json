@@ -1,4 +1,117 @@
 {
+    "dan-2025-02-17-1051-59": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2692",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "1903-03-25",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "unsure and check",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "Eumundi",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane), Urwald",
+            "locality": "Eumundi, approximately 100 kilometers north of Brisbane",
+            "habitat": "Urwald",
+            "verbatimElevation": "N/A",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076699",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/486/C0268508F_p.jpg",
+            "old version name": "pete-2025-02-14-2212-38",
+            "time to create/edit": 3.069782257080078,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 11702,
+            "overall output tokens": 1239,
+            "overall input cost $": 0.0315,
+            "overall output cost $": 0.0113,
+            "overall time to create/edit": 114.5402102470398
+        },
+        "editing": {
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-02-14-1136-48",
+                    "claude-3.5-sonnet"
+                ],
+                [
+                    "gpt-4o-2025-02-14-1136-58",
+                    "gpt-4o"
+                ],
+                [
+                    "daniel-2025-02-14-1148-20",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-14-2210-39",
+                    "dan"
+                ],
+                [
+                    "pete-2025-02-14-2212-38",
+                    "pete"
+                ],
+                [
+                    "dan-2025-02-17-1051-59",
+                    "dan"
+                ]
+            ],
+            "time started": "2025-02-17-1051-57",
+            "time editing": 3.069782257080078,
+            "chats": ""
+        },
+        "comparison to old version": {
+            "compared to": "pete-2025-02-14-2212-38",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "pete",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
     "pete-2025-02-14-2212-38": {
         "content": {
             "verbatimCollectors": "M. Fleischer",

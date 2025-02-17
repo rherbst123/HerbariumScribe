@@ -166,10 +166,7 @@ class ClaudeImageProcessorThread:
                 "time to create/edit": time_elapsed,
                 } | self.get_token_costs()
 
-    def get_image_content_dict(self, url):
-        response = requests.get(url)
-        response.raise_for_status()
-        image = Image.open(BytesIO(response.content))
+    def get_image_content_dict(self, image):
         buffered = BytesIO()
         image.save(buffered, format="JPEG")
         base64_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
@@ -182,8 +179,8 @@ class ClaudeImageProcessorThread:
             },
         }                 
 
-    def chat(self, prompt_text, url=None):
-        print(f"chatting: {prompt_text = }, {url = }")
+    def chat(self, prompt_text, image=None):
+        print(f"chatting: {prompt_text = }")
         messages=[
                 {
                     "role": "user",
@@ -195,8 +192,8 @@ class ClaudeImageProcessorThread:
                     ]
                 }
             ]
-        if url:
-            messages[0]["content"].append(self.get_image_content_dict(url))
+        if image:
+            messages[0]["content"].append(self.get_image_content_dict(image))
         message = self.client.messages.create(
             model=self.model,
             max_tokens=2500,

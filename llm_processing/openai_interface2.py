@@ -53,7 +53,6 @@ class GPTImageProcessorThread:
         }
     
         url = url.strip()
-        print(f"processing: {url =}, {old_version_name = }")
         start_time = time.time()
         try:
             response = requests.get(url)

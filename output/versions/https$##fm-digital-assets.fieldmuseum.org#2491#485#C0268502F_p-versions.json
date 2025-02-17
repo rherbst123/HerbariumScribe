@@ -1,4 +1,121 @@
 {
+    "dan-2025-02-17-1051-59": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2754",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "unsure and check",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "N/A",
+            "verbatimLocality": "Dumundi (ca. 100 km nördlich Brisbane) Urwald",
+            "locality": "Dumundi approximately 100 kilometers north of Brisbane",
+            "habitat": "Urwald",
+            "verbatimElevation": "N/A",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "107784",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "",
+            "created by": "dan",
+            "is user": true,
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "old version name": "pete-2025-02-14-2212-38",
+            "time to create/edit": 22.846364974975586,
+            "input tokens": 1610,
+            "output tokens": 144,
+            "input cost $": 0.0048,
+            "output cost $": 0.0022,
+            "overall input tokens": 6657,
+            "overall output tokens": 646,
+            "overall input cost $": 0.0232,
+            "overall output cost $": 0.0066,
+            "overall time to create/edit": 230.10838961601257
+        },
+        "editing": {
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-02-14-1136-29",
+                    "claude-3.5-sonnet"
+                ],
+                [
+                    "gpt-4o-2025-02-14-1136-38",
+                    "gpt-4o"
+                ],
+                [
+                    "daniel-2025-02-14-1148-20",
+                    "daniel"
+                ],
+                [
+                    "dan-2025-02-14-2147-37",
+                    "dan"
+                ],
+                [
+                    "dan-2025-02-14-2152-39",
+                    "dan"
+                ],
+                [
+                    "pete-2025-02-14-2212-38",
+                    "pete"
+                ],
+                [
+                    "dan-2025-02-17-1051-59",
+                    "dan"
+                ]
+            ],
+            "time started": "2025-02-17-1039-47",
+            "time editing": 22.846364974975586,
+            "chats": "claude-3.5-sonnet is available to answer queries. What is your question?\n\ndan: what does Urwald refer to in this voucher image?\n\nAssistant: In this herbarium specimen label, \"Urwald\" refers to the habitat or location where the specimen was collected. \"Urwald\" is a German word that translates to \"primeval forest\" or \"old-growth forest\" in English. It describes a forest that has attained great age without significant disturbance and thereby exhibits unique ecological features.\n\nThe label indicates that this Macromitrium specimen was collected in Queensland, Australia, specifically in the Eumundi area (about 100 km north of Brisbane), in an Urwald or primeval forest setting. This suggests that the plant was found in a relatively undisturbed, natural forest environment.\n\ndan: "
+        },
+        "comparison to old version": {
+            "compared to": "pete-2025-02-14-2212-38",
+            "alignment rating": 1.0,
+            "number matches": 24,
+            "created by names": [
+                "pete",
+                "dan"
+            ],
+            "created by types": [
+                "user",
+                "user"
+            ],
+            "verbatimCollectors": true,
+            "collectedBy": true,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": true,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": true,
+            "verbatimLocality": true,
+            "locality": true,
+            "habitat": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": true,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    },
     "pete-2025-02-14-2212-38": {
         "content": {
             "verbatimCollectors": "M. Fleischer",
