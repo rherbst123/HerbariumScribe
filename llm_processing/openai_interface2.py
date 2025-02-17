@@ -46,7 +46,7 @@ class GPTImageProcessorThread:
 
 ###############
 
-    def process_image(self, url, index, old_version_name):
+    def process_image_from_url(self, url, index, old_version_name):
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}"
@@ -104,6 +104,60 @@ class GPTImageProcessorThread:
             print(f"ERROR: {error_message}")
             return None, error_message, None, None
 
+    def process_local_image(self, local_image, index, old_version_name):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+    
+        image, filename = local_image
+        start_time = time.time()
+        try:
+            buffered = BytesIO()
+            image.save(buffered, format="JPEG")
+            base64_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            payload = {
+                "model": "gpt-4o",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": self.prompt_text},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{base64_image}"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "max_tokens": 2048,
+                "temperature": 0,
+                "seed": 42
+            }
+            post_resp = requests.post(
+                "https://api.openai.com/v1/chat/completions",
+                headers=headers,
+                json=payload
+            )
+            response_data = post_resp.json()
+            output = self.format_response(f"Image {index + 1}", response_data, filename)
+            self.update_usage(response_data)
+            transcription_dict = extract_info_from_text(output)
+            transcript_obj = Transcript(filename, self.prompt_name)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
+            version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            return image, transcript_obj, version_name, filename
+        except requests.exceptions.RequestException as e:
+            error_message = (
+                f"Error processing image {index + 1} local image '{filename}': {str(e)}"
+            )
+            print(f"ERROR: {error_message}")
+            return None, error_message, None, None        
+
     def get_transcript_processing_data(self, time_elapsed):
         return {
                 "created by": self.modelname,
@@ -111,11 +165,11 @@ class GPTImageProcessorThread:
                 "time to create/edit": time_elapsed,
                 } | self.get_token_costs()       
 
-    def format_response(self, image_name, response_data, url):
+    def format_response(self, image_name, response_data, image_ref):
         content = response_data["choices"][0].get("message", {}).get("content", "")
         lines = content.split("\n")
         formatted_result = f"{image_name}\n"
-        formatted_result += f"URL: {url}\n\n"
+        formatted_result += f"image ref: {image_ref}\n\n"
         formatted_result += "\n".join(lines)
         return formatted_result
 

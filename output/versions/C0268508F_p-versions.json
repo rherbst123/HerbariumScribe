@@ -1,4 +1,58 @@
 {
+    "gpt-4o-2025-02-16-2139-15": {
+        "content": {
+            "verbatimCollectors": "M. Fleischer",
+            "collectedBy": "M. Fleischer",
+            "secondaryCollectors": "N/A",
+            "recordNumber": "B 2692",
+            "verbatimEventDate": "25.3.1903",
+            "minimumEventDate": "1903-03-25",
+            "maximumEventDate": "N/A",
+            "verbatimIdentification": "Macromitrium",
+            "latestScientificName": "Macromitrium",
+            "identifiedBy": "unsure and check",
+            "verbatimDateIdentified": "N/A",
+            "associatedTaxa": "N/A",
+            "country": "Australia",
+            "firstPoliticalUnit": "Queensland",
+            "secondPoliticalUnit": "N/A",
+            "municipality": "Eumundi",
+            "verbatimLocality": "Eumundi (ca. 100 km nördlich Brisbane) Urwald",
+            "locality": "Eumundi",
+            "habitat": "Urwald",
+            "verbatimElevation": "N/A",
+            "verbatimCoordinates": "N/A",
+            "otherCatalogNumbers": "1076699",
+            "originalMethod": "Typed",
+            "typeStatus": "no type status"
+        },
+        "data": {
+            "prompt name": "1.1Stripped.txt",
+            "created by": "gpt-4o",
+            "is user": false,
+            "image ref": "C0268508F_p.jpg",
+            "old version name": "base",
+            "time to create/edit": 5.886915922164917,
+            "input tokens": 4516,
+            "output tokens": 488,
+            "input cost $": 0.01,
+            "output cost $": 0.0,
+            "overall input tokens": 4516,
+            "overall output tokens": 488,
+            "overall input cost $": 0.01,
+            "overall output cost $": 0.0,
+            "overall time to create/edit": 5.886915922164917
+        },
+        "editing": {
+            "history": [
+                [
+                    "gpt-4o-2025-02-16-2139-15",
+                    "gpt-4o"
+                ]
+            ]
+        },
+        "comparison to old version": {}
+    },
     "dan-2025-02-16-2119-26": {
         "content": {
             "verbatimCollectors": "M Fleischer nr B 2692",

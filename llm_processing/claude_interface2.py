@@ -45,11 +45,11 @@ class ClaudeImageProcessorThread:
         self.input_tokens += usage.input_tokens
         self.output_tokens += usage.output_tokens
 
-    def format_response(self, image_name, response_data, url):
+    def format_response(self, image_name, response_data, image_ref):
         text_block = response_data[0].text
         lines = text_block.split("\n")
         formatted_result = f"{image_name}\n"
-        formatted_result += f"URL: {url}\n\n"
+        formatted_result += f"image ref: {image_ref}\n\n"
         formatted_result += "\n".join(lines)
         return formatted_result   
 
