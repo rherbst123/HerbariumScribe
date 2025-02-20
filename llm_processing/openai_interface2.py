@@ -20,6 +20,7 @@ class GPTImageProcessorThread:
         self.input_tokens = 0
         self.output_tokens = 0
         self.set_token_costs_per_mil()
+        self.num_processed = 0
 
     def set_token_costs_per_mil(self):
         if "gpt-4o" in self.model:
@@ -87,6 +88,9 @@ class GPTImageProcessorThread:
                 json=payload
             )
             response_data = post_resp.json()
+            if "choices" not in response_data:
+                error_message = f"Error processing image {index + 1} from url '{url}':\n {response_data}"
+                return None, error_message, None, None 
             output = self.format_response(f"Image {index + 1}", response_data, url)
             self.update_usage(response_data)
             transcription_dict = extract_info_from_text(output)
@@ -101,9 +105,10 @@ class GPTImageProcessorThread:
                 f"Error processing image {index + 1} from URL '{url}': {str(e)}"
             )
             print(f"ERROR: {error_message}")
-            return None, error_message, None, None
+            return None, error_message, None, url
 
     def process_local_image(self, local_image, index, old_version_name):
+        #return None, "gpt-4o does not support local images", None, None
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}"
@@ -141,6 +146,14 @@ class GPTImageProcessorThread:
                 json=payload
             )
             response_data = post_resp.json()
+            #if "choices" not in response_data:
+            print(f"{self.num_processed = }")
+            if self.num_processed==0:
+                error_message = f"Error processing image {index + 1} local image '{filename}':\n {response_data}"
+                print(f"ERROR: {error_message}")
+                self.num_processed += 1 
+                return None, error_message, None, filename
+            self.num_processed += 1       
             output = self.format_response(f"Image {index + 1}", response_data, filename)
             self.update_usage(response_data)
             transcription_dict = extract_info_from_text(output)
@@ -152,10 +165,10 @@ class GPTImageProcessorThread:
             return image, transcript_obj, version_name, filename
         except requests.exceptions.RequestException as e:
             error_message = (
-                f"Error processing image {index + 1} local image '{filename}': {str(e)}"
+                f"Error processing image {index + 1} local image '{filename}':\n {str(e)}"
             )
             print(f"ERROR: {error_message}")
-            return None, error_message, None, None        
+            return None, error_message, None, filename        
 
     def get_transcript_processing_data(self, time_elapsed):
         return {

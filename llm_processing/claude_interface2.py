@@ -89,6 +89,9 @@ class ClaudeImageProcessorThread:
                     }
                 ],
             )
+            if not message.content or not message.content[0].text:
+                error_message = f"Error processing image {index + 1} from url '{url}': {response_data}"
+                return None, error_message, None, None 
             output = self.format_response(f"Image {index + 1}", message.content, url)
             self.update_usage(message)
             transcription_dict = extract_info_from_text(output)
@@ -141,6 +144,9 @@ class ClaudeImageProcessorThread:
                     }
                 ],
             )
+            if not message.content or not message.content[0].text:
+                error_message = f"Error processing image {index + 1} local image '{filename}': {response_data}"
+                return None, error_message, None, None 
             output = self.format_response(f"Image {index + 1}", message.content, filename)
             self.update_usage(message)
             transcription_dict = extract_info_from_text(output)

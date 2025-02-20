@@ -45,8 +45,16 @@ def set_up():
         st.session_state.selected_prompt = ""    
     if "local_images" not in st.session_state:
         st.session_state.local_images = []
+    if "jobs_dict" not in st.session_state:
+        st.session_state.jobs_dict = get_blank_jobs_dict()
     # outputs    
     #### elements in st.session_state.processed_outputs elements
+    if "status_msg" not in st.session_state:
+        st.session_state.status_msg = ""
+    if "pause_button_enabled" not in st.session_state:
+        st.session_state.pause_button_enabled = False
+    if "pause_button_option" not in st.session_state:
+        st.session_state.pause_button_option = ""    
     if "processed_images" not in st.session_state:
         st.session_state.processed_images = []
     if "processed_outputs" not in st.session_state:
@@ -113,7 +121,8 @@ def reset_states():
     st.session_state.current_output_dict.clear()
     st.session_state.filename_to_edits.clear()
     st.session_state.session_to_edit = ""
-    st.session_state.fieldnames.clear() 
+    st.session_state.fieldnames.clear()
+    st.session_state.jobs_dict = get_blank_jobs_dict() 
     # modes
     st.session_state.fullscreen = False
     st.session_state.reedit_mode = False
@@ -200,6 +209,20 @@ def close_fullscreen():
 
 def dict_to_text(d):
     return "\n".join([f"{k}: {v}" for k, v in d.items()]) + 8*"\n"
+
+def get_blank_jobs_dict():
+    return{
+        "api_key_dict": {},
+        "selected_llms": [],
+        "selected_prompt_file": "",
+        "prompt_text": "",
+        "urls": [],
+        "local_images_list": [],
+        "to_process": [],
+        "in_process": [],
+        "processed": [],
+        "failed": [],
+    }
 
 def get_content_options():
     if st.session_state.current_transcript_obj:
@@ -389,7 +412,26 @@ def process_images_callback(
     while True:
         try:
             image, transcript_obj, version_name, image_ref = result_queue.get_nowait()
+            #print(f"{image_ref =}")
+            #print(f"{transcript_obj =}")
             num_returned_from_queue += 1
+            if type(transcript_obj) == str:
+                print(f"transcript_obj is a string: {transcript_obj}")
+                st.session_state.status_msg = transcript_obj
+                st.session_state.pause_button_enabled = True
+                option = st.session_state.pause_button_option
+                print(f"{option =}")
+                while option == "Pause Processing" or option == "":
+                    option = st.session_state.pause_button_option
+                    if option == "Cancel Processing":
+                        st.session_state.status_msg = "Processing cancelled."
+                        break
+                    elif option == "Continue Processing":
+                        st.session_state.status_msg = "Processing continued."
+                        st.session_state.pause_button_enabled = False
+                        continue
+            else:
+                st.session_state.status_msg = f"Successfully processed {image_ref}"
         except queue.Empty:
             break
         if image is None and transcript_obj is None and version_name is None:
@@ -486,7 +528,10 @@ def re_edit_session(selected_session_file):
     except Exception as e:
             st.error(f"Error loading file: {str(e)}")
     st.session_state.reedit_mode = False
-    #st.rerun()       
+    #st.rerun()
+    # 
+def resume_processing():
+    pass       
 
     
 def save_current_output_in_session():
@@ -688,19 +733,28 @@ def main():
         # ---------------
         # Process Images Button
     # ---------------
-        st.button(
-                "Process Images",
-                on_click=process_images_callback,
-                args=(
-                    api_key_dict,
-                    prompt_text_from_file,
-                    selected_llms,
-                    selected_prompt_file,
-                    input_type,
-                    url_file,
-                    local_image_files
+        process_button_col, status_bar_col, pause_button_col = st.columns([1, 5, 1])
+        with process_button_col:
+            st.button(
+                    "Process Images",
+                    on_click=process_images_callback,
+                    args=(
+                        api_key_dict,
+                        prompt_text_from_file,
+                        selected_llms,
+                        selected_prompt_file,
+                        input_type,
+                        url_file,
+                        local_image_files
+                    )
                 )
-            )
+        with status_bar_col:        
+            status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
+        if True:#st.session_state.pause_button_enabled:
+            with pause_button_col:
+                st.session_state_pause_option = st.selectbox("How to Proceed?:", ["Pause Processing", "Continue", "Cancel Processing"])
+
+
     else:
         if not st.session_state.reedit_mode:
             st.session_state.reedit_mode = True

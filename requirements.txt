@@ -4,3 +4,4 @@ anthropic
 numpy
 weighted-levenshtein
 requests
+pandas
