@@ -915,43 +915,46 @@ def main():
             # ---------------
         # Full-Screen View (if enabled)
         #---------------
-        current_output_dict = st.session_state.current_output_dict
-        fieldnames = [k for k in current_output_dict.keys()]
-        validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
-        data = {"fieldname": [], "rating": validation_ratings}
-        column_config={
-                        "value": st.column_config.TextColumn(
-                            "value",
-                            width="large",
-                        ),
-                        "rating": st.column_config.TextColumn(
-                            "rating",
-                            width="small",
-                        )
-                    }
+        table_container = st.container(border=False)
+        with table_container:
+            current_output_dict = st.session_state.current_output_dict
+            fieldnames = [k for k in current_output_dict.keys()]
+            validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
+            data = {"fieldname": [], "rating": validation_ratings}
+            column_config={
+                            "value": st.column_config.TextColumn(
+                                "value",
+                                width="large",
+                            ),
+                            "rating": st.column_config.TextColumn(
+                                "rating",
+                                width="small",
+                            )
+                        }
 
-        for fieldname, d in current_output_dict.items():
-            data["fieldname"].append(fieldname)
-            for k, v in d.items():
-                if k in ["notes", "new_notes"] and not st.session_state.show_notes:
-                    continue
-                if k not in data:
-                    data[k] = []
-                data[k].append(v)
-        df = pd.DataFrame(data)
-        ###### slider goes here
-        # Add this right before the data editor
-        table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed")
-        
-        # Then modify your data editor to use the slider value
-        edited_df = st.data_editor(
-            df, 
-            use_container_width=True, 
-            column_config=column_config, 
-            hide_index=True, 
-            key="my_key", 
-            height=table_height  # Use the slider value here
-        )
+            for fieldname, d in current_output_dict.items():
+                data["fieldname"].append(fieldname)
+                for k, v in d.items():
+                    if k in ["notes", "new_notes"] and not st.session_state.show_notes:
+                        continue
+                    if k not in data:
+                        data[k] = []
+                    data[k].append(v)
+            df = pd.DataFrame(data)
+            ###### slider goes here
+            # Add this right before the data editor
+            
+            
+            # Then modify your data editor to use the slider value
+            edited_df = st.data_editor(
+                df, 
+                use_container_width=True, 
+                column_config=column_config, 
+                hide_index=True, 
+                key="my_key", 
+                height=st.session_state.get('table_height', 225)  # Use the slider value here
+            )
+            table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
         edited_elements = st.session_state["my_key"]["edited_rows"]
             
         # ---------------
