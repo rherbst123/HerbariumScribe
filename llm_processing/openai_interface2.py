@@ -43,7 +43,8 @@ class GPTImageProcessorThread:
         if "usage" in response_data:
             usage = response_data["usage"]
             self.input_tokens += int(usage.get("prompt_tokens", 0))
-            self.output_tokens += int(usage.get("completion_tokens", 0))       
+            self.output_tokens += int(usage.get("completion_tokens", 0))
+
 
 ###############
 
@@ -98,7 +99,14 @@ class GPTImageProcessorThread:
             end_time = time.time()
             elapsed_time = end_time - start_time
             transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
-            version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            try:
+                version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            except Exception as e:
+                error_message = (
+                    f"Error processing image {index + 1} from URL '{url}': {str(e)}"
+                )
+                print(f"ERROR: {error_message}")
+                return None, f"{error_message}\n{transcription_dict}", None, url    
             return image, transcript_obj, version_name, url
         except requests.exceptions.RequestException as e:
             error_message = (
@@ -157,10 +165,18 @@ class GPTImageProcessorThread:
             elapsed_time = end_time - start_time
             transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
             version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            try:
+                version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, data=transcript_processing_data, is_user=False, old_version_name=old_version_name)
+            except Exception as e:
+                error_message = (
+                    f"Error processing local image {index + 1} '{filename}': {str(e)}"
+                )
+                print(f"ERROR: {error_message}")
+                return None, f"{error_message}\n{transcription_dict}", None, filename   
             return image, transcript_obj, version_name, filename
         except requests.exceptions.RequestException as e:
             error_message = (
-                f"Error processing image {index + 1} local image '{filename}':\n {str(e)}"
+                f"Error processing local image {index + 1} local image '{filename}':\n {str(e)}"
             )
             print(f"ERROR: {error_message}")
             return None, error_message, None, filename        
