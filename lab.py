@@ -1,14 +1,22 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
-df = pd.DataFrame(
-    [
-       {"command": "st.selectbox", "rating": 4, "is_widget": True},
-       {"command": "st.balloons", "rating": 5, "is_widget": False},
-       {"command": "st.time_input", "rating": 3, "is_widget": True},
-   ]
+data_df = pd.DataFrame(
+    {
+        "widgets": ["st.selectbox", "st.number_input", "st.text_area", "st.button"],
+    }
 )
-edited_df = st.data_editor(df)
 
-favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
-st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
+st.data_editor(
+    data_df,
+    column_config={
+        "widgets": st.column_config.TextColumn(
+            "Widgets",
+            help="Streamlit **widget** commands 🎈",
+            default="st.",
+            max_chars=50,
+            validate=r"^st\.[a-z_]+$",
+        )
+    },
+    hide_index=True,
+)

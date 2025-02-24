@@ -50,8 +50,8 @@ class TranscriptComparer:
         d = {}
         contentA, contentB = versionA["content"], versionB["content"]
         for fieldname in contentA:
-            valA = contentA[fieldname]
-            valB = contentB[fieldname]
+            valA = contentA[fieldname]["value"] if "value" in contentA[fieldname] else contentA[fieldname]
+            valB = contentB[fieldname]["value"] if "value" in contentA[fieldname] else contentA[fieldname]
             is_a_match = self.is_match(valA, valB) or self.get_graded_match(valA, valB, is_a_match=False)
             d[fieldname] = is_a_match
         return d

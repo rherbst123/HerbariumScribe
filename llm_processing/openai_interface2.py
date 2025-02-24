@@ -7,7 +7,7 @@ import json
 import os
 import time
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript3 import Transcript
+from llm_processing.transcript4 import Transcript
 
 class GPTImageProcessorThread:
 
@@ -146,14 +146,9 @@ class GPTImageProcessorThread:
                 json=payload
             )
             response_data = post_resp.json()
-            #if "choices" not in response_data:
-            print(f"{self.num_processed = }")
-            if self.num_processed==0:
+            if "choices" not in response_data:
                 error_message = f"Error processing image {index + 1} local image '{filename}':\n {response_data}"
-                print(f"ERROR: {error_message}")
-                self.num_processed += 1 
-                return None, error_message, None, filename
-            self.num_processed += 1       
+                return None, error_message, None, filename      
             output = self.format_response(f"Image {index + 1}", response_data, filename)
             self.update_usage(response_data)
             transcription_dict = extract_info_from_text(output)

@@ -1,26 +1,122 @@
 {
-    "verbatimCollectors": "leg H Fleischer nr 3-2734",
-    "collectedBy": "H Fleischer",
-    "secondaryCollectors": "N/A",
-    "recordNumber": "3-2734",
-    "verbatimEventDate": "25 9 1903",
-    "minimumEventDate": "1903-09-25",
-    "maximumEventDate": "N/A",
-    "verbatimIdentification": "Macromitrium",
-    "latestScientificName": "Macromitrium",
-    "identifiedBy": "N/A",
-    "verbatimDateIdentified": "N/A",
-    "associatedTaxa": "N/A",
-    "country": "Australia",
-    "firstPoliticalUnit": "Queensland",
-    "secondPoliticalUnit": "N/A",
-    "municipality": "N/A",
-    "verbatimLocality": "Eumundi (ca 100 km nordlich Brisbane) Urwald",
-    "locality": "Eumundi about 100 kilometers north of Brisbane",
-    "habitat": "Urwald",
-    "verbatimElevation": "N/A",
-    "verbatimCoordinates": "N/A",
-    "otherCatalogNumbers": "1044984",
-    "originalMethod": "Typed",
-    "typeStatus": "no type status"
+    "verbatimCollectors": {
+        "value": "M. Fleischer",
+        "notes": "",
+        "new_notes": ""
+    },
+    "collectedBy": {
+        "value": "M. Fleischer",
+        "notes": "",
+        "new_notes": ""
+    },
+    "secondaryCollectors": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "recordNumber": {
+        "value": "2734",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimEventDate": {
+        "value": "25.3.1903",
+        "notes": "",
+        "new_notes": ""
+    },
+    "minimumEventDate": {
+        "value": "1903-03-25",
+        "notes": "",
+        "new_notes": ""
+    },
+    "maximumEventDate": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimIdentification": {
+        "value": "Macromitrium",
+        "notes": "",
+        "new_notes": ""
+    },
+    "latestScientificName": {
+        "value": "Macromitrium",
+        "notes": "",
+        "new_notes": ""
+    },
+    "identifiedBy": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimDateIdentified": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "associatedTaxa": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "country": {
+        "value": "Australia",
+        "notes": "",
+        "new_notes": ""
+    },
+    "firstPoliticalUnit": {
+        "value": "Queensland",
+        "notes": "",
+        "new_notes": ""
+    },
+    "secondPoliticalUnit": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "municipality": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimLocality": {
+        "value": "Eumundi (ca. 100 km nördlich Brisbane)",
+        "notes": "",
+        "new_notes": ""
+    },
+    "locality": {
+        "value": "Eumundi (approximately 100 kilometers north of Brisbane)",
+        "notes": "",
+        "new_notes": ""
+    },
+    "habitat": {
+        "value": "Urwald",
+        "notes": "",
+        "new_notes": "should this be translated?"
+    },
+    "verbatimElevation": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimCoordinates": {
+        "value": "N/A",
+        "notes": "",
+        "new_notes": ""
+    },
+    "otherCatalogNumbers": {
+        "value": "1076713",
+        "notes": "",
+        "new_notes": ""
+    },
+    "originalMethod": {
+        "value": "Typed",
+        "notes": "",
+        "new_notes": ""
+    },
+    "typeStatus": {
+        "value": "no type status",
+        "notes": "",
+        "new_notes": ""
+    }
 }
