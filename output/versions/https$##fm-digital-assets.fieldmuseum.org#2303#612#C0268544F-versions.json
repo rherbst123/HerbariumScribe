@@ -2,117 +2,117 @@
     "dan-2025-02-23-2227-21": {
         "content": {
             "verbatimCollectors": {
-                "value": "M. Fleischer",
+                "value": "no verbatim collectors",
                 "notes": "",
                 "new_notes": ""
             },
             "collectedBy": {
-                "value": "M. Fleischer",
+                "value": "no collected by",
                 "notes": "",
                 "new_notes": ""
             },
             "secondaryCollectors": {
-                "value": "N/A",
+                "value": "no secondary collectors",
                 "notes": "",
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "2734",
+                "value": "no record number",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "no verbatim event date",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "no minimum event date",
                 "notes": "",
                 "new_notes": ""
             },
             "maximumEventDate": {
-                "value": "N/A",
+                "value": "no maximum event date",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium",
+                "value": "no verbatim identification",
                 "notes": "",
                 "new_notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium",
+                "value": "no latest scientific name",
                 "notes": "",
                 "new_notes": ""
             },
             "identifiedBy": {
-                "value": "N/A",
+                "value": "no identified by",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimDateIdentified": {
-                "value": "N/A",
+                "value": "no verbatim date identified",
                 "notes": "",
                 "new_notes": ""
             },
             "associatedTaxa": {
-                "value": "N/A",
+                "value": "no associated taxa",
                 "notes": "",
                 "new_notes": ""
             },
             "country": {
-                "value": "Australia",
+                "value": "no country",
                 "notes": "",
                 "new_notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "no first political unit",
                 "notes": "",
                 "new_notes": ""
             },
             "secondPoliticalUnit": {
-                "value": "N/A",
+                "value": "no second political unit",
                 "notes": "",
                 "new_notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "no municipality",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Eumundi (ca. 100 km nördlich Brisbane)",
+                "value": "no verbatim locality",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Eumundi (approximately 100 kilometers north of Brisbane)",
+                "value": "no locality",
                 "notes": "",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
-                "notes": "dan-2025-02-23-2227-21: should this be translated?",
+                "value": "no habitat",
+                "notes": "",
                 "new_notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "no verbatim elevation",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimCoordinates": {
-                "value": "N/A",
+                "value": "no verbatim coordinates",
                 "notes": "",
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1076713",
+                "value": "no other catalog numbers",
                 "notes": "",
                 "new_notes": ""
             },
             "originalMethod": {
-                "value": "Typed",
+                "value": "no original method",
                 "notes": "",
                 "new_notes": ""
             },
@@ -126,27 +126,27 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "dan",
             "is user": true,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
-            "old version name": "gpt-4o-2025-02-23-2208-06",
-            "time to create/edit": 1740370926.9133127,
-            "input tokens": 1608,
-            "output tokens": 182,
-            "input cost $": 0.0048,
-            "output cost $": 0.0027,
-            "overall input tokens": 7449,
-            "overall output tokens": 669,
-            "overall input cost $": 0.024399999999999998,
-            "overall output cost $": 0.0069,
-            "overall time to create/edit": 1740370940.8529751
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2303/612/C0268544F.jpg",
+            "old version name": "gpt-4o-2025-02-23-2208-58",
+            "time to create/edit": 19.281716346740723,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 29205,
+            "overall output tokens": 2294,
+            "overall input cost $": 0.0779,
+            "overall output cost $": 0.031,
+            "overall time to create/edit": 31.57450294494629
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-54",
                     "claude-3.5-sonnet"
                 ],
                 [
-                    "gpt-4o-2025-02-23-2208-06",
+                    "gpt-4o-2025-02-23-2208-58",
                     "gpt-4o"
                 ],
                 [
@@ -154,9 +154,9 @@
                     "dan"
                 ]
             ],
-            "time started": "2025-02-23-2226-42",
-            "time editing": 1740370926.9133127,
-            "chats": "claude-3.5-sonnet is available to answer queries. What is your question?\n\ndan: what does Urwald mean on this label?\n\nAssistant: \"Urwald\" is a German word that translates to \"primeval forest\" or \"old-growth forest\" in English. In the context of this herbarium specimen label, it refers to the habitat or environment where the specimen was collected. \n\nUrwald describes a forest that has attained great age without significant disturbance and thereby exhibits unique ecological features. These forests are often characterized by the presence of old trees, multilayered canopies, standing dead trees (snags), and fallen logs. They are considered to be in a natural or near-natural state, largely unaffected by human activities.\n\nIn this case, the label indicates that the Macromitrium specimen was collected from an Urwald area in Queensland, Australia, specifically about 100 km north of Brisbane. This information provides important ecological context for the collected specimen.\n\ndan: ",
+            "time started": "2025-02-23-2226-24",
+            "time editing": 19.281716346740723,
+            "chats": "",
             "verbatimCollectors": [
                 ""
             ],
@@ -231,9 +231,9 @@
             ]
         },
         "comparison to old version": {
-            "compared to": "gpt-4o-2025-02-23-2208-06",
-            "alignment rating": 0.75,
-            "number matches": 18,
+            "compared to": "gpt-4o-2025-02-23-2208-58",
+            "alignment rating": 1.0,
+            "number matches": 24,
             "created by names": [
                 "gpt-4o",
                 "dan"
@@ -242,146 +242,146 @@
                 "model",
                 "user"
             ],
-            "verbatimCollectors": 0.7058823529411764,
+            "verbatimCollectors": true,
             "collectedBy": true,
             "secondaryCollectors": true,
-            "recordNumber": 0.75,
+            "recordNumber": true,
             "verbatimEventDate": true,
             "minimumEventDate": true,
             "maximumEventDate": true,
             "verbatimIdentification": true,
             "latestScientificName": true,
-            "identifiedBy": 0,
+            "identifiedBy": true,
             "verbatimDateIdentified": true,
             "associatedTaxa": true,
             "country": true,
             "firstPoliticalUnit": true,
             "secondPoliticalUnit": true,
             "municipality": true,
-            "verbatimLocality": 0.8222222222222222,
-            "locality": 0.9821428571428571,
+            "verbatimLocality": true,
+            "locality": true,
             "habitat": true,
             "verbatimElevation": true,
             "verbatimCoordinates": true,
-            "otherCatalogNumbers": 0.4285714285714286,
+            "otherCatalogNumbers": true,
             "originalMethod": true,
             "typeStatus": true
         }
     },
-    "gpt-4o-2025-02-23-2208-06": {
+    "gpt-4o-2025-02-23-2208-58": {
         "content": {
             "verbatimCollectors": {
-                "value": "leg. M. Fleischer",
+                "value": "no verbatim collectors",
                 "notes": "",
                 "new_notes": ""
             },
             "collectedBy": {
-                "value": "M. Fleischer",
+                "value": "no collected by",
                 "notes": "",
                 "new_notes": ""
             },
             "secondaryCollectors": {
-                "value": "N/A",
+                "value": "no secondary collectors",
                 "notes": "",
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "2754",
+                "value": "no record number",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "no verbatim event date",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "no minimum event date",
                 "notes": "",
                 "new_notes": ""
             },
             "maximumEventDate": {
-                "value": "N/A",
+                "value": "no maximum event date",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium",
+                "value": "no verbatim identification",
                 "notes": "",
                 "new_notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium",
+                "value": "no latest scientific name",
                 "notes": "",
                 "new_notes": ""
             },
             "identifiedBy": {
-                "value": "unsure and check",
+                "value": "no identified by",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimDateIdentified": {
-                "value": "N/A",
+                "value": "no verbatim date identified",
                 "notes": "",
                 "new_notes": ""
             },
             "associatedTaxa": {
-                "value": "N/A",
+                "value": "no associated taxa",
                 "notes": "",
                 "new_notes": ""
             },
             "country": {
-                "value": "Australia",
+                "value": "no country",
                 "notes": "",
                 "new_notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "no first political unit",
                 "notes": "",
                 "new_notes": ""
             },
             "secondPoliticalUnit": {
-                "value": "N/A",
+                "value": "no second political unit",
                 "notes": "",
                 "new_notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "no municipality",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Dumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "value": "no verbatim locality",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Dumundi (approximately 100 kilometers north of Brisbane)",
+                "value": "no locality",
                 "notes": "",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "no habitat",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "no verbatim elevation",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimCoordinates": {
-                "value": "N/A",
+                "value": "no verbatim coordinates",
                 "notes": "",
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1071384",
+                "value": "no other catalog numbers",
                 "notes": "",
                 "new_notes": ""
             },
             "originalMethod": {
-                "value": "Typed",
+                "value": "no original method",
                 "notes": "",
                 "new_notes": ""
             },
@@ -395,27 +395,27 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "gpt-4o",
             "is user": false,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
-            "old version name": "claude-3.5-sonnet-2025-02-23-2207-59",
-            "time to create/edit": 6.662502765655518,
-            "input tokens": 2648,
-            "output tokens": 205,
-            "input cost $": 0.01,
-            "output cost $": 0.0,
-            "overall input tokens": 5841,
-            "overall output tokens": 487,
-            "overall input cost $": 0.0196,
-            "overall output cost $": 0.0042,
-            "overall time to create/edit": 13.939662456512451
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2303/612/C0268544F.jpg",
+            "old version name": "claude-3.5-sonnet-2025-02-23-2208-54",
+            "time to create/edit": 4.4374353885650635,
+            "input tokens": 13240,
+            "output tokens": 895,
+            "input cost $": 0.03,
+            "output cost $": 0.01,
+            "overall input tokens": 29205,
+            "overall output tokens": 2294,
+            "overall input cost $": 0.0779,
+            "overall output cost $": 0.031,
+            "overall time to create/edit": 12.292786598205566
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-54",
                     "claude-3.5-sonnet"
                 ],
                 [
-                    "gpt-4o-2025-02-23-2208-06",
+                    "gpt-4o-2025-02-23-2208-58",
                     "gpt-4o"
                 ]
             ],
@@ -493,9 +493,9 @@
             ]
         },
         "comparison to old version": {
-            "compared to": "claude-3.5-sonnet-2025-02-23-2207-59",
-            "alignment rating": 0.625,
-            "number matches": 15,
+            "compared to": "claude-3.5-sonnet-2025-02-23-2208-54",
+            "alignment rating": 0.041666666666666664,
+            "number matches": 1,
             "created by names": [
                 "claude-3.5-sonnet",
                 "gpt-4o"
@@ -504,41 +504,41 @@
                 "model",
                 "model"
             ],
-            "verbatimCollectors": 0.5714285714285714,
-            "collectedBy": 0.9166666666666666,
-            "secondaryCollectors": true,
-            "recordNumber": 0.5,
-            "verbatimEventDate": 0.8888888888888888,
-            "minimumEventDate": 0.9,
-            "maximumEventDate": true,
-            "verbatimIdentification": true,
-            "latestScientificName": true,
-            "identifiedBy": 0,
-            "verbatimDateIdentified": true,
-            "associatedTaxa": true,
-            "country": true,
-            "firstPoliticalUnit": true,
-            "secondPoliticalUnit": true,
-            "municipality": true,
-            "verbatimLocality": 0.9565217391304348,
-            "locality": 0.48684210526315785,
-            "habitat": true,
-            "verbatimElevation": true,
-            "verbatimCoordinates": true,
-            "otherCatalogNumbers": 0.5714285714285714,
-            "originalMethod": true,
+            "verbatimCollectors": 0.18181818181818177,
+            "collectedBy": 0.06666666666666665,
+            "secondaryCollectors": 0,
+            "recordNumber": 0.0625,
+            "verbatimEventDate": 0.13636363636363635,
+            "minimumEventDate": 0.0,
+            "maximumEventDate": 0,
+            "verbatimIdentification": 0.15217391304347827,
+            "latestScientificName": 0.040000000000000036,
+            "identifiedBy": 0.125,
+            "verbatimDateIdentified": 0,
+            "associatedTaxa": 0,
+            "country": 0.09999999999999998,
+            "firstPoliticalUnit": 0.04347826086956519,
+            "secondPoliticalUnit": 0,
+            "municipality": 0,
+            "verbatimLocality": 0.14117647058823535,
+            "locality": 0.18918918918918914,
+            "habitat": 0.125,
+            "verbatimElevation": 0.19047619047619047,
+            "verbatimCoordinates": 0,
+            "otherCatalogNumbers": 0.0,
+            "originalMethod": 0.11111111111111116,
             "typeStatus": true
         }
     },
-    "claude-3.5-sonnet-2025-02-23-2207-59": {
+    "claude-3.5-sonnet-2025-02-23-2208-54": {
         "content": {
             "verbatimCollectors": {
-                "value": "leg. H. Fleischer nr. 3-2734",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new_notes": ""
             },
             "collectedBy": {
-                "value": "H. Fleischer",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new_notes": ""
             },
@@ -548,17 +548,17 @@
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "3-2734",
+                "value": "s.n.",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.9.1903",
+                "value": "Mar. 27, 1971",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-09-25",
+                "value": "1971-03-27",
                 "notes": "",
                 "new_notes": ""
             },
@@ -568,17 +568,17 @@
                 "new_notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum Sull. et Lesq. c. fr.",
                 "notes": "",
                 "new_notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum",
                 "notes": "",
                 "new_notes": ""
             },
             "identifiedBy": {
-                "value": "N/A",
+                "value": "A. Noguchi | Z. Iwatsuki",
                 "notes": "",
                 "new_notes": ""
             },
@@ -593,12 +593,12 @@
                 "new_notes": ""
             },
             "country": {
-                "value": "Australia",
+                "value": "Japan",
                 "notes": "",
                 "new_notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "Wakayama",
                 "notes": "",
                 "new_notes": ""
             },
@@ -613,22 +613,22 @@
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Eumundi (ca. 100 km nördlich Brisbane), Urwald",
+                "value": "On vertical face of rock, 330 m alt., Ohara, Yata, Nishimuro-gun, Wakayama Prefecture",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Eumundi (about 100 kilometers north of Brisbane), [precise locality unknown]",
+                "value": "On vertical face of rock, Ohara, Yata",
                 "notes": "",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "On vertical face of rock",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "330 m alt.",
                 "notes": "",
                 "new_notes": ""
             },
@@ -638,7 +638,7 @@
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1044984",
+                "value": "1043494",
                 "notes": "",
                 "new_notes": ""
             },
@@ -657,23 +657,23 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "claude-3.5-sonnet",
             "is user": false,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2303/612/C0268544F.jpg",
             "old version name": "base",
-            "time to create/edit": 7.277159690856934,
-            "input tokens": 3193,
-            "output tokens": 282,
-            "input cost $": 0.0096,
-            "output cost $": 0.0042,
-            "overall input tokens": 3193,
-            "overall output tokens": 282,
-            "overall input cost $": 0.0096,
-            "overall output cost $": 0.0042,
-            "overall time to create/edit": 7.277159690856934
+            "time to create/edit": 7.855351209640503,
+            "input tokens": 15965,
+            "output tokens": 1399,
+            "input cost $": 0.0479,
+            "output cost $": 0.021,
+            "overall input tokens": 15965,
+            "overall output tokens": 1399,
+            "overall input cost $": 0.0479,
+            "overall output cost $": 0.021,
+            "overall time to create/edit": 7.855351209640503
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-54",
                     "claude-3.5-sonnet"
                 ]
             ],

@@ -17,17 +17,17 @@
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "2734",
+                "value": "B 2697",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "20.3.1903",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "1903-03-20",
                 "notes": "",
                 "new_notes": ""
             },
@@ -82,18 +82,18 @@
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Eumundi (ca. 100 km nördlich Brisbane)",
+                "value": "bei Brisbane",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Eumundi (approximately 100 kilometers north of Brisbane)",
-                "notes": "",
+                "value": "[precise locality unknown]",
+                "notes": "dan-2025-02-23-2227-21: should I put something here?",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
-                "notes": "dan-2025-02-23-2227-21: should this be translated?",
+                "value": "N/A",
+                "notes": "",
                 "new_notes": ""
             },
             "verbatimElevation": {
@@ -107,7 +107,7 @@
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1076713",
+                "value": "1076705",
                 "notes": "",
                 "new_notes": ""
             },
@@ -126,27 +126,27 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "dan",
             "is user": true,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
-            "old version name": "gpt-4o-2025-02-23-2208-06",
-            "time to create/edit": 1740370926.9133127,
-            "input tokens": 1608,
-            "output tokens": 182,
-            "input cost $": 0.0048,
-            "output cost $": 0.0027,
-            "overall input tokens": 7449,
-            "overall output tokens": 669,
-            "overall input cost $": 0.024399999999999998,
-            "overall output cost $": 0.0069,
-            "overall time to create/edit": 1740370940.8529751
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/491/C0268520F_p.jpg",
+            "old version name": "gpt-4o-2025-02-23-2208-46",
+            "time to create/edit": 103.89466762542725,
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "overall input tokens": 23364,
+            "overall output tokens": 1932,
+            "overall input cost $": 0.0683,
+            "overall output cost $": 0.026099999999999998,
+            "overall time to create/edit": 117.73585247993469
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-39",
                     "claude-3.5-sonnet"
                 ],
                 [
-                    "gpt-4o-2025-02-23-2208-06",
+                    "gpt-4o-2025-02-23-2208-46",
                     "gpt-4o"
                 ],
                 [
@@ -154,9 +154,9 @@
                     "dan"
                 ]
             ],
-            "time started": "2025-02-23-2226-42",
-            "time editing": 1740370926.9133127,
-            "chats": "claude-3.5-sonnet is available to answer queries. What is your question?\n\ndan: what does Urwald mean on this label?\n\nAssistant: \"Urwald\" is a German word that translates to \"primeval forest\" or \"old-growth forest\" in English. In the context of this herbarium specimen label, it refers to the habitat or environment where the specimen was collected. \n\nUrwald describes a forest that has attained great age without significant disturbance and thereby exhibits unique ecological features. These forests are often characterized by the presence of old trees, multilayered canopies, standing dead trees (snags), and fallen logs. They are considered to be in a natural or near-natural state, largely unaffected by human activities.\n\nIn this case, the label indicates that the Macromitrium specimen was collected from an Urwald area in Queensland, Australia, specifically about 100 km north of Brisbane. This information provides important ecological context for the collected specimen.\n\ndan: ",
+            "time started": "2025-02-23-2224-41",
+            "time editing": 103.89466762542725,
+            "chats": "",
             "verbatimCollectors": [
                 ""
             ],
@@ -231,9 +231,9 @@
             ]
         },
         "comparison to old version": {
-            "compared to": "gpt-4o-2025-02-23-2208-06",
-            "alignment rating": 0.75,
-            "number matches": 18,
+            "compared to": "gpt-4o-2025-02-23-2208-46",
+            "alignment rating": 0.9583333333333334,
+            "number matches": 23,
             "created by names": [
                 "gpt-4o",
                 "dan"
@@ -245,30 +245,30 @@
             "verbatimCollectors": 0.7058823529411764,
             "collectedBy": true,
             "secondaryCollectors": true,
-            "recordNumber": 0.75,
+            "recordNumber": true,
             "verbatimEventDate": true,
             "minimumEventDate": true,
             "maximumEventDate": true,
             "verbatimIdentification": true,
             "latestScientificName": true,
-            "identifiedBy": 0,
+            "identifiedBy": true,
             "verbatimDateIdentified": true,
             "associatedTaxa": true,
             "country": true,
             "firstPoliticalUnit": true,
             "secondPoliticalUnit": true,
             "municipality": true,
-            "verbatimLocality": 0.8222222222222222,
-            "locality": 0.9821428571428571,
+            "verbatimLocality": true,
+            "locality": true,
             "habitat": true,
             "verbatimElevation": true,
             "verbatimCoordinates": true,
-            "otherCatalogNumbers": 0.4285714285714286,
+            "otherCatalogNumbers": true,
             "originalMethod": true,
             "typeStatus": true
         }
     },
-    "gpt-4o-2025-02-23-2208-06": {
+    "gpt-4o-2025-02-23-2208-46": {
         "content": {
             "verbatimCollectors": {
                 "value": "leg. M. Fleischer",
@@ -286,17 +286,17 @@
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "2754",
+                "value": "B 2697",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "20.3.1903",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "1903-03-20",
                 "notes": "",
                 "new_notes": ""
             },
@@ -316,7 +316,7 @@
                 "new_notes": ""
             },
             "identifiedBy": {
-                "value": "unsure and check",
+                "value": "N/A",
                 "notes": "",
                 "new_notes": ""
             },
@@ -351,17 +351,17 @@
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Dumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "value": "bei Brisbane",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Dumundi (approximately 100 kilometers north of Brisbane)",
+                "value": "[precise locality unknown]",
                 "notes": "",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "N/A",
                 "notes": "",
                 "new_notes": ""
             },
@@ -376,7 +376,7 @@
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1071384",
+                "value": "1076705",
                 "notes": "",
                 "new_notes": ""
             },
@@ -395,27 +395,27 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "gpt-4o",
             "is user": false,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
-            "old version name": "claude-3.5-sonnet-2025-02-23-2207-59",
-            "time to create/edit": 6.662502765655518,
-            "input tokens": 2648,
-            "output tokens": 205,
-            "input cost $": 0.01,
-            "output cost $": 0.0,
-            "overall input tokens": 5841,
-            "overall output tokens": 487,
-            "overall input cost $": 0.0196,
-            "overall output cost $": 0.0042,
-            "overall time to create/edit": 13.939662456512451
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/491/C0268520F_p.jpg",
+            "old version name": "claude-3.5-sonnet-2025-02-23-2208-39",
+            "time to create/edit": 7.5783281326293945,
+            "input tokens": 10592,
+            "output tokens": 858,
+            "input cost $": 0.03,
+            "output cost $": 0.01,
+            "overall input tokens": 23364,
+            "overall output tokens": 1932,
+            "overall input cost $": 0.0683,
+            "overall output cost $": 0.026099999999999998,
+            "overall time to create/edit": 13.841184854507446
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-39",
                     "claude-3.5-sonnet"
                 ],
                 [
-                    "gpt-4o-2025-02-23-2208-06",
+                    "gpt-4o-2025-02-23-2208-46",
                     "gpt-4o"
                 ]
             ],
@@ -493,9 +493,9 @@
             ]
         },
         "comparison to old version": {
-            "compared to": "claude-3.5-sonnet-2025-02-23-2207-59",
-            "alignment rating": 0.625,
-            "number matches": 15,
+            "compared to": "claude-3.5-sonnet-2025-02-23-2208-39",
+            "alignment rating": 0.75,
+            "number matches": 18,
             "created by names": [
                 "claude-3.5-sonnet",
                 "gpt-4o"
@@ -504,41 +504,41 @@
                 "model",
                 "model"
             ],
-            "verbatimCollectors": 0.5714285714285714,
-            "collectedBy": 0.9166666666666666,
+            "verbatimCollectors": 0.52,
+            "collectedBy": true,
             "secondaryCollectors": true,
-            "recordNumber": 0.5,
-            "verbatimEventDate": 0.8888888888888888,
-            "minimumEventDate": 0.9,
+            "recordNumber": true,
+            "verbatimEventDate": 0.7777777777777778,
+            "minimumEventDate": true,
             "maximumEventDate": true,
             "verbatimIdentification": true,
             "latestScientificName": true,
-            "identifiedBy": 0,
+            "identifiedBy": true,
             "verbatimDateIdentified": true,
             "associatedTaxa": true,
             "country": true,
             "firstPoliticalUnit": true,
             "secondPoliticalUnit": true,
-            "municipality": true,
-            "verbatimLocality": 0.9565217391304348,
-            "locality": 0.48684210526315785,
+            "municipality": 0,
+            "verbatimLocality": true,
+            "locality": 0.15384615384615385,
             "habitat": true,
             "verbatimElevation": true,
             "verbatimCoordinates": true,
-            "otherCatalogNumbers": 0.5714285714285714,
-            "originalMethod": true,
+            "otherCatalogNumbers": 0.4117647058823529,
+            "originalMethod": 0.1785714285714286,
             "typeStatus": true
         }
     },
-    "claude-3.5-sonnet-2025-02-23-2207-59": {
+    "claude-3.5-sonnet-2025-02-23-2208-39": {
         "content": {
             "verbatimCollectors": {
-                "value": "leg. H. Fleischer nr. 3-2734",
+                "value": "leg M Fleischer nr B 2697",
                 "notes": "",
                 "new_notes": ""
             },
             "collectedBy": {
-                "value": "H. Fleischer",
+                "value": "M. Fleischer",
                 "notes": "",
                 "new_notes": ""
             },
@@ -548,17 +548,17 @@
                 "new_notes": ""
             },
             "recordNumber": {
-                "value": "3-2734",
+                "value": "B 2697",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.9.1903",
+                "value": "20 3 1903",
                 "notes": "",
                 "new_notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-09-25",
+                "value": "1903-03-20",
                 "notes": "",
                 "new_notes": ""
             },
@@ -608,22 +608,22 @@
                 "new_notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "Brisbane",
                 "notes": "",
                 "new_notes": ""
             },
             "verbatimLocality": {
-                "value": "Eumundi (ca. 100 km nördlich Brisbane), Urwald",
+                "value": "bei Brisbane",
                 "notes": "",
                 "new_notes": ""
             },
             "locality": {
-                "value": "Eumundi (about 100 kilometers north of Brisbane), [precise locality unknown]",
+                "value": "near Brisbane",
                 "notes": "",
                 "new_notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "N/A",
                 "notes": "",
                 "new_notes": ""
             },
@@ -638,12 +638,12 @@
                 "new_notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1044984",
+                "value": "1076705 | 1044145",
                 "notes": "",
                 "new_notes": ""
             },
             "originalMethod": {
-                "value": "Typed",
+                "value": "Mix of Handwritten and Typed",
                 "notes": "",
                 "new_notes": ""
             },
@@ -657,23 +657,23 @@
             "prompt name": "1.5Stripped.txt",
             "created by": "claude-3.5-sonnet",
             "is user": false,
-            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/485/C0268502F_p.jpg",
+            "image ref": "https://fm-digital-assets.fieldmuseum.org/2491/491/C0268520F_p.jpg",
             "old version name": "base",
-            "time to create/edit": 7.277159690856934,
-            "input tokens": 3193,
-            "output tokens": 282,
-            "input cost $": 0.0096,
-            "output cost $": 0.0042,
-            "overall input tokens": 3193,
-            "overall output tokens": 282,
-            "overall input cost $": 0.0096,
-            "overall output cost $": 0.0042,
-            "overall time to create/edit": 7.277159690856934
+            "time to create/edit": 6.262856721878052,
+            "input tokens": 12772,
+            "output tokens": 1074,
+            "input cost $": 0.0383,
+            "output cost $": 0.0161,
+            "overall input tokens": 12772,
+            "overall output tokens": 1074,
+            "overall input cost $": 0.0383,
+            "overall output cost $": 0.0161,
+            "overall time to create/edit": 6.262856721878052
         },
         "editing": {
             "history": [
                 [
-                    "claude-3.5-sonnet-2025-02-23-2207-59",
+                    "claude-3.5-sonnet-2025-02-23-2208-39",
                     "claude-3.5-sonnet"
                 ]
             ],

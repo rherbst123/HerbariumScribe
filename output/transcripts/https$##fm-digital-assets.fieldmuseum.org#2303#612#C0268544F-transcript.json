@@ -1,26 +1,122 @@
 {
-    "verbatimCollectors": "T. Nakajima",
-    "collectedBy": "T. Nakajima",
-    "secondaryCollectors": "N/A",
-    "recordNumber": "1229",
-    "verbatimEventDate": "Mar. 27, 1971",
-    "minimumEventDate": "1971-03-27",
-    "maximumEventDate": "N/A",
-    "verbatimIdentification": "Macromitrium gymnostomum Sull. et Lesq. e-fr.",
-    "latestScientificName": "Macromitrium gymnostomum",
-    "identifiedBy": "T. Nakajima",
-    "verbatimDateIdentified": "Mar. 27, 1971",
-    "associatedTaxa": "N/A",
-    "country": "Japan",
-    "firstPoliticalUnit": "Wakayama Prefecture",
-    "secondPoliticalUnit": "Nishimuro-gun",
-    "municipality": "Ohara, Yuya, Oto-mura",
-    "verbatimLocality": "Ohara, Yuya, Oto-mura, Nishimuro-gun, Wakayama Prefecture",
-    "locality": "Ohara, Yuya, Oto-mura",
-    "habitat": "On vertical face of rock",
-    "verbatimElevation": "330 m alt.",
-    "verbatimCoordinates": "N/A",
-    "otherCatalogNumbers": "1043494",
-    "originalMethod": "Typed",
-    "typeStatus": "no type status"
+    "verbatimCollectors": {
+        "value": "no verbatim collectors",
+        "notes": "",
+        "new_notes": ""
+    },
+    "collectedBy": {
+        "value": "no collected by",
+        "notes": "",
+        "new_notes": ""
+    },
+    "secondaryCollectors": {
+        "value": "no secondary collectors",
+        "notes": "",
+        "new_notes": ""
+    },
+    "recordNumber": {
+        "value": "no record number",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimEventDate": {
+        "value": "no verbatim event date",
+        "notes": "",
+        "new_notes": ""
+    },
+    "minimumEventDate": {
+        "value": "no minimum event date",
+        "notes": "",
+        "new_notes": ""
+    },
+    "maximumEventDate": {
+        "value": "no maximum event date",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimIdentification": {
+        "value": "no verbatim identification",
+        "notes": "",
+        "new_notes": ""
+    },
+    "latestScientificName": {
+        "value": "no latest scientific name",
+        "notes": "",
+        "new_notes": ""
+    },
+    "identifiedBy": {
+        "value": "no identified by",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimDateIdentified": {
+        "value": "no verbatim date identified",
+        "notes": "",
+        "new_notes": ""
+    },
+    "associatedTaxa": {
+        "value": "no associated taxa",
+        "notes": "",
+        "new_notes": ""
+    },
+    "country": {
+        "value": "no country",
+        "notes": "",
+        "new_notes": ""
+    },
+    "firstPoliticalUnit": {
+        "value": "no first political unit",
+        "notes": "",
+        "new_notes": ""
+    },
+    "secondPoliticalUnit": {
+        "value": "no second political unit",
+        "notes": "",
+        "new_notes": ""
+    },
+    "municipality": {
+        "value": "no municipality",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimLocality": {
+        "value": "no verbatim locality",
+        "notes": "",
+        "new_notes": ""
+    },
+    "locality": {
+        "value": "no locality",
+        "notes": "",
+        "new_notes": ""
+    },
+    "habitat": {
+        "value": "no habitat",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimElevation": {
+        "value": "no verbatim elevation",
+        "notes": "",
+        "new_notes": ""
+    },
+    "verbatimCoordinates": {
+        "value": "no verbatim coordinates",
+        "notes": "",
+        "new_notes": ""
+    },
+    "otherCatalogNumbers": {
+        "value": "no other catalog numbers",
+        "notes": "",
+        "new_notes": ""
+    },
+    "originalMethod": {
+        "value": "no original method",
+        "notes": "",
+        "new_notes": ""
+    },
+    "typeStatus": {
+        "value": "no type status",
+        "notes": "",
+        "new_notes": ""
+    }
 }

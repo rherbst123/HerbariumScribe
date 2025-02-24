@@ -30,8 +30,8 @@ def extract_info_from_text(formatted_transcription):
         result = {}
         for key, pattern in regex_patterns.items():
             match = re.search(pattern, formatted_transcription)
-            result[key] = match.group(1).strip() if match else f"no {convert_from_camelcase(key)}"
-        return result
+            result[key] = match.group(1).strip() if match else f""
+        return result if any(result.values()) else formatted_transcription
 
 def convert_from_camelcase(s):
     words = re.findall(r'[A-Z]?[a-z]+', s)
@@ -41,4 +41,33 @@ def dict_to_string(dictionary):
     result = ""
     for key, value in dictionary.items():
         result += f"{key}: {value}\n"
-    return result.strip()    
+    return result.strip()
+
+if __name__ == "__main__":
+    formatted_transcription = """
+    verbatimCollectors: 
+    collectedBy: 
+    secondaryCollectors: 
+    recordNumber: 
+    verbatimEventDate: 
+    minimumEventDate: 
+    maximumEventDate: 
+    verbatimIdentification: 
+    latestScientificName: 
+    identifiedBy: 
+    verbatimDateIdentified:aaaaa 
+    associatedTaxa: 
+    country: 
+    firstPoliticalUnit: 
+    secondPoliticalUnit: aa 
+    municipality: 
+    verbatimLocality: 
+    locality: 
+    habitat: 
+    verbatimElevation: 
+    verbatimCoordinates: 
+    otherCatalogNumbers: 
+    originalMethod: 
+    typeStatus: 
+    """
+    print(type(extract_info_from_text(formatted_transcription)))        

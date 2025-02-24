@@ -10,6 +10,7 @@ from llm_processing.utility import extract_info_from_text
 import time
 import json
 import re
+import pandas as pd
 
 from llm_processing.llm_manager2 import ProcessorManager
 from llm_processing.claude_interface2 import ClaudeImageProcessorThread
@@ -75,7 +76,9 @@ def set_up():
     if "session_to_edit" not in st.session_state:
         st.session_state.session_to_edit = ""
     if "fieldnames" not in st.session_state:
-        st.session_state.fieldnames = []    
+        st.session_state.fieldnames = []
+    if "current_fieldname" not in st.session_state:
+        st.session_state.current_fieldname = ""        
     # modes
     if "reedit_mode" not in st.session_state:
         st.session_state.reedit_mode = False
@@ -170,6 +173,7 @@ def chat_with_llm():
                 processor = ClaudeImageProcessorThread(api_key, None, None)
                 # use a selectbox to ask user if they want to include the url
                 if st.session_state.include_image and st.session_state.current_transcript_obj:
+                    #image_ref = st.session_state.current_transcript_obj.image_ref
                     image = st.session_state.processed_images[st.session_state.current_image_index]
                     response, costs = processor.chat(new_message, image)
                 else:
@@ -184,10 +188,9 @@ def chat_with_llm():
 
 def color_keys(fieldname):
     if st.session_state.content_option != "content":
-        return f":blue[{st.session_state.current_fieldname}]"
-    filename = st.session_state.current_transcript_obj.get_legal_json_filename()
+        return f":blue[{fieldname}]"
     rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
-    return f":red[{st.session_state.current_fieldname}]" if rating==0 else f":orange[{st.session_state.current_fieldname}]" if rating==1 else f":blue[{st.session_state.current_fieldname}]" if rating==2 else f":green[{st.session_state.current_fieldname}]" if rating ==3 else fieldname
+    return f":red[{fieldname}]" if rating==0 else f":orange[{fieldname}]" if rating==1 else f":blue[{fieldname}]" if rating==2 else f":green[{fieldname}]" if rating ==3 else fieldname
 
 def close_chat():
     """Callback to switch 'show_chat_area' off."""
@@ -368,7 +371,7 @@ def process_images_callback(
             st.error("Unable to read URL file. Check encoding or file format.")
             return
         st.session_state.urls = urls
-        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, result_queue, urls=urls, )
+        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, urls, result_queue)
         processor_manager.process_images()
     else:
         if not local_image_files:
@@ -382,7 +385,7 @@ def process_images_callback(
             except Exception as e:
                 st.warning(f"Could not open {uploaded_file.name}: {e}")
         st.session_state.local_images = local_images_list
-        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, result_queue, local_images_list=local_images_list)
+        processor_manager = ProcessorManager(api_key_dict, selected_llms, st.session_state.selected_prompt, st.session_state.prompt_text, local_images_list, result_queue)
         processor_manager.process_images()
     # Retrieve results
     num_returned_from_queue = 0
@@ -390,6 +393,7 @@ def process_images_callback(
         try:
             image, transcript_obj, version_name, image_ref = result_queue.get_nowait()
             num_returned_from_queue += 1
+            print(f"{num_returned_from_queue = }")
         except queue.Empty:
             break
         if image is None and transcript_obj is None and version_name is None:
@@ -416,10 +420,14 @@ def re_edit_saved_versions(selected_reedit_files):
             with open(os.path.join(f"{TRANCRIPTION_FOLDER}/versions", selected_file), "r", encoding="utf-8") as rf:
                 transcript_dict = json.load(rf)
                 latest_version_name = [k for k in transcript_dict.keys()][0]
+                print("420")
                 latest_version_dict = transcript_dict[latest_version_name]
+                print("422")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
+                print("425")
                 transcript_obj.versions = transcript_dict
+                print("427")
                 try:
                     response = requests.get(image_ref)
                     response.raise_for_status()
@@ -457,7 +465,11 @@ def re_edit_session(selected_session_file):
             session_dict = json.load(rf)
             for image_ref, transcript_dict in session_dict.items():
                 latest_version_name = [k for k in transcript_dict.keys()][0]
+                print(f"line 464")
+                print(f"{latest_version_name = }")
                 latest_version_dict = transcript_dict[latest_version_name]
+                print("line 467")
+                print(f"{latest_version_dict = }")
                 image_ref = latest_version_dict["data"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
@@ -517,6 +529,7 @@ def save_edits_to_json():
     for transcript_obj, p_version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
         transcript = Transcript(image_ref, st.session_state.selected_prompt)
         s_version_name = transcript.get_latest_version_name()
+        print(f"in save_edits_to_json: {s_version_name = }")
         costs = editing_data["costs"]
         editing = editing_data["editing"]
         output_dict = transcript_obj.versions[p_version_name]["content"]
@@ -824,24 +837,44 @@ def main():
                             st.write("No transcription to display.")       
                     # end workspace_fieldnames_container
                 else:
+                                        
+                    
+                    # ...existing code...
+                    
                     workspace_full_transcript_container = st.container(border=False)
                     with workspace_full_transcript_container:
                         if st.session_state.processed_outputs:
-                            st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-                            st.session_state.current_version_name = get_current_version_name()
-                            st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
-                            output_as_text = dict_to_text(st.session_state.current_output_dict)
-                            head = 20*"*\n"
-                            update_time_to_edit(start=True)
-                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", head+output_as_text, height=850)
+                            st.text_area(" ", "  ", height=350)
+                            current_output_dict = st.session_state.current_output_dict
+                            fieldnames = [k for k in current_output_dict.keys()]
+                            current_fieldvalues = list(current_output_dict.values())
+                            old_notes = ["no notes"] * len(current_output_dict)
+                            new_notes = [""] * len(current_output_dict)
+                    
+                            df = pd.DataFrame({
+                                "Field Name": fieldnames,
+                                "Current Value": current_fieldvalues,
+                                "Old Notes": old_notes,
+                                "New Notes": new_notes
+                            })
+                    
+                            edited_df = st.data_editor(df, key="my_key",height=350)
+                            #st.data_editor(df, key="my_key", num_rows="dynamic") #  Set a key
+                            st.write("Here's the value in Session State:")
+                            st.write(st.session_state["my_key"]) #  Show the value in Session State
+                            
+                            #print(f"{st.session_state.edited_rows = }") 
+                            #for index, row in edited_df.iterrows():
+                            #    if index == 0:
+                            #        print(f"{row['Current Value'] = }")
+                            #    st.session_state.current_output_dict[list(current_output_dict.keys())[index]] = row["Current Value"]
+                            #    # Assuming you want to store new notes somewhere in session state
+                            #    #st.session_state.current_output_dict[f"{list(current_output_dict.keys())[index]}_new_notes"] = row["New Notes"]
+                            #print(f"{st.session_state.current_output_dict = }")    
+                                
                         else:
-                            st.session_state.current_full_edits = st.text_area("*Press Ctrl+Enter to accept edits*", "no processed outputs to display", height=425)
-                
-                #col_link1, col_link2 = st.columns(2)
-                #with col_link1:
-                #    st.write("https://ipa.typeit.org/full/")
-                #with col_link2:
-                #    st.write("https://translate.google.com/")    
+                            st.write("No transcription to display.")
+                    # end workspace_full_transcript_container  
         # end editor_container
             # ---------------
         # Full-Screen View (if enabled)
@@ -860,12 +893,19 @@ def main():
                 st.button("Update Combined Output", on_click=save_edits)
 
             with col_download:
-                if st.session_state.processed_outputs:
-                    session_filename = f"{TRANCRIPTION_FOLDER}/sessions/{st.session_state.user_name}-{get_timestamp()}-session.txt"
+                # Build a filename containing model name and prompt
+                # Replace spaces or special chars if desired
+                if st.session_state.selected_llms and st.session_state.selected_prompt:
+                    model_short = st.session_state.selected_llms[-1].replace(" ", "_")
+                    prompt_short = st.session_state.selected_prompt.replace(" ", "_").replace(".txt", "")
+                    timestamp_str = datetime.now().strftime("%m_%d_%y-%I_%M%p")
+
+                    out_filename = f"Transcription_{model_short}_{prompt_short}_{timestamp_str}.txt"
+
                     st.download_button(
-                        label="Download Session as TXT",
+                        label="Download Output as TXT",
                         data=st.session_state.final_output,
-                        file_name=session_filename,
+                        file_name=out_filename,
                         mime="text/plain",
                         help="Save the combined output file to your local machine"
                     )
