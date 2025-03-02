@@ -5,15 +5,34 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 import requests
-from llm_processing.transcript4 import Transcript
-from llm_processing.utility import extract_info_from_text
+
 import time
 import json
 import re
 import pandas as pd
 
-from llm_processing.llm_manager3 import ProcessorManager
-from llm_processing.claude_interface2 import ClaudeImageProcessorThread
+
+from tkinter import filedialog
+import tkinter as tk
+from dotenv import load_dotenv
+import subprocess
+import platform
+from streamlit.components.v1 import html
+
+from llm_processing.llm_manager4 import ProcessorManager
+from llm_processing.claude_interface3 import ClaudeImageProcessorThread
+from llm_processing.transcript5 import Transcript
+from llm_processing.utility import extract_info_from_text
+
+# Constants
+ENV_FILE = ".env"
+REQUIRED_ENV_VARS = {
+    "ANTHROPIC_API_KEY": "API key for chat features",
+    "LOCAL_IMAGES_FOLDER": "Directory for local images",
+    "URL_TXT_FILES_FOLDER": "Directory for URL text files",
+    "OPENAI_API_KEY": "Optional OpenAI API key"
+}
+
 
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 TRANCRIPTION_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
@@ -47,7 +66,9 @@ def set_up():
     if "local_images" not in st.session_state:
         st.session_state.local_images = []
     if "job_dict" not in st.session_state:
-        st.session_state.job_dict = get_blank_jobs_dict() 
+        st.session_state.job_dict = get_blank_jobs_dict()
+    if "files_are_selected_to_process" not in st.session_state:
+        st.session_state.files_are_selected_to_process = False     
     # outputs    
     #### elements in st.session_state.processed_outputs elements
     if "status_msg" not in st.session_state:
@@ -112,8 +133,6 @@ def set_up():
         st.session_state.content_option = "content"
     if "current_transcript_obj" not in st.session_state:
         st.session_state.current_transcript_obj = None 
-    if "current_version_name" not in st.session_state:
-        st.session_state.current_version_name = ""
 
 def reset_states():
     # inputs
@@ -136,7 +155,8 @@ def reset_states():
     st.session_state.filename_to_edits.clear()
     st.session_state.session_to_edit = ""
     st.session_state.fieldnames.clear()
-    st.session_state.job_dict = get_blank_jobs_dict()  
+    st.session_state.job_dict = get_blank_jobs_dict() 
+    st.session_state.files_are_selected_to_process = False  
     # modes
     st.session_state.fullscreen = False
     st.session_state.reedit_mode = False
@@ -147,7 +167,6 @@ def reset_states():
     st.session_state.current_fieldvalue = ""
     st.session_state.content_option = "content"
     st.session_state.current_transcript_obj = None 
-    st.session_state.current_version_name = ""
     st.session_state.chat_history = ""
     st.session_state.show_chat_area = False
     st.session_state.current_chat = ""
@@ -170,7 +189,9 @@ def append_processed_elements(image, transcript_obj, version_name, image_ref):
     st.session_state.processed_outputs.append(transcript_obj)
     st.session_state.processed_version_names.append(version_name)
     st.session_state.processed_image_refs.append(image_ref)
-    output_dict = transcript_obj.get_version_by_name(version_name)["content"]
+    output_dict = transcript_obj.versions[0]["content"]
+    for fieldname in output_dict:
+        output_dict[fieldname]["new notes"] = ""
     st.session_state.final_output += image_ref + "\n" + dict_to_text(output_dict) + "\n" + ("=" * 50) + "\n"
     editing_data = {"costs": get_costs_blank_dict(), "editing": get_editing_blank_dict()}
     st.session_state.editing_data.append(editing_data)
@@ -210,7 +231,7 @@ def chat_with_llm():
 def color_keys(fieldname):
     if st.session_state.content_option != "content":
         return f":blue[{st.session_state.current_fieldname}]"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     return f":red[{st.session_state.current_fieldname}]" if rating==0 else f":orange[{st.session_state.current_fieldname}]" if rating==1 else f":blue[{st.session_state.current_fieldname}]" if rating==2 else f":green[{st.session_state.current_fieldname}]" if rating ==3 else fieldname
 
 def close_chat():
@@ -231,11 +252,9 @@ def enable_notes_display():
 
 def get_content_options():
     if st.session_state.current_transcript_obj:
-        version_name = st.session_state.current_transcript_obj.get_latest_version_name()
-        st.session_state.current_version_name = version_name
-        options = list(st.session_state.current_transcript_obj.versions[st.session_state.current_version_name].keys())
+        options = list(st.session_state.current_transcript_obj.versions[0].keys())
         #return [o if o != "content" else "transcript" for o in options ]
-        return ["transcript"]
+        return ["transcript", "comparisons", "costs"]
     else:
         return ["transcript"]
         
@@ -247,8 +266,6 @@ def get_costs_blank_dict():
             "output cost $": 0
         }
 
-def get_current_version_name():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].get_latest_version_name()
 
 def get_editing_blank_dict():
     return {"time started": 0, "time editing": 0, "chats": ""}    
@@ -284,30 +301,30 @@ def get_combined_output_as_text():
     for image, transcript_obj, version_name, image_ref in zip(st.session_state.processed_images, st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs):
         prompt_used = transcript_obj.prompt_name
         models_used = ", ".join(transcript_obj.models)
-        output_dict = transcript_obj.versions[version_name]["content"]
+        output_dict = transcript_obj.versions[0]["content"]
         values = "\n".join([f"{fieldname}: {v['value']}" for fieldname, v in output_dict.items()])
         output += f'{image_ref}\nprompt used: {prompt_used}\nmodel(s) used: {models_used}\n\n{values}\n\n{"=" * 50}\n\n'
     return header + "\n" + output 
 
 def get_option_dict_from_version_in_processed_outputs():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option]       
+    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option]       
 
 def get_timestamp():
     return  time.strftime("%Y-%m-%d-%H%M-%S")
 
 def get_val_from_version_in_processed_outputs():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option][st.session_state.current_fieldname]
+    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option][st.session_state.current_fieldname]
 
 def get_validation_rating(fieldname):
     if st.session_state.content_option != "content":
         return "?"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     return rating if rating is not None else "?"
 
 def get_validation_rating_with_emoji(fieldname):
     if st.session_state.content_option != "content":
         return "🥺"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     if rating:
         return rating*"👍"
     return "🥺"    
@@ -372,85 +389,90 @@ def open_fullscreen():
     st.session_state.fullscreen = True
 
 def process_images_callback(
-    api_key_dict,
-    prompt_text_from_file,
-    selected_llms,
-    selected_prompt_file,
-    input_type,
-    url_file,
-    local_image_files
-    ):
-    
-    for llm in selected_llms:
-        if not api_key_dict[llm]:
-            st.error(f"Please upload the API key file for {llm}.")
-            return
-    if not prompt_text_from_file:
-        st.error("No prompt text available (folder empty or file missing).")
-        return
-    for llm in selected_llms:
-        try:
-            api_key = api_key_dict[llm].read().decode("utf-8").strip()
-        except:
-            st.error(f"Unable to read API key file for {llm}. Check encoding or file format.")
-            return
-        api_key_dict[f"{llm}_key"] = api_key
-    st.session_state.api_key_dict = api_key_dict
-    # Store the chosen model & prompt in session for final output/filename
-    st.session_state.selected_llms = selected_llms
-    st.session_state.selected_prompt = selected_prompt_file
-    # Reset states
-    st.session_state.prompt_text = prompt_text_from_file
-    st.session_state.processed_images.clear()
-    st.session_state.processed_outputs.clear()
-    st.session_state.processed_version_names.clear()
-    st.session_state.processed_image_refs.clear()
-    st.session_state.current_image_index = 0
-    st.session_state.final_output = ""
-    st.session_state.urls.clear()
-    st.session_state.local_images.clear()
-    st.session_state.fullscreen = False
-    # Decide URL-based or local
-    
-    if input_type == "URL List":
-        if not url_file:
-            st.error("Please upload a .txt file containing image URLs.")
-            return
-        try:
-            urls_content = url_file.read().decode("utf-8")
-            urls = urls_content.strip().splitlines()
-        except:
-            st.error("Unable to read URL file. Check encoding or file format.")
-            return
-        st.session_state.urls = urls
-    else:
-        if not local_image_files:
-            st.error("Please upload at least one image file.")
-            return
-        local_images_list = []
-        for uploaded_file in local_image_files:
+        api_key_dict,
+        prompt_text_from_file,
+        selected_llms,
+        selected_prompt_file,
+        input_type,
+        url_file,
+        local_image_files
+        ):
+        print(f"process_images_callback: {api_key_dict = }, {url_file = }")
+        
+        for llm in selected_llms:
+            if not api_key_dict.get(f"{llm}_key"):
+                st.error(f"Please upload the API key file for {llm}.")
+                return
+        if not prompt_text_from_file:
+            st.error("No prompt text available (folder empty or file missing).")
+            return  
+        for llm in selected_llms:
+            if not api_key_dict.get(f"{llm}_key"):
+                try:
+                    api_key = api_key_dict[llm].read().decode("utf-8").strip()
+                except:
+                    st.error(f"Unable to read API key file for {llm}. Check encoding or file format.")
+                    return
+                api_key_dict[f"{llm}_key"] = api_key
+        st.session_state.api_key_dict = api_key_dict
+        # Store the chosen model & prompt in session for final output/filename
+        st.session_state.selected_llms = selected_llms
+        st.session_state.selected_prompt = selected_prompt_file
+        # Reset states
+        st.session_state.prompt_text = prompt_text_from_file
+        st.session_state.processed_images.clear()
+        st.session_state.processed_outputs.clear()
+        st.session_state.processed_version_names.clear()
+        st.session_state.processed_image_refs.clear()
+        st.session_state.current_image_index = 0
+        st.session_state.final_output = ""
+        st.session_state.urls.clear()
+        st.session_state.local_images.clear()
+        st.session_state.fullscreen = False
+        
+        if input_type == "URL List":
+            if not url_file:
+                st.error("Please upload a .txt file containing image URLs.")
+                return
             try:
-                image = Image.open(uploaded_file)
-                local_images_list.append((image, uploaded_file.name))
-            except Exception as e:
-                st.warning(f"Could not open {uploaded_file.name}: {e}")
-        st.session_state.local_images = local_images_list
-    use_url = input_type == "URL List"
-    images_to_process = st.session_state.urls if use_url else st.session_state.local_images
-    jobs_dict = {
-        "api_key_dict": api_key_dict,
-        "selected_llms": selected_llms,
-        "selected_prompt_file": st.session_state.selected_prompt,
-        "prompt_text": st.session_state.prompt_text,
-        "urls": st.session_state.urls,
-        "local_images_list": st.session_state.local_images,
-        "to_process": images_to_process,
-        "in_process": [],
-        "processed": [],
-        "failed": [],
-    }
-    load_jobs(jobs_dict)
-    process_jobs()         
+                with open(url_file, "r", encoding="utf-8") as f:
+                    urls_content = f.read().strip()
+                    urls = urls_content.splitlines()
+                #urls_content = url_file.read().decode("utf-8")
+                #urls = urls_content.strip().splitlines()
+            except:
+                st.error("Unable to read URL file. Check encoding or file format.")
+                return
+            st.session_state.urls = urls
+        else:  # Local Images
+            if not local_image_files:
+                st.error("Please upload at least one image file.")
+                return
+            local_images_list = []
+            for uploaded_file in local_image_files:
+                try:
+                    image = Image.open(uploaded_file)
+                    local_images_list.append((image, uploaded_file))
+                except Exception as e:
+                    st.warning(f"Could not open {uploaded_file}: {e}")
+            st.session_state.local_images = local_images_list
+    
+        use_url = input_type == "URL List"
+        images_to_process = st.session_state.urls if use_url else st.session_state.local_images
+        jobs_dict = {
+            "api_key_dict": api_key_dict,
+            "selected_llms": selected_llms,
+            "selected_prompt_file": st.session_state.selected_prompt,
+            "prompt_text": st.session_state.prompt_text,
+            "urls": st.session_state.urls,
+            "local_images_list": st.session_state.local_images,
+            "to_process": images_to_process,
+            "in_process": [],
+            "processed": [],
+            "failed": [],
+        }
+        load_jobs(jobs_dict)
+        process_jobs()
 
 def process_jobs():
     jobs = st.session_state.job_dict
@@ -460,7 +482,7 @@ def process_jobs():
     for idx, image_to_process in enumerate(copy_images_to_process):
         jobs["to_process"].remove(image_to_process)
         jobs["in_process"].append(image_to_process)
-        image, transcript_obj, version_name, image_ref = processor_manager.process_one_image(idx, url=image_to_process) if use_url else processor_manager.process_one_image(idx, local_image=image_to_process)
+        image, transcript_obj, version_name, image_ref = processor_manager.process_one_image(idx, image_to_process) if use_url else processor_manager.process_one_image(idx, image_to_process)
         if type(transcript_obj) != Transcript:
             st.session_state.pause_button_enabled = True
             st.session_state.status_msg = transcript_obj
@@ -471,7 +493,7 @@ def process_jobs():
             st.session_state.status_msg += f"Successfully processed {image_ref}\n"
             jobs["processed"].append([image_to_process, image_ref])
         append_processed_elements(image, transcript_obj, version_name, image_ref)
-        output_dict = transcript_obj.get_version_by_name(version_name)["content"]
+        output_dict = transcript_obj.versions[0]["content"]
         st.session_state.final_output = get_combined_output_as_text()
         editing_data = {"costs": get_costs_blank_dict(), "editing": get_editing_blank_dict()}
         st.session_state.editing_data.append(editing_data)
@@ -490,9 +512,9 @@ def re_edit_saved_versions(selected_reedit_files):
         for selected_file in selected_reedit_files:
             with open(os.path.join(f"{TRANCRIPTION_FOLDER}/versions", selected_file), "r", encoding="utf-8") as rf:
                 transcript_dict = json.load(rf)
-                latest_version_name = [k for k in transcript_dict.keys()][0]
-                latest_version_dict = transcript_dict[latest_version_name]
-                image_ref = latest_version_dict["data"]["image ref"]
+                latest_version_name = transcript_dict[0]["new version name"]
+                latest_version_dict = transcript_dict[0]
+                image_ref = latest_version_dict["generation info"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
                 try:
@@ -509,7 +531,6 @@ def re_edit_saved_versions(selected_reedit_files):
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
         #st.session_state.current_transcript_obj = transcript_obj
@@ -530,9 +551,9 @@ def re_edit_session(selected_session_file):
         with open(os.path.join(f"{TRANCRIPTION_FOLDER}/sessions", selected_session_file), "r", encoding="utf-8") as rf:
             session_dict = json.load(rf)
             for image_ref, transcript_dict in session_dict.items():
-                latest_version_name = [k for k in transcript_dict.keys()][0]
-                latest_version_dict = transcript_dict[latest_version_name]
-                image_ref = latest_version_dict["data"]["image ref"]
+                latest_version_name = transcript_dict[0]["new version name"]
+                latest_version_dict = transcript_dict[0]
+                image_ref = latest_version_dict["generation info"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
                 try:
@@ -549,7 +570,6 @@ def re_edit_session(selected_session_file):
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
         st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
@@ -580,12 +600,15 @@ def save_edits_to_json():
     session_output_dict = {}
     for transcript_obj, p_version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
         transcript = Transcript(image_ref, st.session_state.selected_prompt)
-        s_version_name = transcript.get_latest_version_name()
+        s_version_name = transcript.versions[0]["new version name"]
+        print(f"in save_edits_to_json: {s_version_name = }, {p_version_name = }")
         costs = editing_data["costs"]
+        print(f"in save_edits_to_json: {costs = }")
         editing = editing_data["editing"]
-        output_dict = transcript_obj.versions[p_version_name]["content"]
+        print(f"in save_edits_to_json: {editing = }")
+        output_dict = transcript_obj.versions[0]["content"]
         save_to_json(output_dict, image_ref)
-        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, data=costs, is_user=True, old_version_name=s_version_name, editing=editing)
+        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, costs=costs, is_ai_generated=False, old_version_name=s_version_name, editing=editing, new_notes = {})
         session_output_dict[image_ref] = transcript.versions
     session_filename = f"{TRANCRIPTION_FOLDER}/sessions/{st.session_state.user_name}-{get_timestamp()}-session.json"
     if session_output_dict:
@@ -598,7 +621,7 @@ def save_field_text_area():
         update_version_in_processed_outputs(st.session_state.field_text_area)
 
 def save_table_edits(edited_elements, fieldnames, current_output_dict):
-    editables = ["value", "new_notes"]
+    editables = ["value", "new notes"]
     for row_number, columns in edited_elements.items():
         for header, val in columns.items():
             if header in editables:
@@ -647,9 +670,6 @@ def update_costs(new_costs: dict):
 
 def update_displays():
     st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-    transcript_dict = st.session_state.current_transcript_obj.versions
-    version_name = [k for k in transcript_dict.keys()][0]
-    st.session_state.current_version_name = version_name
     st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
     st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
     st.session_state.field_idx = 0
@@ -690,16 +710,117 @@ def update_time_to_edit(start=True):
 
 def update_version_in_processed_outputs(val):
     if st.session_state.content_option=="content":
-        st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option][st.session_state.current_fieldname]["value"] = val
+        st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option][st.session_state.current_fieldname]["value"] = val
 
 def update_processed_outputs():
     if st.session_state.content_option=="content" and st.session_state.processed_outputs:
         output_dict = st.session_state.current_output_dict
-        st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option] = output_dict    
+        st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option] = output_dict    
+
+# State Management
+def init_session_state():
+    """Initialize session state variables"""
+    if 'config' not in st.session_state:
+        st.session_state.config = {}
+    if 'images_dir' not in st.session_state:
+        st.session_state.images_dir = ""
+    if 'url_dir' not in st.session_state:
+        st.session_state.url_dir = ""
+    if 'step' not in st.session_state:
+        st.session_state.step = 1
+    if 'env_loaded' not in st.session_state:
+        st.session_state.env_loaded = False
+
+# Environment File Handling
+def check_env_file():
+    """Check if .env file exists and load it"""
+    if os.path.exists(ENV_FILE):
+        load_dotenv()
+        env_vars = {key: os.getenv(key) for key in REQUIRED_ENV_VARS.keys()}
+        return env_vars
+    return None
+
+def load_env_to_session():
+    """Load environment variables into session state"""
+    env_vars = check_env_file()
+    if env_vars:
+        st.session_state.config = env_vars
+        st.session_state.images_dir = env_vars.get('LOCAL_IMAGES_FOLDER', '')
+        st.session_state.url_dir = env_vars.get('URL_TXT_FILES_FOLDER', '')
+        st.session_state.env_loaded = True
+        return True
+    return False
+
+def select_files(file_types=None, initial_dir=None):
+    """Open native file selection dialog that allows multiple file selection"""
+    try:
+        # Create and hide the tkinter root window
+        root = tk.Tk()
+        root.attributes('-topmost', True)  # Make sure it appears on top
+        root.withdraw()  # Hide the main window
+        
+        # Default file types if none specified
+        if file_types is None:
+            file_types = [
+                ('Image files', '*.png *.jpg *.jpeg'),
+                ('All files', '*.*')
+            ]
+            
+        # Use provided initial directory or expand user's home directory
+        dir_value = initial_dir or "~"
+        default_dir = os.path.expanduser(dir_value)
+        
+        # Open the file selection dialog
+        file_paths = filedialog.askopenfilenames(
+            parent=root,
+            initialdir=default_dir,
+            title="Select files",
+            filetypes=file_types
+        )
+        
+        # Clean up the tkinter instance
+        root.destroy()
+        
+        return file_paths if file_paths else None
+        
+    except Exception as e:
+        st.error(f"Error selecting files: {str(e)}")
+        return None
+
+def main():
+    st.title("HerbariumScribe")
+    
+    # Initialize session state
+    init_session_state()
+    
+    
+    # Check for existing configuration
+    if not st.session_state.env_loaded:
+        if load_env_to_session():
+            st.success("Existing configuration loaded from .env file")
+
+    # Rest of your main function...
+
 
 def main():
     st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
+    init_session_state()
     
+    # Initialize file selection states if not present
+    if 'select_images_clicked' not in st.session_state:
+        st.session_state.select_images_clicked = False
+    if 'select_url_clicked' not in st.session_state:
+        st.session_state.select_url_clicked = False
+    if 'selected_files' not in st.session_state:
+        st.session_state.selected_files = None
+    if 'selected_url_file' not in st.session_state:
+        st.session_state.selected_url_file = None
+    
+    # Check for existing configuration
+    if not st.session_state.env_loaded:
+        if load_env_to_session():
+            st.success("Existing configuration loaded from .env file")
+
     st.markdown("""
         <style>
         div.stButton > button {
@@ -753,67 +874,146 @@ def main():
             # LLM Choice
             llm_options = ["claude-3.5-sonnet", "gpt-4o"]
             selected_llms = st.multiselect("Select LLM(s):", llm_options, default=[llm_options[0]])
-
-            # API key file
             api_key_dict = {}
+            if "OPENAI_API_KEY" in os.environ:
+                api_key_dict["gpt-4o_key"] = os.getenv("OPENAI_API_KEY")
+                api_key_dict["gpt-4o_key"] = os.getenv("OPENAI_API_KEY")
+            if "ANTHROPIC_API_KEY" in os.environ:
+                api_key_dict["claude-3.5-sonnet_key"] = os.getenv("ANTHROPIC_API_KEY")
+                api_key_dict["claude-3.5-sonnet_key"] = os.getenv("ANTHROPIC_API_KEY")
             for llm in selected_llms:
+                if f"{llm}_key" in api_key_dict:
+                    continue
                 api_key_dict[llm] = st.file_uploader(f"Upload API Key File For {llm} (TXT)", type=["txt"])
             st.session_state.api_key_dict = api_key_dict
             # Radio for "Local Images" vs. "URL List"
-            input_type = st.radio("Select Image Input Type:", ["URL List", "Local Images"], index=0)
+                    
+            # Input type selection without default
+            input_type = st.radio(
+                "Select Image Input Type:",
+                ["", "URL List", "Local Images"],
+                index=0,
+                label_visibility="visible"
+            )
 
-            # File uploaders
             if input_type == "URL List":
-                url_file = st.file_uploader("Upload URL File (TXT)", type=["txt"])
+                # Button for URL file selection
+                if st.button("Select URL File", key='select_url_button'):
+                    st.session_state.select_url_clicked = True
+                    st.session_state.select_images_clicked = False  # Reset other button
+
+                # Handle URL file selection
+                if st.session_state.select_url_clicked:
+                    file_paths = select_files(
+                        file_types=[('Text files', '*.txt')],
+                        initial_dir=st.session_state.url_dir
+                    )
+                    if file_paths:
+                        # Since we only want one URL file, take the first selected file
+                        st.session_state.selected_url_file = file_paths[0]
+                    st.session_state.select_url_clicked = False
+                    st.rerun()
+
+                # Display selected URL file
+                if st.session_state.selected_url_file:
+                    st.write(f"Selected URL file: {os.path.basename(st.session_state.selected_url_file)}")
+                    # Read the URL file
+                    try:
+                        with open(st.session_state.selected_url_file, 'r') as f:
+                            urls_content = f.read()
+                            urls = urls_content.strip().splitlines()
+                            st.write(f"Found {len(urls)} URLs in file")
+                        url_file = st.session_state.selected_url_file
+                    except Exception as e:
+                        st.error(f"Error reading URL file: {str(e)}")
+                        url_file = None
+                else:
+                    url_file = None
                 local_image_files = None
-            else:
+
+            elif input_type == "Local Images":
+                # Button for image selection
+                if st.button("Select Image Files", key='select_images_button'):
+                    st.session_state.select_images_clicked = True
+                    st.session_state.select_url_clicked = False  # Reset other button
+
+                # Handle image file selection
+                if st.session_state.select_images_clicked:
+                    file_paths = select_files(
+                        file_types=[
+                            ('Image files', '*.png *.jpg *.jpeg'),
+                            ('All files', '*.*')
+                        ],
+                        initial_dir=st.session_state.images_dir
+                    )
+                    if file_paths:
+                        st.session_state.selected_files = file_paths
+                    st.session_state.select_images_clicked = False
+                    st.rerun()
+                
+                # Display selected image files
+                if st.session_state.selected_files:
+                    st.write("Selected files:")
+                    for file in st.session_state.selected_files:
+                        st.write(f"- {os.path.basename(file)}")
+                    local_image_files = st.session_state.selected_files
+                else:
+                    local_image_files = None
                 url_file = None
-                local_image_files = st.file_uploader(
-                    "Upload One or More Images",
-                    type=["png", "jpg", "jpeg"],
-                    accept_multiple_files=True
-                )
-        # end input_setting_container
+
+            else:
+                st.warning("Please select an input type")
+                return
+
+            # Clear selection button
+            if (st.session_state.selected_files or st.session_state.selected_url_file) and st.button("Clear Selection"):
+                st.session_state.selected_files = None
+                st.session_state.selected_url_file = None
+                st.rerun()
+
+    
+    # end input_setting_container
         # ---------------
         # Process Images Button
     # ---------------
         process_container = st.container(border=True)
-        with process_container:
-            process_button_col, status_bar_col, pause_button_col = st.columns([1, 4, 1])
-            with process_button_col:
-                st.container(height=20, border=False)
-                st.button(
-                        "Process Images",
-                        on_click=process_images_callback,
-                        args=(
-                            api_key_dict,
-                            prompt_text_from_file,
-                            selected_llms,
-                            selected_prompt_file,
-                            input_type,
-                            url_file,
-                            local_image_files
-                        )
-                        )
-            with status_bar_col:        
-                status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
-            if st.session_state.pause_button_enabled:
-                with pause_button_col:
-                    proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"])
-                    if proceed_option == "Finish Remaining Jobs":
-                        st.session_state.status_msg = "Skipping Failed Jobs and Finishing remaining jobs..."
-                        resume_jobs(try_failed_jobs=False)
-                    elif proceed_option == "Retry Failed and Remaining Jobs":
-                        st.session_state.status_msg = "Retrying Failed Jobs and Finishing remaining jobs..."
-                        resume_jobs(try_failed_jobs=True)
-                    elif proceed_option == "Cancel all Jobs and Abort Editing":
-                        st.session_state.pause_button_enabled = False
-                        st.session_state.status_msg = "Cancelling remaining jobs and aborting editing..."
-                        reset_states()
-                    elif proceed_option == "Cancel All Jobs":
-                        st.session_state.pause_button_enabled = False
-                        st.session_state.status_msg = "Cancelling remaining jobs..."   
-                        
+        if True:#st.session_state.files_are_selected_to_process:
+            with process_container:
+                process_button_col, status_bar_col, pause_button_col = st.columns([1, 4, 1])
+                with process_button_col:
+                    st.container(height=20, border=False)
+                    st.button(
+                            "Process Images",
+                            on_click=process_images_callback,
+                            args=(
+                                st.session_state.api_key_dict,
+                                prompt_text_from_file,
+                                selected_llms,
+                                selected_prompt_file,
+                                input_type,
+                                url_file,
+                                local_image_files
+                            )
+                            )
+                with status_bar_col:        
+                    status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
+                if st.session_state.pause_button_enabled:
+                    with pause_button_col:
+                        proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"])
+                        if proceed_option == "Finish Remaining Jobs":
+                            st.session_state.status_msg = "Skipping Failed Jobs and Finishing remaining jobs..."
+                            resume_jobs(try_failed_jobs=False)
+                        elif proceed_option == "Retry Failed and Remaining Jobs":
+                            st.session_state.status_msg = "Retrying Failed Jobs and Finishing remaining jobs..."
+                            resume_jobs(try_failed_jobs=True)
+                        elif proceed_option == "Cancel all Jobs and Abort Editing":
+                            st.session_state.pause_button_enabled = False
+                            st.session_state.status_msg = "Cancelling remaining jobs and aborting editing..."
+                            reset_states()
+                        elif proceed_option == "Cancel All Jobs":
+                            st.session_state.pause_button_enabled = False
+                            st.session_state.status_msg = "Cancelling remaining jobs..."   
+                            
 
 
     else:
@@ -864,7 +1064,7 @@ def main():
     # ---------------
     # Output Display
     #---------------
-    if st.session_state.processed_outputs and st.session_state.processed_images:
+    if True:#st.session_state.processed_outputs and st.session_state.processed_images:
         editor_container = st.container(border=False) 
         with editor_container:
             st.write("## Editor")
@@ -886,21 +1086,20 @@ def main():
                       
 
             with col_field_editor:
-                st.container(border=False, height=300)
+                st.container(border=False, height=250)
                 if st.session_state.processed_outputs:
                     st.write("https://ipa.typeit.org/full/")
                     st.write("https://translate.google.com/") 
                     content_options = get_content_options()
-                    #selected_content = st.selectbox("Select Content To View or Edit:", content_options)
-                    st.session_state.content_option = "content" #if selected_content=="transcript" else selected_content
+                    selected_content = st.selectbox("Select Content To View or Edit:", content_options)
+                    st.session_state.content_option = "content" if selected_content=="transcript" else selected_content
                     st.session_state.editing_view_option = st.radio("Select Editor View:", ["Fieldname", "Full Text"], index=0)
                     
                     if st.session_state.editing_view_option == "Fieldname":
                         st.container(height=175, border=False)
                         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-                        st.session_state.current_version_name = get_current_version_name()
                         col_prev_field, col_next_field, __ = st.columns(3)
-                        if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
+                        if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.content_option=="content":
                             
                             with col_next_field:
                                 st.button("next field", on_click=go_to_next_field)         
@@ -925,7 +1124,19 @@ def main():
                             current_output_dict = st.session_state.current_output_dict
                             output_as_text = dict_to_text(current_output_dict)
                             text_area_height = st.slider("text area height", min_value=100, max_value=600, value=300, label_visibility="collapsed", key="text_area_height")                
-                            st.text_area("**Press Ctrl-Enter to Accept Changes**", output_as_text, st.session_state.get("text_area_height", 300), key="text_output_key", on_change=update_text_output)
+                            txt = st.text_area("**Press Ctrl-Enter to Accept Changes**", output_as_text, st.session_state.get("text_area_height", 300), key="text_output_key", on_change=update_text_output)
+                                                        
+                            js = """
+                            <script>
+                            const txt_areas = window.parent.document.querySelectorAll('div[data-testid="stTextArea"] textarea');
+                            txt_areas.forEach(txt => {
+                                txt.spellcheck = false;
+                                }
+                            );
+                            </script>
+                            """
+
+                            html(js, height=0)
                             
                     image_ref = st.session_state.current_transcript_obj.image_ref if st.session_state.current_transcript_obj else f"Image {current_image_idx}" 
                     st.write(image_ref)
@@ -948,43 +1159,97 @@ def main():
             with table_container:
                 current_output_dict = st.session_state.current_output_dict
                 fieldnames = [k for k in current_output_dict.keys()]
-                validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
-                data = {"fieldname": [], "rating": validation_ratings}
-                column_config={
-                                "value": st.column_config.TextColumn(
-                                    "value",
-                                    width="large",
-                                ),
-                                "rating": st.column_config.TextColumn(
-                                    "rating",
-                                    width="small",
-                                )
-                            }
+                if st.session_state.content_option == "content":
+                    validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
+                    data = {"fieldname": [], "rating": validation_ratings}
+                    column_config={
+                                    "value": st.column_config.TextColumn(
+                                        "value",
+                                        width="large",
+                                    ),
+                                    "rating": st.column_config.TextColumn(
+                                        "rating",
+                                        width="small",
+                                    )
+                                }
 
-                for fieldname, d in current_output_dict.items():
-                    data["fieldname"].append(fieldname)
-                    for k, v in d.items():
-                        if k in ["notes", "new_notes"] and not st.session_state.show_notes:
-                            continue
-                        if k not in data:
-                            data[k] = []
-                        data[k].append(v)
-                df = pd.DataFrame(data)
-                ###### slider goes here
-                # Add this right before the data editor
-                
-                
-                # Then modify your data editor to use the slider value
-                edited_df = st.data_editor(
-                    df, 
-                    use_container_width=True, 
-                    column_config=column_config, 
-                    hide_index=True, 
-                    key="my_key", 
-                    height=st.session_state.get('table_height', 225)  # Use the slider value here
-                )
-                table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
-            edited_elements = st.session_state["my_key"]["edited_rows"]
+                    for fieldname, d in current_output_dict.items():
+                        data["fieldname"].append(fieldname)
+                        for k, v in d.items():
+                            if k in ["notes", "new notes"] and not st.session_state.show_notes:
+                                continue
+                            if k not in data:
+                                data[k] = []
+                            data[k].append(v)
+                    df = pd.DataFrame(data)
+                    ###### slider goes here
+                    # Add this right before the data editor
+                    
+                    
+                    # Then modify your data editor to use the slider value
+                    edited_df = st.data_editor(
+                        df, 
+                        use_container_width=True, 
+                        column_config=column_config, 
+                        hide_index=True, 
+                        key="my_key", 
+                        height=st.session_state.get('table_height', 225)  # Use the slider value here
+                    )
+                    table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
+                    edited_elements = st.session_state["my_key"]["edited_rows"]
+                elif st.session_state.content_option == "comparisons":
+                    current_version = st.session_state.current_transcript_obj.versions[0]
+                    print(f"{st.session_state.content_option =}")
+                    data = {"fieldname": []}
+                    comparisons_dict = current_version["comparisons"]
+                    for comparison_name, d in comparisons_dict.items():
+                        data["fieldname"] = list(d.keys())
+                        for k, v in d.items():
+                            if comparison_name not in data:
+                                data[comparison_name] = []
+                            data[comparison_name].append(v)
+                    df = pd.DataFrame(data)
+                    edited_df = st.data_editor(
+                        df, 
+                        use_container_width=True, 
+                        hide_index=True
+                    )
+                else:
+                    versions = st.session_state.current_transcript_obj.versions
+                    version_names = [v["new version name"] for v in versions]
+                    print(f"{st.session_state.content_option =}")
+                    data = {"fieldname": []}
+                    content_objs = [obj[st.session_state.content_option] for obj in versions]
+                    if type(content_objs[0])==dict:# and any(type(val)==dict for val in content_objs[0].values()):
+                        for version_name, content_obj in zip(version_names, content_objs):
+                            fieldnames = list(content_obj.keys())
+                            if len(fieldnames)!=10:
+                                continue
+                            data["fieldname"] = fieldnames    
+                            for k, v in content_obj.items():
+                                if version_name not in data:
+                                    data[version_name] = []
+                                data[version_name].append(v)
+                                print(f"{len(data['fieldname']) =}, {len(data[version_name]) = }")
+                        df = pd.DataFrame(data)
+                        edited_df = st.data_editor(
+                            df, 
+                            use_container_width=True, 
+                            hide_index=True
+                        )
+                    elif False:#type(content_objs[0])==dict:
+                        data["value"] = []
+                        for fieldname, val in content_objs[0].items():
+                            data["fieldname"].append(fieldname)
+                            data["value"].append(val)
+                        df = pd.DataFrame(data)
+                        edited_df = st.data_editor(
+                            df, 
+                            use_container_width=True, 
+                            hide_index=True
+                        )    
+
+        # end table_container        
         # end table_container
         
             
@@ -1046,3 +1311,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# version_name = create_version(created_by=self.modelname, content=transcription_dict, costs=transcript_processing_data, is_ai_generated=True, old_version_name=old_version_name, editing = {}, new_notes = {})

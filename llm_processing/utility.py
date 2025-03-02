@@ -1,4 +1,9 @@
 import re
+import requests
+from PIL import Image
+from io import BytesIO
+import base64
+import base64
 
 def extract_info_from_text(formatted_transcription):
         regex_patterns = {
@@ -42,6 +47,24 @@ def dict_to_string(dictionary):
     for key, value in dictionary.items():
         result += f"{key}: {value}\n"
     return result.strip()
+
+def get_image_from_url(url):
+    try:
+        response = requests.get(url.strip())
+        response.raise_for_status()
+        image = Image.open(BytesIO(response.content))
+        return image
+    except requests.exceptions.RequestException as e:
+        error_message = f"Error processing image: '{url}': {str(e)}"
+        print(f"ERROR: {error_message}")
+        return error_message
+
+def get_base64_image(image):
+    buffered = BytesIO()
+    image.save(buffered, format="JPEG")
+    img_str = base64.b64encode(buffered.getvalue()).decode()
+    return img_str
+                
 
 if __name__ == "__main__":
     formatted_transcription = """

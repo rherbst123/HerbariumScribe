@@ -1,122 +1,98 @@
 {
     "verbatimCollectors": {
         "value": "M. Fleischer",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "collectedBy": {
         "value": "M. Fleischer",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "secondaryCollectors": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "recordNumber": {
-        "value": "2734",
-        "notes": "",
-        "new_notes": ""
+        "value": "B 2754",
+        "new notes": ""
     },
     "verbatimEventDate": {
         "value": "25.3.1903",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "minimumEventDate": {
         "value": "1903-03-25",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "maximumEventDate": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "verbatimIdentification": {
         "value": "Macromitrium",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "latestScientificName": {
         "value": "Macromitrium",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "identifiedBy": {
-        "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "value": "unsure and check",
+        "new notes": ""
     },
     "verbatimDateIdentified": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "associatedTaxa": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "country": {
         "value": "Australia",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "firstPoliticalUnit": {
         "value": "Queensland",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "secondPoliticalUnit": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "municipality": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "verbatimLocality": {
-        "value": "Eumundi (ca. 100 km nördlich Brisbane)",
-        "notes": "",
-        "new_notes": ""
+        "value": "Dumundi (ca. 100 km nördlich Brisbane) Urwald",
+        "new notes": ""
     },
     "locality": {
-        "value": "Eumundi (approximately 100 kilometers north of Brisbane)",
-        "notes": "",
-        "new_notes": ""
+        "value": "Dumundi approximately 100 kilometers north of Brisbane",
+        "new notes": ""
     },
     "habitat": {
         "value": "Urwald",
-        "notes": "",
-        "new_notes": "should this be translated?"
+        "new notes": ""
     },
     "verbatimElevation": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "verbatimCoordinates": {
         "value": "N/A",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "1076713",
-        "notes": "",
-        "new_notes": ""
+        "value": "107138",
+        "new notes": ""
     },
     "originalMethod": {
         "value": "Typed",
-        "notes": "",
-        "new_notes": ""
+        "new notes": ""
     },
     "typeStatus": {
-        "value": "no type status",
-        "notes": "",
-        "new_notes": ""
+        "value": "",
+        "new notes": ""
     }
 }

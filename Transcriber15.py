@@ -5,15 +5,15 @@ from datetime import datetime
 from PIL import Image
 from io import BytesIO
 import requests
-from llm_processing.transcript4 import Transcript
+from llm_processing.transcript5 import Transcript
 from llm_processing.utility import extract_info_from_text
 import time
 import json
 import re
 import pandas as pd
 
-from llm_processing.llm_manager3 import ProcessorManager
-from llm_processing.claude_interface2 import ClaudeImageProcessorThread
+from llm_processing.llm_manager4 import ProcessorManager
+from llm_processing.claude_interface3 import ClaudeImageProcessorThread
 
 PROMPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
 TRANCRIPTION_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
@@ -112,8 +112,6 @@ def set_up():
         st.session_state.content_option = "content"
     if "current_transcript_obj" not in st.session_state:
         st.session_state.current_transcript_obj = None 
-    if "current_version_name" not in st.session_state:
-        st.session_state.current_version_name = ""
 
 def reset_states():
     # inputs
@@ -147,7 +145,6 @@ def reset_states():
     st.session_state.current_fieldvalue = ""
     st.session_state.content_option = "content"
     st.session_state.current_transcript_obj = None 
-    st.session_state.current_version_name = ""
     st.session_state.chat_history = ""
     st.session_state.show_chat_area = False
     st.session_state.current_chat = ""
@@ -170,7 +167,9 @@ def append_processed_elements(image, transcript_obj, version_name, image_ref):
     st.session_state.processed_outputs.append(transcript_obj)
     st.session_state.processed_version_names.append(version_name)
     st.session_state.processed_image_refs.append(image_ref)
-    output_dict = transcript_obj.get_version_by_name(version_name)["content"]
+    output_dict = transcript_obj.versions[0]["content"]
+    for fieldname in output_dict:
+        output_dict[fieldname]["new notes"] = ""
     st.session_state.final_output += image_ref + "\n" + dict_to_text(output_dict) + "\n" + ("=" * 50) + "\n"
     editing_data = {"costs": get_costs_blank_dict(), "editing": get_editing_blank_dict()}
     st.session_state.editing_data.append(editing_data)
@@ -210,7 +209,7 @@ def chat_with_llm():
 def color_keys(fieldname):
     if st.session_state.content_option != "content":
         return f":blue[{st.session_state.current_fieldname}]"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     return f":red[{st.session_state.current_fieldname}]" if rating==0 else f":orange[{st.session_state.current_fieldname}]" if rating==1 else f":blue[{st.session_state.current_fieldname}]" if rating==2 else f":green[{st.session_state.current_fieldname}]" if rating ==3 else fieldname
 
 def close_chat():
@@ -231,11 +230,9 @@ def enable_notes_display():
 
 def get_content_options():
     if st.session_state.current_transcript_obj:
-        version_name = st.session_state.current_transcript_obj.get_latest_version_name()
-        st.session_state.current_version_name = version_name
-        options = list(st.session_state.current_transcript_obj.versions[st.session_state.current_version_name].keys())
+        options = list(st.session_state.current_transcript_obj.versions[0].keys())
         #return [o if o != "content" else "transcript" for o in options ]
-        return ["transcript"]
+        return ["transcript", "comparisons", "costs"]
     else:
         return ["transcript"]
         
@@ -247,8 +244,6 @@ def get_costs_blank_dict():
             "output cost $": 0
         }
 
-def get_current_version_name():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].get_latest_version_name()
 
 def get_editing_blank_dict():
     return {"time started": 0, "time editing": 0, "chats": ""}    
@@ -284,30 +279,30 @@ def get_combined_output_as_text():
     for image, transcript_obj, version_name, image_ref in zip(st.session_state.processed_images, st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs):
         prompt_used = transcript_obj.prompt_name
         models_used = ", ".join(transcript_obj.models)
-        output_dict = transcript_obj.versions[version_name]["content"]
+        output_dict = transcript_obj.versions[0]["content"]
         values = "\n".join([f"{fieldname}: {v['value']}" for fieldname, v in output_dict.items()])
         output += f'{image_ref}\nprompt used: {prompt_used}\nmodel(s) used: {models_used}\n\n{values}\n\n{"=" * 50}\n\n'
     return header + "\n" + output 
 
 def get_option_dict_from_version_in_processed_outputs():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option]       
+    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option]       
 
 def get_timestamp():
     return  time.strftime("%Y-%m-%d-%H%M-%S")
 
 def get_val_from_version_in_processed_outputs():
-    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option][st.session_state.current_fieldname]
+    return st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option][st.session_state.current_fieldname]
 
 def get_validation_rating(fieldname):
     if st.session_state.content_option != "content":
         return "?"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     return rating if rating is not None else "?"
 
 def get_validation_rating_with_emoji(fieldname):
     if st.session_state.content_option != "content":
         return "🥺"
-    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname, st.session_state.current_version_name)
+    rating = st.session_state.current_transcript_obj.get_field_validation_rating(fieldname)
     if rating:
         return rating*"👍"
     return "🥺"    
@@ -471,7 +466,7 @@ def process_jobs():
             st.session_state.status_msg += f"Successfully processed {image_ref}\n"
             jobs["processed"].append([image_to_process, image_ref])
         append_processed_elements(image, transcript_obj, version_name, image_ref)
-        output_dict = transcript_obj.get_version_by_name(version_name)["content"]
+        output_dict = transcript_obj.versions[0]["content"]
         st.session_state.final_output = get_combined_output_as_text()
         editing_data = {"costs": get_costs_blank_dict(), "editing": get_editing_blank_dict()}
         st.session_state.editing_data.append(editing_data)
@@ -490,9 +485,9 @@ def re_edit_saved_versions(selected_reedit_files):
         for selected_file in selected_reedit_files:
             with open(os.path.join(f"{TRANCRIPTION_FOLDER}/versions", selected_file), "r", encoding="utf-8") as rf:
                 transcript_dict = json.load(rf)
-                latest_version_name = [k for k in transcript_dict.keys()][0]
-                latest_version_dict = transcript_dict[latest_version_name]
-                image_ref = latest_version_dict["data"]["image ref"]
+                latest_version_name = transcript_dict[0]["new version name"]
+                latest_version_dict = transcript_dict[0]
+                image_ref = latest_version_dict["generation info"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
                 try:
@@ -509,7 +504,6 @@ def re_edit_saved_versions(selected_reedit_files):
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
         #st.session_state.current_transcript_obj = transcript_obj
@@ -530,9 +524,9 @@ def re_edit_session(selected_session_file):
         with open(os.path.join(f"{TRANCRIPTION_FOLDER}/sessions", selected_session_file), "r", encoding="utf-8") as rf:
             session_dict = json.load(rf)
             for image_ref, transcript_dict in session_dict.items():
-                latest_version_name = [k for k in transcript_dict.keys()][0]
-                latest_version_dict = transcript_dict[latest_version_name]
-                image_ref = latest_version_dict["data"]["image ref"]
+                latest_version_name = transcript_dict[0]["new version name"]
+                latest_version_dict = transcript_dict[0]
+                image_ref = latest_version_dict["generation info"]["image ref"]
                 transcript_obj = Transcript(image_ref, st.session_state.selected_prompt)
                 transcript_obj.versions = transcript_dict
                 try:
@@ -549,7 +543,6 @@ def re_edit_session(selected_session_file):
         st.session_state.final_output = get_combined_output_as_text()            
         st.session_state.current_image_index = 0
         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-        st.session_state.current_version_name = st.session_state.current_transcript_obj.get_latest_version_name()
         st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
 
         st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
@@ -580,12 +573,15 @@ def save_edits_to_json():
     session_output_dict = {}
     for transcript_obj, p_version_name, image_ref, editing_data in zip(st.session_state.processed_outputs, st.session_state.processed_version_names, st.session_state.processed_image_refs, st.session_state.editing_data):
         transcript = Transcript(image_ref, st.session_state.selected_prompt)
-        s_version_name = transcript.get_latest_version_name()
+        s_version_name = transcript.versions[0]["new version name"]
+        print(f"in save_edits_to_json: {s_version_name = }, {p_version_name = }")
         costs = editing_data["costs"]
+        print(f"in save_edits_to_json: {costs = }")
         editing = editing_data["editing"]
-        output_dict = transcript_obj.versions[p_version_name]["content"]
+        print(f"in save_edits_to_json: {editing = }")
+        output_dict = transcript_obj.versions[0]["content"]
         save_to_json(output_dict, image_ref)
-        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, data=costs, is_user=True, old_version_name=s_version_name, editing=editing)
+        transcript.create_version(created_by=st.session_state.user_name, content=output_dict, costs=costs, is_ai_generated=False, old_version_name=s_version_name, editing=editing, new_notes = {})
         session_output_dict[image_ref] = transcript.versions
     session_filename = f"{TRANCRIPTION_FOLDER}/sessions/{st.session_state.user_name}-{get_timestamp()}-session.json"
     if session_output_dict:
@@ -598,7 +594,7 @@ def save_field_text_area():
         update_version_in_processed_outputs(st.session_state.field_text_area)
 
 def save_table_edits(edited_elements, fieldnames, current_output_dict):
-    editables = ["value", "new_notes"]
+    editables = ["value", "new notes"]
     for row_number, columns in edited_elements.items():
         for header, val in columns.items():
             if header in editables:
@@ -647,9 +643,6 @@ def update_costs(new_costs: dict):
 
 def update_displays():
     st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-    transcript_dict = st.session_state.current_transcript_obj.versions
-    version_name = [k for k in transcript_dict.keys()][0]
-    st.session_state.current_version_name = version_name
     st.session_state.current_output_dict = get_option_dict_from_version_in_processed_outputs()
     st.session_state.fieldnames = [k for k in st.session_state.current_output_dict.keys()]
     st.session_state.field_idx = 0
@@ -690,12 +683,12 @@ def update_time_to_edit(start=True):
 
 def update_version_in_processed_outputs(val):
     if st.session_state.content_option=="content":
-        st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option][st.session_state.current_fieldname]["value"] = val
+        st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option][st.session_state.current_fieldname]["value"] = val
 
 def update_processed_outputs():
     if st.session_state.content_option=="content" and st.session_state.processed_outputs:
         output_dict = st.session_state.current_output_dict
-        st.session_state.processed_outputs[st.session_state.current_image_index].versions[st.session_state.current_version_name][st.session_state.content_option] = output_dict    
+        st.session_state.processed_outputs[st.session_state.current_image_index].versions[0][st.session_state.content_option] = output_dict    
 
 def main():
     st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
@@ -886,21 +879,20 @@ def main():
                       
 
             with col_field_editor:
-                st.container(border=False, height=300)
+                st.container(border=False, height=250)
                 if st.session_state.processed_outputs:
                     st.write("https://ipa.typeit.org/full/")
                     st.write("https://translate.google.com/") 
                     content_options = get_content_options()
-                    #selected_content = st.selectbox("Select Content To View or Edit:", content_options)
-                    st.session_state.content_option = "content" #if selected_content=="transcript" else selected_content
+                    selected_content = st.selectbox("Select Content To View or Edit:", content_options)
+                    st.session_state.content_option = "content" if selected_content=="transcript" else selected_content
                     st.session_state.editing_view_option = st.radio("Select Editor View:", ["Fieldname", "Full Text"], index=0)
                     
                     if st.session_state.editing_view_option == "Fieldname":
                         st.container(height=175, border=False)
                         st.session_state.current_transcript_obj = st.session_state.processed_outputs[st.session_state.current_image_index]
-                        st.session_state.current_version_name = get_current_version_name()
                         col_prev_field, col_next_field, __ = st.columns(3)
-                        if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.current_version_name and st.session_state.content_option=="content":
+                        if st.session_state.processed_outputs and st.session_state.processed_images and st.session_state.content_option=="content":
                             
                             with col_next_field:
                                 st.button("next field", on_click=go_to_next_field)         
@@ -948,43 +940,97 @@ def main():
             with table_container:
                 current_output_dict = st.session_state.current_output_dict
                 fieldnames = [k for k in current_output_dict.keys()]
-                validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
-                data = {"fieldname": [], "rating": validation_ratings}
-                column_config={
-                                "value": st.column_config.TextColumn(
-                                    "value",
-                                    width="large",
-                                ),
-                                "rating": st.column_config.TextColumn(
-                                    "rating",
-                                    width="small",
-                                )
-                            }
+                if st.session_state.content_option == "content":
+                    validation_ratings = [get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
+                    data = {"fieldname": [], "rating": validation_ratings}
+                    column_config={
+                                    "value": st.column_config.TextColumn(
+                                        "value",
+                                        width="large",
+                                    ),
+                                    "rating": st.column_config.TextColumn(
+                                        "rating",
+                                        width="small",
+                                    )
+                                }
 
-                for fieldname, d in current_output_dict.items():
-                    data["fieldname"].append(fieldname)
-                    for k, v in d.items():
-                        if k in ["notes", "new_notes"] and not st.session_state.show_notes:
-                            continue
-                        if k not in data:
-                            data[k] = []
-                        data[k].append(v)
-                df = pd.DataFrame(data)
-                ###### slider goes here
-                # Add this right before the data editor
-                
-                
-                # Then modify your data editor to use the slider value
-                edited_df = st.data_editor(
-                    df, 
-                    use_container_width=True, 
-                    column_config=column_config, 
-                    hide_index=True, 
-                    key="my_key", 
-                    height=st.session_state.get('table_height', 225)  # Use the slider value here
-                )
-                table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
-            edited_elements = st.session_state["my_key"]["edited_rows"]
+                    for fieldname, d in current_output_dict.items():
+                        data["fieldname"].append(fieldname)
+                        for k, v in d.items():
+                            if k in ["notes", "new notes"] and not st.session_state.show_notes:
+                                continue
+                            if k not in data:
+                                data[k] = []
+                            data[k].append(v)
+                    df = pd.DataFrame(data)
+                    ###### slider goes here
+                    # Add this right before the data editor
+                    
+                    
+                    # Then modify your data editor to use the slider value
+                    edited_df = st.data_editor(
+                        df, 
+                        use_container_width=True, 
+                        column_config=column_config, 
+                        hide_index=True, 
+                        key="my_key", 
+                        height=st.session_state.get('table_height', 225)  # Use the slider value here
+                    )
+                    table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
+                    edited_elements = st.session_state["my_key"]["edited_rows"]
+                elif st.session_state.content_option == "comparisons":
+                    current_version = st.session_state.current_transcript_obj.versions[0]
+                    print(f"{st.session_state.content_option =}")
+                    data = {"fieldname": []}
+                    comparisons_dict = current_version["comparisons"]
+                    for comparison_name, d in comparisons_dict.items():
+                        data["fieldname"] = list(d.keys())
+                        for k, v in d.items():
+                            if comparison_name not in data:
+                                data[comparison_name] = []
+                            data[comparison_name].append(v)
+                    df = pd.DataFrame(data)
+                    edited_df = st.data_editor(
+                        df, 
+                        use_container_width=True, 
+                        hide_index=True
+                    )
+                else:
+                    versions = st.session_state.current_transcript_obj.versions
+                    version_names = [v["new version name"] for v in versions]
+                    print(f"{st.session_state.content_option =}")
+                    data = {"fieldname": []}
+                    content_objs = [obj[st.session_state.content_option] for obj in versions]
+                    if type(content_objs[0])==dict:# and any(type(val)==dict for val in content_objs[0].values()):
+                        for version_name, content_obj in zip(version_names, content_objs):
+                            fieldnames = list(content_obj.keys())
+                            if len(fieldnames)!=10:
+                                continue
+                            data["fieldname"] = fieldnames    
+                            for k, v in content_obj.items():
+                                if version_name not in data:
+                                    data[version_name] = []
+                                data[version_name].append(v)
+                                print(f"{len(data['fieldname']) =}, {len(data[version_name]) = }")
+                        df = pd.DataFrame(data)
+                        edited_df = st.data_editor(
+                            df, 
+                            use_container_width=True, 
+                            hide_index=True
+                        )
+                    elif False:#type(content_objs[0])==dict:
+                        data["value"] = []
+                        for fieldname, val in content_objs[0].items():
+                            data["fieldname"].append(fieldname)
+                            data["value"].append(val)
+                        df = pd.DataFrame(data)
+                        edited_df = st.data_editor(
+                            df, 
+                            use_container_width=True, 
+                            hide_index=True
+                        )    
+
+        # end table_container        
         # end table_container
         
             
@@ -1046,3 +1092,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# version_name = create_version(created_by=self.modelname, content=transcription_dict, costs=transcript_processing_data, is_ai_generated=True, old_version_name=old_version_name, editing = {}, new_notes = {})

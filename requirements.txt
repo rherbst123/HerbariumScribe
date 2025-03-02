@@ -5,3 +5,4 @@ numpy
 weighted-levenshtein
 requests
 pandas
+dotenv
