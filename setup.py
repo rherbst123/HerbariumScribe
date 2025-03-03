@@ -31,13 +31,6 @@ def select_folder():
         st.error(f"Error selecting folder: {str(e)}")
         return None
 
-import os
-import streamlit as st
-from tkinter import filedialog
-import tkinter as tk
-
-# ... (keep the helper functions the same) ...
-
 def main():
     st.title("HerbariumScribe Setup")
     st.write("""
@@ -180,6 +173,7 @@ def main():
                 # Install requirements
                 with st.spinner("Installing requirements..."):
                     os.system("pip install -r requirements.txt")
+                    os.system("pip install --upgrade streamlit")
                 st.success("""
                 Setup complete! You can now:
                 - Close this window
