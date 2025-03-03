@@ -1,16 +1,6 @@
 # Herbarium Scribe
 
 
-
-
-
-
-
-
-
-
-
-
 Welcome to HerbariumScribe, a project that enables user review and editing of Large Language Model (LLM) generated transcriptions of herbarium specimen labels.
 
 Creators and Contributors:
