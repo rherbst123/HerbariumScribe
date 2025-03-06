@@ -19,18 +19,28 @@ from llm_processing.compare2 import TranscriptComparer
 
 class Transcript:
     def __init__(self, image_ref: str, prompt_name: str, model="", time_started=None):
-        self.image_ref = image_ref
+        self.image_ref, self.image_source = self.get_image_ref(image_ref)
         self.prompt_name = prompt_name
         self.transcription_folder = "output/"
         self.versions =  self.load_versions()
         self.time_started = time_started or self.get_timestamp()
         self.prompt_name = prompt_name or self.get_prompt_name_from_base()
-        self.models = model or self.get_models_used()
+        self.models = [model] or self.get_models_used()
 
-    def download_image(self, url):
-        response = requests.get(url)
-        image = Image.open(BytesIO(response.content))
-        image.save(f"{self.transcription_folder}{self.image_ref}.jpg")    
+    def get_image_ref(self, image_filename):
+        if "http" in image_filename:
+            return image_filename, "web"
+        if "/" not in image_filename and "\\" not in image_filename:
+            return image_filename, "local"
+        try:        
+            mtch = re.search(r"(.+[/\\])(.+(jpg)|(jpeg)|(png))", image_filename)
+            image_source = mtch.group(1)
+            image_name = mtch.group(2)
+        except:
+            image_name = image_filename
+            image_source = "undefined"
+            print(f"ERROR: current regex does not capture image_ref: {image_filename}")
+        return image_name, image_source     
 
     def load_versions(self):
         filename = self.get_legal_json_filename()
@@ -49,19 +59,22 @@ class Transcript:
         return self.versions[-1]["generation info"]["prompt name"]
 
     def get_models_used(self):
-        return list(set([v["generation info"]["created by"] for v in self.versions if v["generation info"]["is ai generated"]]))          
+        models = list(set([v["generation info"]["created by"] for v in self.versions if v["generation info"]["is ai generated"]]))     
+        print(f"get_models_used called: {models}")
+        return models
+             
 
     def get_version_name(self, created_by):
         return f"{created_by}-{self.time_started}"                 
 
-    def create_version(self, created_by, content, costs, is_ai_generated=True, old_version_name="base", editing = {}, new_notes = {}):
+    def create_version(self, created_by, content, costs, is_ai_generated=True, old_version_name="base", editing = {}):
         # versions[list[dict]]
         if not self.versions:
             fieldnames = list(content.keys())
             self.initialize_versions(fieldnames)
         new_version_name = self.get_version_name(created_by)    
         generation_info_dict = self.get_generation_info_dict(created_by, old_version_name, self.get_timestamp(), is_ai_generated)
-        new_content_dict = self.update_content(content, new_notes, new_version_name, is_ai_generated)
+        new_content_dict = self.update_content(content, new_version_name, is_ai_generated)
         new_history = self.update_history(new_version_name, created_by)
         new_notes_dict = self.update_notes(new_notes, created_by, new_version_name)    
         new_costs_dict = self.update_costs(costs, editing)
@@ -85,7 +98,7 @@ class Transcript:
 
     def get_generation_info_dict(self, created_by, old_version_name, time_created, is_ai_generated):
         created_by_type = "model" if is_ai_generated else "user"
-        return {"image ref": self.image_ref,"created by": created_by, "time created": time_created, "is ai generated": is_ai_generated, "prompt name": self.prompt_name, "old version name": old_version_name, "created by type": created_by_type}    
+        return {"image ref": self.image_ref, "image source": self.image_source, "created by": created_by, "time created": time_created, "is ai generated": is_ai_generated, "prompt name": self.prompt_name, "old version name": old_version_name, "created by type": created_by_type}    
 
     def get_costs_list(self):
         return ["input tokens", "output tokens", "input cost $", "output cost $", "time to create/edit"]
@@ -93,21 +106,24 @@ class Transcript:
     def is_same_user(self, created_by):
         return self.versions[0]["generation info"]["created by"] == created_by
 
-    def update_content(self, content, new_notes, new_version_name, is_ai_generated):
+    def update_content(self, content, new_version_name, is_ai_generated):
         new_content = {}
         for fieldname, fieldvalue in content.items():
-            print(f"{fieldvalue = }")
             new_content[fieldname] = {}
-            new_content[fieldname]["value"] = fieldvalue if is_ai_generated else fieldvalue["value"]
-            if fieldname in new_notes and new_notes[fieldname]:
-                new_content[fieldname]["notes"] = f"{new_version_name}: {new_notes[fieldname]}"
-            elif "content" not in self.versions[0]:
+            if is_ai_generated:
+                new_content[fieldname]["value"] = fieldvalue 
                 new_content[fieldname]["notes"] = ""
+            else:
+                new_content[fieldname]["value"] = fieldvalue["value"]
+                if "new notes" in fieldvalue and fieldvalue["new notes"]:
+                    new_content[fieldname]["notes"] = f"{new_version_name}: {fieldvalue['new notes']}"
+                else:
+                    new_content[fieldname]["notes"] = fieldvalue["notes"] if "notes" in fieldvalue else ""
+    
         return new_content
 
     def update_history(self, new_version_name, created_by):
         history = copy.copy(self.versions[0]["history"])
-        print(f"{history = }")
         history.append([new_version_name, created_by])
         return history            
 
@@ -146,14 +162,14 @@ class Transcript:
             #self.versions[0]["editing"]["time started"] = 0                   
 
     def get_field_validation_rating(self, fieldname):
-        if "comparisons" not in self.versions[0]:
+        if self.versions[0]["generation info"]["old version name"] == "base":
             return 0
-        comparison = self.versions[0]["comparisons"]
+        comparison = [v for v in self.versions[0]["comparisons"].values()][0]
         if not comparison or fieldname not in comparison or not math.floor(comparison[fieldname]):
             return 0
-        if "created by types" not in comparison:
+        if "alignment type" not in comparison:
             return 0    
-        created_by_types = comparison["created by types"]
+        created_by_types = comparison["alignment type"]
         return 1 if created_by_types==["model", "model"] else 2 if "model" in created_by_types else 3
   
     def get_legal_json_filename(self):

@@ -25,7 +25,6 @@ class ProcessorManager:
             image = utility.get_image_from_url(image_info)
         else:
             image, image_ref = image_info
-            image = image_info
         return utility.get_base64_image(image), image, image_ref
         
     def process_one_image(self, image_ref_idx, image_info):

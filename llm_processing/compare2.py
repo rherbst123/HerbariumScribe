@@ -45,7 +45,6 @@ class TranscriptComparer:
         contentA, contentB = versionA["content"], versionB["content"]
         for fieldname in contentA:
             valA = contentA[fieldname]["value"]
-            print(f"{valA = }")
             valB = contentB[fieldname]["value"]
             is_a_match = self.is_match(valA, valB) or self.get_graded_match(valA, valB, is_a_match=False)
             d[fieldname] = is_a_match

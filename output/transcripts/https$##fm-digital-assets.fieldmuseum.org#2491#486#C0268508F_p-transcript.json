@@ -2,50 +2,50 @@
     "verbatimCollectors": {
         "value": "M. Fleischer",
         "notes": "",
-        "new notes": ""
+        "new notes": "1"
     },
     "collectedBy": {
         "value": "M. Fleischer",
         "notes": "",
-        "new notes": ""
+        "new notes": "2"
     },
     "secondaryCollectors": {
         "value": "N/A",
         "notes": "",
-        "new notes": ""
+        "new notes": "3"
     },
     "recordNumber": {
         "value": "B 2692",
         "notes": "",
-        "new notes": ""
+        "new notes": "4"
     },
     "verbatimEventDate": {
         "value": "25.3.1903",
         "notes": "",
-        "new notes": ""
+        "new notes": "5"
     },
     "minimumEventDate": {
         "value": "1903-03-25",
         "notes": "",
-        "new notes": ""
+        "new notes": "6"
     },
     "maximumEventDate": {
-        "value": "N/A",
+        "value": "1903-03-25",
         "notes": "",
-        "new notes": ""
+        "new notes": "7"
     },
     "verbatimIdentification": {
         "value": "Macromitrium",
         "notes": "",
-        "new notes": ""
+        "new notes": "8"
     },
     "latestScientificName": {
         "value": "Macromitrium",
         "notes": "",
-        "new notes": ""
+        "new notes": "9"
     },
     "identifiedBy": {
-        "value": "unsure and check",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     },
@@ -75,17 +75,17 @@
         "new notes": ""
     },
     "municipality": {
-        "value": "Eumundi",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     },
     "verbatimLocality": {
-        "value": "Eumundi (ca. 100 km nördlich Brisbane), Urwald",
+        "value": "Eumundi (ca 100 km nordlich Brisbane)",
         "notes": "",
         "new notes": ""
     },
     "locality": {
-        "value": "Eumundi, approximately 100 kilometers north of Brisbane",
+        "value": "Eumundi (about 100 km north of Brisbane)",
         "notes": "",
         "new notes": ""
     },
@@ -105,7 +105,7 @@
         "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "1076699",
+        "value": "1076659 | 1411225",
         "notes": "",
         "new notes": ""
     },
@@ -115,7 +115,7 @@
         "new notes": ""
     },
     "typeStatus": {
-        "value": "no type status",
+        "value": "",
         "notes": "",
         "new notes": ""
     }

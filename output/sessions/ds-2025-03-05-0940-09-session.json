@@ -1,0 +1,654 @@
+{
+    "C:/Users/dancs/OneDrive/Pictures/C0268502F_p.jpg": [
+        {
+            "new version name": "ds-2025-03-05-0940-09",
+            "generation info": {
+                "image ref": "C0268502F_p.jpg",
+                "image source": "C:/Users/dancs/OneDrive/Pictures/",
+                "created by": "ds",
+                "time created": "2025-03-05-0940-09",
+                "is ai generated": false,
+                "prompt name": "1.1Stripped.txt",
+                "old version name": "claude-3.5-sonnet-2025-03-05-0938-13",
+                "created by type": "user"
+            },
+            "content": {
+                "verbatimCollectors": {
+                    "value": "M. Fleischer",
+                    "notes": ""
+                },
+                "collectedBy": {
+                    "value": "M. Fleischer",
+                    "notes": ""
+                },
+                "secondaryCollectors": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "recordNumber": {
+                    "value": "B-2734",
+                    "notes": ""
+                },
+                "verbatimEventDate": {
+                    "value": "25.9.1903",
+                    "notes": ""
+                },
+                "minimumEventDate": {
+                    "value": "1903-09-25",
+                    "notes": ""
+                },
+                "maximumEventDate": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimIdentification": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "latestScientificName": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "identifiedBy": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimDateIdentified": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "associatedTaxa": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "country": {
+                    "value": "Australia",
+                    "notes": ""
+                },
+                "firstPoliticalUnit": {
+                    "value": "Queensland",
+                    "notes": ""
+                },
+                "secondPoliticalUnit": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "municipality": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimLocality": {
+                    "value": "Eumundi (ca 100 km nordlich Brisbane)",
+                    "notes": ""
+                },
+                "locality": {
+                    "value": "Eumundi (about 100 km north of Brisbane)",
+                    "notes": ""
+                },
+                "habitat": {
+                    "value": "Urwald",
+                    "notes": "ds-2025-03-05-0940-09: translate?"
+                },
+                "verbatimElevation": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimCoordinates": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "otherCatalogNumbers": {
+                    "value": "1076713",
+                    "notes": ""
+                },
+                "originalMethod": {
+                    "value": "Typed",
+                    "notes": ""
+                },
+                "typeStatus": {
+                    "value": "N/A",
+                    "notes": ""
+                }
+            },
+            "costs": {
+                "input tokens": 0,
+                "output tokens": 0,
+                "input cost $": 0,
+                "output cost $": 0,
+                "time to create/edit": 0,
+                "overall input tokens": 2789,
+                "overall output tokens": 276,
+                "overall input cost $": 0.008,
+                "overall output cost $": 0.004,
+                "overall time to create/edit": 0.4368476867675781
+            },
+            "editing": {
+                "time started": 0,
+                "time editing": 0,
+                "chats": ""
+            },
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-03-05-0938-13",
+                    "claude-3.5-sonnet"
+                ],
+                [
+                    "ds-2025-03-05-0940-09",
+                    "ds"
+                ]
+            ],
+            "notes": {
+                "verbatimCollectors": [],
+                "collectedBy": [],
+                "secondaryCollectors": [],
+                "recordNumber": [],
+                "verbatimEventDate": [],
+                "minimumEventDate": [],
+                "maximumEventDate": [],
+                "verbatimIdentification": [],
+                "latestScientificName": [],
+                "identifiedBy": [],
+                "verbatimDateIdentified": [],
+                "associatedTaxa": [],
+                "country": [],
+                "firstPoliticalUnit": [],
+                "secondPoliticalUnit": [],
+                "municipality": [],
+                "verbatimLocality": [],
+                "locality": [],
+                "habitat": [],
+                "verbatimElevation": [],
+                "verbatimCoordinates": [],
+                "otherCatalogNumbers": [],
+                "originalMethod": [],
+                "typeStatus": []
+            },
+            "comparisons": {}
+        },
+        {
+            "new version name": "claude-3.5-sonnet-2025-03-05-0938-13",
+            "generation info": {
+                "image ref": "C0268502F_p.jpg",
+                "image source": "C:/Users/dancs/OneDrive/Pictures/",
+                "created by": "claude-3.5-sonnet",
+                "time created": "2025-03-05-0938-13",
+                "is ai generated": true,
+                "prompt name": "1.1Stripped.txt",
+                "old version name": "base",
+                "created by type": "model"
+            },
+            "content": {
+                "verbatimCollectors": {
+                    "value": "leg H Fleischer nr 5-2754",
+                    "notes": ""
+                },
+                "collectedBy": {
+                    "value": "Fleischer",
+                    "notes": ""
+                },
+                "secondaryCollectors": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "recordNumber": {
+                    "value": "5-2754",
+                    "notes": ""
+                },
+                "verbatimEventDate": {
+                    "value": "25 9 1903",
+                    "notes": ""
+                },
+                "minimumEventDate": {
+                    "value": "1903-09-25",
+                    "notes": ""
+                },
+                "maximumEventDate": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimIdentification": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "latestScientificName": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "identifiedBy": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimDateIdentified": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "associatedTaxa": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "country": {
+                    "value": "Australia",
+                    "notes": ""
+                },
+                "firstPoliticalUnit": {
+                    "value": "Queensland",
+                    "notes": ""
+                },
+                "secondPoliticalUnit": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "municipality": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimLocality": {
+                    "value": "Eumundi (ca 100 km nordlich Brisbane) Urwald",
+                    "notes": ""
+                },
+                "locality": {
+                    "value": "Eumundi (about 100 km north of Brisbane)",
+                    "notes": ""
+                },
+                "habitat": {
+                    "value": "Urwald",
+                    "notes": ""
+                },
+                "verbatimElevation": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimCoordinates": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "otherCatalogNumbers": {
+                    "value": "1044984",
+                    "notes": ""
+                },
+                "originalMethod": {
+                    "value": "Typed",
+                    "notes": ""
+                },
+                "typeStatus": {
+                    "value": "",
+                    "notes": ""
+                }
+            },
+            "costs": {
+                "created by": "claude-3.5-sonnet",
+                "is user": false,
+                "time to create/edit": 0.4368476867675781,
+                "input tokens": 2789,
+                "output tokens": 276,
+                "input cost $": 0.008,
+                "output cost $": 0.004,
+                "overall input tokens": 0,
+                "overall output tokens": 0,
+                "overall input cost $": 0,
+                "overall output cost $": 0,
+                "overall time to create/edit": 0
+            },
+            "editing": {},
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-03-05-0938-13",
+                    "claude-3.5-sonnet"
+                ]
+            ],
+            "notes": {
+                "verbatimCollectors": [],
+                "collectedBy": [],
+                "secondaryCollectors": [],
+                "recordNumber": [],
+                "verbatimEventDate": [],
+                "minimumEventDate": [],
+                "maximumEventDate": [],
+                "verbatimIdentification": [],
+                "latestScientificName": [],
+                "identifiedBy": [],
+                "verbatimDateIdentified": [],
+                "associatedTaxa": [],
+                "country": [],
+                "firstPoliticalUnit": [],
+                "secondPoliticalUnit": [],
+                "municipality": [],
+                "verbatimLocality": [],
+                "locality": [],
+                "habitat": [],
+                "verbatimElevation": [],
+                "verbatimCoordinates": [],
+                "otherCatalogNumbers": [],
+                "originalMethod": [],
+                "typeStatus": []
+            },
+            "comparisons": {}
+        }
+    ],
+    "C:/Users/dancs/OneDrive/Pictures/C0268508F_p.jpg": [
+        {
+            "new version name": "ds-2025-03-05-0940-09",
+            "generation info": {
+                "image ref": "C0268508F_p.jpg",
+                "image source": "C:/Users/dancs/OneDrive/Pictures/",
+                "created by": "ds",
+                "time created": "2025-03-05-0940-09",
+                "is ai generated": false,
+                "prompt name": "1.1Stripped.txt",
+                "old version name": "claude-3.5-sonnet-2025-03-05-0938-20",
+                "created by type": "user"
+            },
+            "content": {
+                "verbatimCollectors": {
+                    "value": "M Fleischer nr B 2692",
+                    "notes": ""
+                },
+                "collectedBy": {
+                    "value": "M Fleischer",
+                    "notes": ""
+                },
+                "secondaryCollectors": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "recordNumber": {
+                    "value": "B 2692",
+                    "notes": ""
+                },
+                "verbatimEventDate": {
+                    "value": "25.3.1903",
+                    "notes": ""
+                },
+                "minimumEventDate": {
+                    "value": "1903-03-25",
+                    "notes": ""
+                },
+                "maximumEventDate": {
+                    "value": "1903-03-25",
+                    "notes": ""
+                },
+                "verbatimIdentification": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "latestScientificName": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "identifiedBy": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimDateIdentified": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "associatedTaxa": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "country": {
+                    "value": "Australia",
+                    "notes": ""
+                },
+                "firstPoliticalUnit": {
+                    "value": "Queensland",
+                    "notes": ""
+                },
+                "secondPoliticalUnit": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "municipality": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimLocality": {
+                    "value": "Eumundi (ca 100 km nordlich Brisbane), Urwald",
+                    "notes": ""
+                },
+                "locality": {
+                    "value": "Eumundi (about 100 km north of Brisbane)",
+                    "notes": ""
+                },
+                "habitat": {
+                    "value": "Urwald (primeval forest)",
+                    "notes": ""
+                },
+                "verbatimElevation": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimCoordinates": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "otherCatalogNumbers": {
+                    "value": "1076659, 1411225",
+                    "notes": ""
+                },
+                "originalMethod": {
+                    "value": "Typed",
+                    "notes": ""
+                },
+                "typeStatus": {
+                    "value": "",
+                    "notes": ""
+                }
+            },
+            "costs": {
+                "input tokens": 0,
+                "output tokens": 0,
+                "input cost $": 0,
+                "output cost $": 0,
+                "time to create/edit": 0,
+                "overall input tokens": 5578,
+                "overall output tokens": 567,
+                "overall input cost $": 0.017,
+                "overall output cost $": 0.009,
+                "overall time to create/edit": 0.27698707580566406
+            },
+            "editing": {
+                "time started": 0,
+                "time editing": 0,
+                "chats": ""
+            },
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-03-05-0938-20",
+                    "claude-3.5-sonnet"
+                ],
+                [
+                    "ds-2025-03-05-0940-09",
+                    "ds"
+                ]
+            ],
+            "notes": {
+                "verbatimCollectors": [],
+                "collectedBy": [],
+                "secondaryCollectors": [],
+                "recordNumber": [],
+                "verbatimEventDate": [],
+                "minimumEventDate": [],
+                "maximumEventDate": [],
+                "verbatimIdentification": [],
+                "latestScientificName": [],
+                "identifiedBy": [],
+                "verbatimDateIdentified": [],
+                "associatedTaxa": [],
+                "country": [],
+                "firstPoliticalUnit": [],
+                "secondPoliticalUnit": [],
+                "municipality": [],
+                "verbatimLocality": [],
+                "locality": [],
+                "habitat": [],
+                "verbatimElevation": [],
+                "verbatimCoordinates": [],
+                "otherCatalogNumbers": [],
+                "originalMethod": [],
+                "typeStatus": []
+            },
+            "comparisons": {}
+        },
+        {
+            "new version name": "claude-3.5-sonnet-2025-03-05-0938-20",
+            "generation info": {
+                "image ref": "C0268508F_p.jpg",
+                "image source": "C:/Users/dancs/OneDrive/Pictures/",
+                "created by": "claude-3.5-sonnet",
+                "time created": "2025-03-05-0938-20",
+                "is ai generated": true,
+                "prompt name": "1.1Stripped.txt",
+                "old version name": "base",
+                "created by type": "model"
+            },
+            "content": {
+                "verbatimCollectors": {
+                    "value": "M Fleischer nr B 2692",
+                    "notes": ""
+                },
+                "collectedBy": {
+                    "value": "M Fleischer",
+                    "notes": ""
+                },
+                "secondaryCollectors": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "recordNumber": {
+                    "value": "B 2692",
+                    "notes": ""
+                },
+                "verbatimEventDate": {
+                    "value": "25.3.1903",
+                    "notes": ""
+                },
+                "minimumEventDate": {
+                    "value": "1903-03-25",
+                    "notes": ""
+                },
+                "maximumEventDate": {
+                    "value": "1903-03-25",
+                    "notes": ""
+                },
+                "verbatimIdentification": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "latestScientificName": {
+                    "value": "Macromitrium",
+                    "notes": ""
+                },
+                "identifiedBy": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimDateIdentified": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "associatedTaxa": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "country": {
+                    "value": "Australia",
+                    "notes": ""
+                },
+                "firstPoliticalUnit": {
+                    "value": "Queensland",
+                    "notes": ""
+                },
+                "secondPoliticalUnit": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "municipality": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimLocality": {
+                    "value": "Eumundi (ca 100 km nordlich Brisbane), Urwald",
+                    "notes": ""
+                },
+                "locality": {
+                    "value": "Eumundi (about 100 km north of Brisbane)",
+                    "notes": ""
+                },
+                "habitat": {
+                    "value": "Urwald (primeval forest)",
+                    "notes": ""
+                },
+                "verbatimElevation": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "verbatimCoordinates": {
+                    "value": "N/A",
+                    "notes": ""
+                },
+                "otherCatalogNumbers": {
+                    "value": "1076659, 1411225",
+                    "notes": ""
+                },
+                "originalMethod": {
+                    "value": "Typed",
+                    "notes": ""
+                },
+                "typeStatus": {
+                    "value": "",
+                    "notes": ""
+                }
+            },
+            "costs": {
+                "created by": "claude-3.5-sonnet",
+                "is user": false,
+                "time to create/edit": 0.27698707580566406,
+                "input tokens": 5578,
+                "output tokens": 567,
+                "input cost $": 0.017,
+                "output cost $": 0.009,
+                "overall input tokens": 0,
+                "overall output tokens": 0,
+                "overall input cost $": 0,
+                "overall output cost $": 0,
+                "overall time to create/edit": 0
+            },
+            "editing": {},
+            "history": [
+                [
+                    "claude-3.5-sonnet-2025-03-05-0938-20",
+                    "claude-3.5-sonnet"
+                ]
+            ],
+            "notes": {
+                "verbatimCollectors": [],
+                "collectedBy": [],
+                "secondaryCollectors": [],
+                "recordNumber": [],
+                "verbatimEventDate": [],
+                "minimumEventDate": [],
+                "maximumEventDate": [],
+                "verbatimIdentification": [],
+                "latestScientificName": [],
+                "identifiedBy": [],
+                "verbatimDateIdentified": [],
+                "associatedTaxa": [],
+                "country": [],
+                "firstPoliticalUnit": [],
+                "secondPoliticalUnit": [],
+                "municipality": [],
+                "verbatimLocality": [],
+                "locality": [],
+                "habitat": [],
+                "verbatimElevation": [],
+                "verbatimCoordinates": [],
+                "otherCatalogNumbers": [],
+                "originalMethod": [],
+                "typeStatus": []
+            },
+            "comparisons": {}
+        }
+    ]
+}

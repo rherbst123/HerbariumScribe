@@ -1,37 +1,37 @@
 {
     "verbatimCollectors": {
         "value": "M. Fleischer",
-        "notes": "dani-2025-03-05-0842-29: 1",
+        "notes": "",
         "new notes": ""
     },
     "collectedBy": {
         "value": "M. Fleischer",
-        "notes": "dani-2025-03-05-0842-29: 2",
+        "notes": "",
         "new notes": ""
     },
     "secondaryCollectors": {
         "value": "N/A",
-        "notes": "dani-2025-03-05-0842-29: 3",
+        "notes": "",
         "new notes": ""
     },
     "recordNumber": {
         "value": "B-2734",
-        "notes": "dani-2025-03-05-0842-29: 4",
+        "notes": "",
         "new notes": ""
     },
     "verbatimEventDate": {
-        "value": "25.3.1903",
-        "notes": "dani-2025-03-05-0842-29: 5",
+        "value": "25.9.1903",
+        "notes": "",
         "new notes": ""
     },
     "minimumEventDate": {
-        "value": "1903-03-25",
-        "notes": "dani-2025-03-05-0842-29: 6",
+        "value": "1903-09-25",
+        "notes": "",
         "new notes": ""
     },
     "maximumEventDate": {
         "value": "N/A",
-        "notes": "dani-2025-03-05-0842-29: 7",
+        "notes": "",
         "new notes": ""
     },
     "verbatimIdentification": {
@@ -92,7 +92,7 @@
     "habitat": {
         "value": "Urwald",
         "notes": "",
-        "new notes": ""
+        "new notes": "translate?"
     },
     "verbatimElevation": {
         "value": "N/A",
@@ -105,7 +105,7 @@
         "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "1044984",
+        "value": "1076713",
         "notes": "",
         "new notes": ""
     },
@@ -115,7 +115,7 @@
         "new notes": ""
     },
     "typeStatus": {
-        "value": "",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     }
