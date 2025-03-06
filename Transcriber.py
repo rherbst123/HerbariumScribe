@@ -750,10 +750,14 @@ def load_env_to_session():
         st.session_state.env_loaded = True
         return True
     return False
-
+#################################
 def select_files(file_types=None, initial_dir=None):
     """Open native file selection dialog that allows multiple file selection"""
     try:
+        # First try to use tkinter
+        import tkinter as tk
+        from tkinter import filedialog
+        
         # Create and hide the tkinter root window
         root = tk.Tk()
         root.attributes('-topmost', True)  # Make sure it appears on top
@@ -783,9 +787,48 @@ def select_files(file_types=None, initial_dir=None):
         
         return file_paths if file_paths else None
         
+    except ImportError:
+        # Fallback to Streamlit's file uploader if tkinter is not available
+        st.warning("Native file selection not available. Using Streamlit file uploader instead.")
+        
+        # Convert file_types to accepted_types for st.file_uploader
+        if file_types:
+            accepted_types = []
+            for _, extensions in file_types:
+                # Convert "*.png *.jpg" to [".png", ".jpg"]
+                exts = [f".{ext.strip('*.')}" for ext in extensions.split()]
+                accepted_types.extend(exts)
+        else:
+            accepted_types = None
+            
+        uploaded_files = st.file_uploader(
+            "Choose files",
+            accept_multiple_files=True,
+            type=accepted_types
+        )
+        
+        if uploaded_files:
+            # Save uploaded files to temporary location and return their paths
+            temp_dir = os.path.join(os.getcwd(), "temp_uploads")
+            os.makedirs(temp_dir, exist_ok=True)
+            
+            file_paths = []
+            for uploaded_file in uploaded_files:
+                temp_path = os.path.join(temp_dir, uploaded_file.name)
+                with open(temp_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                file_paths.append(temp_path)
+                
+            return tuple(file_paths) if file_paths else None
+                
+        return None
+    
     except Exception as e:
         st.error(f"Error selecting files: {str(e)}")
         return None
+
+###################################
+
 
 def main():
     st.title("HerbariumScribe")
