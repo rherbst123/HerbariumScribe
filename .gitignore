@@ -3,3 +3,5 @@ keys/creds.yaml
 .env
 venv/
 temp_images/
+__pycache__/
+*/__pycache__/

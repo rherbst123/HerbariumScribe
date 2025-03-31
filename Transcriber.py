@@ -412,8 +412,8 @@ def main():
                             st.session_state.status_msg = "Cancelling remaining jobs..."
                             st.wait(3)
                             st.session_state.session_obj.reset_inputs()
-                else:
-                    st.session_state.session_obj.volume.save_volume_to_json()              
+                elif st.session_state.session_obj.volume and st.session_state.session_obj.volume.pages:
+                    st.session_state.session_obj.volume.commit_volume()              
         ##############################                         
     else:
         if not st.session_state.reedit_mode:
@@ -589,7 +589,7 @@ def main():
         with bottom_buttons_container:
             col_save_table_edits, col_save_text, col_download, col_save_to_json, col_chat_button = st.columns(5)
             with col_save_table_edits:
-                if st.session_state.session_obj.table_content_option == "content":
+                if st.session_state.session_obj.table_content_option == "content" and "my_key" in st.session_state and st.session_state["my_key"]["edited_rows"]:
                     st.button(label="Save Table Changes", 
                     on_click=save_table_edits,
                     help="Save the table edits to the current transcript"
@@ -600,7 +600,7 @@ def main():
                 help="Reflect edits to text output"
                 )
             with col_download:
-                session_filename = st.session_state.session_obj.get_volume_filename()
+                volume_filename = st.session_state.session_obj.get_volume_filename()
                 st.download_button(
                     label="Download Session as TXT",
                     data=st.session_state.session_obj.final_output,

@@ -8,7 +8,7 @@ import os
 import time
 import traceback
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript5 import Transcript
+from llm_processing.transcript6 import Transcript
 from llm_processing.llm_interface import ImageProcessor
 
 class GPTImageProcessor(ImageProcessor):

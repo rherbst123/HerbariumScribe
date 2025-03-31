@@ -1,6 +1,6 @@
 {
     "verbatimCollectors": {
-        "value": "M. Fleischer",
+        "value": "leg. M. Fleischer nr. B 2552",
         "notes": "",
         "new notes": ""
     },
@@ -15,17 +15,17 @@
         "new notes": ""
     },
     "recordNumber": {
-        "value": "B 2754",
+        "value": "B 2552",
         "notes": "",
         "new notes": ""
     },
     "verbatimEventDate": {
-        "value": "25.3.1903",
+        "value": "6.4.1903",
         "notes": "",
         "new notes": ""
     },
     "minimumEventDate": {
-        "value": "1903-03-25",
+        "value": "1903-04-06",
         "notes": "",
         "new notes": ""
     },
@@ -65,37 +65,37 @@
         "new notes": ""
     },
     "firstPoliticalUnit": {
-        "value": "Queensland",
+        "value": "New South Wales",
         "notes": "",
         "new notes": ""
     },
     "secondPoliticalUnit": {
-        "value": "N/A",
+        "value": "unsure and check",
         "notes": "",
         "new notes": ""
     },
     "municipality": {
-        "value": "N/A",
+        "value": "unsure and check",
         "notes": "",
         "new notes": ""
     },
     "verbatimLocality": {
-        "value": "Dumundi (ca. 100 km nördlich Brisbane), Urwald",
+        "value": "Blue Mountains bei Sydney, Wentworth Falls",
         "notes": "",
         "new notes": ""
     },
     "locality": {
-        "value": "Dumundi, approximately 100 kilometers north of Brisbane",
+        "value": "Blue Mountains, Wentworth Falls",
         "notes": "",
         "new notes": ""
     },
     "habitat": {
-        "value": "Urwald",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     },
     "substrate": {
-        "value": "unsure and check",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     },
@@ -110,7 +110,7 @@
         "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "107784",
+        "value": "1076824",
         "notes": "",
         "new notes": ""
     },

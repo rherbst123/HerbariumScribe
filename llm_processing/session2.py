@@ -181,7 +181,7 @@ class Session:
         transcript_pages = self.run_manager.process_images()
         for transcript_page in transcript_pages:
             self.volume.add_page(transcript_page)
-        self.msg["status"]append(f"Volume {volume_name} created and saved!!!!")        
+        self.msg["status"].append(f"Volume {volume_name} created and saved!!!!")        
 
     def recreate_transcript_obj(self, transcript_dict):
         image_name = transcript_dict["generation info"][-1]["image ref"]

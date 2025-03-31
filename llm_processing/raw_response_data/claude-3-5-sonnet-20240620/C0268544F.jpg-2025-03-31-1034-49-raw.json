@@ -1,0 +1,17 @@
+{
+    "content": {
+        "content": "Here is the transcription and expansion of details from the herbarium label:\n\nverbatimCollectors: T Nakajima\ncollectedBy: T Nakajima\nsecondaryCollectors: N/A\nrecordNumber: N/A\nverbatimEventDate: Mar 27 1971\nminimumEventDate: 1971-03-27\nmaximumEventDate: 1971-03-27\nverbatimIdentification: Macromitrium gymnostomum Sull et Lesq c fr\nlatestScientificName: Macromitrium gymnostomum\nidentifiedBy: A Noguchi and Z Iwatsuki\nverbatimDateIdentified: 1973\nassociatedTaxa: N/A\ncountry: Japan\nfirstPoliticalUnit: Wakayama Prefecture\nsecondPoliticalUnit: N/A\nmunicipality: Ohara\nverbatimLocality: Ohara Nishimuro-gun Wakayama Prefecture\nlocality: Ohara\nhabitat: On vertical face of rock 330 m alt\nsubstrate: rock\nverbatimElevation: 330 m alt\nverbatimCoordinates: N/A\notherCatalogNumbers: 1043494\noriginalMethod: Typed\ntypeStatus: no type status"
+    },
+    "metadata": {
+        "model": "claude-3-5-sonnet-20240620",
+        "role": "assistant",
+        "usage": {
+            "input_tokens": 2789,
+            "output_tokens": 299
+        },
+        "id": "msg_01FPSBLRParkJ5wWFg87xCa3",
+        "type": "message",
+        "stop_reason": "end_turn",
+        "stop_sequence": null
+    }
+}

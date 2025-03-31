@@ -15,17 +15,17 @@
         "new notes": ""
     },
     "recordNumber": {
-        "value": "B-2734",
+        "value": "B 2692",
         "notes": "",
         "new notes": ""
     },
     "verbatimEventDate": {
-        "value": "25.9.1903",
+        "value": "25.3.1903",
         "notes": "",
         "new notes": ""
     },
     "minimumEventDate": {
-        "value": "1903-09-25",
+        "value": "1903-03-25",
         "notes": "",
         "new notes": ""
     },
@@ -40,12 +40,12 @@
         "new notes": ""
     },
     "latestScientificName": {
-        "value": "Macromitrium",
+        "value": "Unsure and check",
         "notes": "",
         "new notes": ""
     },
     "identifiedBy": {
-        "value": "N/A",
+        "value": "Unsure and check",
         "notes": "",
         "new notes": ""
     },
@@ -75,17 +75,17 @@
         "new notes": ""
     },
     "municipality": {
-        "value": "N/A",
+        "value": "Eumundi",
         "notes": "",
         "new notes": ""
     },
     "verbatimLocality": {
-        "value": "Eumundi (ca 100 km nordlich Brisbane)",
+        "value": "Eumundi (ca. 100 km nördlich Brisbane) Urwald",
         "notes": "",
         "new notes": ""
     },
     "locality": {
-        "value": "Eumundi (about 100 km north of Brisbane)",
+        "value": "Eumundi",
         "notes": "",
         "new notes": ""
     },
@@ -95,7 +95,7 @@
         "new notes": ""
     },
     "substrate": {
-        "value": "",
+        "value": "N/A",
         "notes": "",
         "new notes": ""
     },
@@ -110,7 +110,7 @@
         "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "1076713",
+        "value": "1076699",
         "notes": "",
         "new notes": ""
     },
@@ -120,7 +120,7 @@
         "new notes": ""
     },
     "typeStatus": {
-        "value": "N/A",
+        "value": "No type status",
         "notes": "",
         "new notes": ""
     }

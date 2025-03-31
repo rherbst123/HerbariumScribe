@@ -8,7 +8,7 @@ import os
 import time
 import traceback
 from llm_processing.utility import extract_info_from_text
-from llm_processing.transcript5 import Transcript
+from llm_processing.transcript6 import Transcript
 from llm_processing.llm_interface import ImageProcessor
 
 class ClaudeImageProcessor(ImageProcessor):
@@ -30,10 +30,53 @@ class ClaudeImageProcessor(ImageProcessor):
         text_block = response_data[0].text
         return text_block 
 
-    def extract_json(self, response):
-        json_start = response.index("{")
-        json_end = response.rfind("}")
-        return json.loads(response[json_start:json_end + 1])    
+    def extract_json(self, message):
+        """Extract JSON from an Anthropic message response including metadata"""
+        try:
+            # Get the text content and metadata from the message
+            content = message.content[0].text
+            metadata = {
+                "model": message.model,
+                "role": message.role,
+                "usage": {
+                    "input_tokens": message.usage.input_tokens,
+                    "output_tokens": message.usage.output_tokens
+                },
+                "id": message.id,
+                "type": message.type,
+                "stop_reason": message.stop_reason,
+                "stop_sequence": message.stop_sequence
+            }
+            
+            # Try to parse content as JSON
+            try:
+                content_json = json.loads(content)
+            except json.JSONDecodeError:
+                # If not valid JSON, try to find JSON within the text
+                try:
+                    json_start = content.index("{")
+                    json_end = content.rindex("}") + 1
+                    json_str = content[json_start:json_end]
+                    content_json = json.loads(json_str)
+                except (ValueError, json.JSONDecodeError):
+                    # If no JSON found, use content as is
+                    content_json = {"content": content}
+            
+            # Combine content and metadata
+            return {
+                "content": content_json,
+                "metadata": metadata
+            }
+                    
+        except Exception as e:
+            print(f"Error extracting JSON: {str(e)}")
+            return {
+                "error": str(e), 
+                "raw_content": str(message),
+                "metadata": metadata if 'metadata' in locals() else None
+            }
+            
+          
 
     def process_image(self, base64_image, image_ref, index):
         start_time = time.time()

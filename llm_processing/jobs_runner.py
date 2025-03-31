@@ -1,5 +1,5 @@
-from llm_processing.llm_manager_testing import ProcessorManager
-#from llm_processing.llm_manager4 import ProcessorManager
+#from llm_processing.llm_manager_testing import ProcessorManager
+from llm_processing.llm_manager4 import ProcessorManager
 from llm_processing.transcript6 import Transcript
 
 class JobsRunner:
@@ -37,7 +37,6 @@ class JobsRunner:
     def load_jobs(self, jobs_dict):
         for job_name, job in jobs_dict.items():
             self.jobs_dict[job_name] = job
-
     
     def process_jobs(self):
         self.msg["status"] = []

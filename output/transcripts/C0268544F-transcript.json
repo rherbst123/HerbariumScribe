@@ -1,11 +1,11 @@
 {
     "verbatimCollectors": {
-        "value": "M. Fleischer",
+        "value": "T. Nakajima",
         "notes": "",
         "new notes": ""
     },
     "collectedBy": {
-        "value": "M. Fleischer",
+        "value": "T. Nakajima",
         "notes": "",
         "new notes": ""
     },
@@ -15,42 +15,42 @@
         "new notes": ""
     },
     "recordNumber": {
-        "value": "B 2754",
+        "value": "1229",
         "notes": "",
         "new notes": ""
     },
     "verbatimEventDate": {
-        "value": "25.3.1903",
+        "value": "Mar. 27, 1971",
         "notes": "",
         "new notes": ""
     },
     "minimumEventDate": {
-        "value": "1903-03-25",
+        "value": "1971-03-27",
         "notes": "",
         "new notes": ""
     },
     "maximumEventDate": {
-        "value": "N/A",
+        "value": "1971-03-27",
         "notes": "",
         "new notes": ""
     },
     "verbatimIdentification": {
-        "value": "Macromitrium",
+        "value": "Macromitrium gymnostomum Sull. et Lesq. e-fr.",
         "notes": "",
         "new notes": ""
     },
     "latestScientificName": {
-        "value": "Macromitrium",
+        "value": "Macromitrium gymnostomum",
         "notes": "",
         "new notes": ""
     },
     "identifiedBy": {
-        "value": "unsure and check",
+        "value": "T. Nakajima",
         "notes": "",
         "new notes": ""
     },
     "verbatimDateIdentified": {
-        "value": "N/A",
+        "value": "Mar. 27, 1971",
         "notes": "",
         "new notes": ""
     },
@@ -60,47 +60,47 @@
         "new notes": ""
     },
     "country": {
-        "value": "Australia",
+        "value": "Japan",
         "notes": "",
         "new notes": ""
     },
     "firstPoliticalUnit": {
-        "value": "Queensland",
+        "value": "Wakayama Prefecture",
         "notes": "",
         "new notes": ""
     },
     "secondPoliticalUnit": {
-        "value": "N/A",
+        "value": "Nishimuro-gun",
         "notes": "",
         "new notes": ""
     },
     "municipality": {
-        "value": "N/A",
+        "value": "Oto-mura",
         "notes": "",
         "new notes": ""
     },
     "verbatimLocality": {
-        "value": "Dumundi (ca. 100 km nördlich Brisbane), Urwald",
+        "value": "Ohara Yuya Oto-mura",
         "notes": "",
         "new notes": ""
     },
     "locality": {
-        "value": "Dumundi, approximately 100 kilometers north of Brisbane",
+        "value": "Ohara Yuya Oto-mura",
         "notes": "",
         "new notes": ""
     },
     "habitat": {
-        "value": "Urwald",
+        "value": "On vertical face of rock",
         "notes": "",
         "new notes": ""
     },
     "substrate": {
-        "value": "unsure and check",
+        "value": "rock",
         "notes": "",
         "new notes": ""
     },
     "verbatimElevation": {
-        "value": "N/A",
+        "value": "330 m alt.",
         "notes": "",
         "new notes": ""
     },
@@ -110,7 +110,7 @@
         "new notes": ""
     },
     "otherCatalogNumbers": {
-        "value": "107784",
+        "value": "1043494",
         "notes": "",
         "new notes": ""
     },

@@ -1,18 +1,18 @@
 {
     "version name": [
-        "claude-3.5-sonnet-2025-03-31-1033-26",
-        "gpt-4o-2025-03-31-1033-26",
-        "dan-2025-03-31-1033-26"
+        "claude-3.5-sonnet-2025-03-31-1034-41",
+        "gpt-4o-2025-03-31-1034-41",
+        "dan-2025-03-31-1034-41"
     ],
     "content": [
         {
             "verbatimCollectors": {
-                "value": "leg H Fleischer nr 3-2734",
+                "value": "T Nakajima",
                 "notes": "",
                 "new notes": ""
             },
             "collectedBy": {
-                "value": "Fleischer",
+                "value": "T Nakajima",
                 "notes": "",
                 "new notes": ""
             },
@@ -22,42 +22,42 @@
                 "new notes": ""
             },
             "recordNumber": {
-                "value": "3-2734",
+                "value": "N/A",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimEventDate": {
-                "value": "25 9 1903",
+                "value": "Mar 27 1971",
                 "notes": "",
                 "new notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-09-25",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "maximumEventDate": {
-                "value": "N/A",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium austraileni",
+                "value": "Macromitrium gymnostomum Sull et Lesq c fr",
                 "notes": "",
                 "new notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium austraileni",
+                "value": "Macromitrium gymnostomum",
                 "notes": "",
                 "new notes": ""
             },
             "identifiedBy": {
-                "value": "N/A",
+                "value": "A Noguchi and Z Iwatsuki",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimDateIdentified": {
-                "value": "N/A",
+                "value": "1973",
                 "notes": "",
                 "new notes": ""
             },
@@ -67,12 +67,12 @@
                 "new notes": ""
             },
             "country": {
-                "value": "N/A",
+                "value": "Japan",
                 "notes": "",
                 "new notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "Wakayama Prefecture",
                 "notes": "",
                 "new notes": ""
             },
@@ -82,32 +82,32 @@
                 "new notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "Ohara",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimLocality": {
-                "value": "Eumundi (ca 100 km nordlich Brisbane) Urwald",
+                "value": "Ohara Nishimuro-gun Wakayama Prefecture",
                 "notes": "",
                 "new notes": ""
             },
             "locality": {
-                "value": "Eumundi (about 100 km north of Brisbane)",
+                "value": "Ohara",
                 "notes": "",
                 "new notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "On vertical face of rock 330 m alt",
                 "notes": "",
                 "new notes": ""
             },
             "substrate": {
-                "value": "N/A",
+                "value": "rock",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "330 m alt",
                 "notes": "",
                 "new notes": ""
             },
@@ -117,7 +117,7 @@
                 "new notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "1044984",
+                "value": "1043494",
                 "notes": "",
                 "new notes": ""
             },
@@ -134,12 +134,12 @@
         },
         {
             "verbatimCollectors": {
-                "value": "M. Fleischer",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
             "collectedBy": {
-                "value": "M. Fleischer",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
@@ -149,42 +149,42 @@
                 "new notes": ""
             },
             "recordNumber": {
-                "value": "B 2754",
+                "value": "1229",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "Mar. 27, 1971",
                 "notes": "",
                 "new notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "maximumEventDate": {
-                "value": "N/A",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum Sull. et Lesq. e-fr.",
                 "notes": "",
                 "new notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum",
                 "notes": "",
                 "new notes": ""
             },
             "identifiedBy": {
-                "value": "unsure and check",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimDateIdentified": {
-                "value": "N/A",
+                "value": "Mar. 27, 1971",
                 "notes": "",
                 "new notes": ""
             },
@@ -194,47 +194,47 @@
                 "new notes": ""
             },
             "country": {
-                "value": "Australia",
+                "value": "Japan",
                 "notes": "",
                 "new notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "Wakayama Prefecture",
                 "notes": "",
                 "new notes": ""
             },
             "secondPoliticalUnit": {
-                "value": "N/A",
+                "value": "Nishimuro-gun",
                 "notes": "",
                 "new notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimLocality": {
-                "value": "Dumundi (ca. 100 km nördlich Brisbane), Urwald",
+                "value": "Ohara Yuya Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "locality": {
-                "value": "Dumundi, approximately 100 kilometers north of Brisbane",
+                "value": "Ohara Yuya Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "On vertical face of rock",
                 "notes": "",
                 "new notes": ""
             },
             "substrate": {
-                "value": "unsure and check",
+                "value": "rock",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "330 m alt.",
                 "notes": "",
                 "new notes": ""
             },
@@ -244,7 +244,7 @@
                 "new notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "107784",
+                "value": "1043494",
                 "notes": "",
                 "new notes": ""
             },
@@ -261,12 +261,12 @@
         },
         {
             "verbatimCollectors": {
-                "value": "M. Fleischer",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
             "collectedBy": {
-                "value": "M. Fleischer",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
@@ -276,42 +276,42 @@
                 "new notes": ""
             },
             "recordNumber": {
-                "value": "B 2754",
+                "value": "1229",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimEventDate": {
-                "value": "25.3.1903",
+                "value": "Mar. 27, 1971",
                 "notes": "",
                 "new notes": ""
             },
             "minimumEventDate": {
-                "value": "1903-03-25",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "maximumEventDate": {
-                "value": "N/A",
+                "value": "1971-03-27",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimIdentification": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum Sull. et Lesq. e-fr.",
                 "notes": "",
                 "new notes": ""
             },
             "latestScientificName": {
-                "value": "Macromitrium",
+                "value": "Macromitrium gymnostomum",
                 "notes": "",
                 "new notes": ""
             },
             "identifiedBy": {
-                "value": "unsure and check",
+                "value": "T. Nakajima",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimDateIdentified": {
-                "value": "N/A",
+                "value": "Mar. 27, 1971",
                 "notes": "",
                 "new notes": ""
             },
@@ -321,47 +321,47 @@
                 "new notes": ""
             },
             "country": {
-                "value": "Australia",
+                "value": "Japan",
                 "notes": "",
                 "new notes": ""
             },
             "firstPoliticalUnit": {
-                "value": "Queensland",
+                "value": "Wakayama Prefecture",
                 "notes": "",
                 "new notes": ""
             },
             "secondPoliticalUnit": {
-                "value": "N/A",
+                "value": "Nishimuro-gun",
                 "notes": "",
                 "new notes": ""
             },
             "municipality": {
-                "value": "N/A",
+                "value": "Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimLocality": {
-                "value": "Dumundi (ca. 100 km nördlich Brisbane), Urwald",
+                "value": "Ohara Yuya Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "locality": {
-                "value": "Dumundi, approximately 100 kilometers north of Brisbane",
+                "value": "Ohara Yuya Oto-mura",
                 "notes": "",
                 "new notes": ""
             },
             "habitat": {
-                "value": "Urwald",
+                "value": "On vertical face of rock",
                 "notes": "",
                 "new notes": ""
             },
             "substrate": {
-                "value": "unsure and check",
+                "value": "rock",
                 "notes": "",
                 "new notes": ""
             },
             "verbatimElevation": {
-                "value": "N/A",
+                "value": "330 m alt.",
                 "notes": "",
                 "new notes": ""
             },
@@ -371,7 +371,7 @@
                 "new notes": ""
             },
             "otherCatalogNumbers": {
-                "value": "107784",
+                "value": "1043494",
                 "notes": "",
                 "new notes": ""
             },
@@ -389,46 +389,46 @@
     ],
     "costs": [
         {
-            "time to create/edit (mins)": 0.10997072855631511,
-            "input tokens": 2789,
-            "output tokens": 286,
-            "input cost $": 0.008,
-            "output cost $": 0.004,
-            "overall input tokens": 2789,
-            "overall output tokens": 286,
-            "overall input cost $": 0.008,
-            "overall output cost $": 0.004,
-            "overall time to create/edit (mins)": 0.10997072855631511
+            "time to create/edit (mins)": 0.12800445954004924,
+            "input tokens": 13945,
+            "output tokens": 1405,
+            "input cost $": 0.042,
+            "output cost $": 0.021,
+            "overall input tokens": 13945,
+            "overall output tokens": 1405,
+            "overall input cost $": 0.042,
+            "overall output cost $": 0.021,
+            "overall time to create/edit (mins)": 0.12800445954004924
         },
         {
-            "time to create/edit (mins)": 0.2382190267244975,
-            "input tokens": 2225,
-            "output tokens": 210,
-            "input cost $": 0.006,
-            "output cost $": 0.002,
-            "overall input tokens": 5014,
-            "overall output tokens": 496,
-            "overall input cost $": 0.014,
-            "overall output cost $": 0.006,
-            "overall time to create/edit (mins)": 0.3481897552808126
+            "time to create/edit (mins)": 0.2384669542312622,
+            "input tokens": 11125,
+            "output tokens": 1063,
+            "input cost $": 0.028,
+            "output cost $": 0.011,
+            "overall input tokens": 25070,
+            "overall output tokens": 2468,
+            "overall input cost $": 0.07,
+            "overall output cost $": 0.032,
+            "overall time to create/edit (mins)": 0.3664714137713114
         },
         {
-            "version name": "dan-2025-03-31-1033-26",
+            "version name": "dan-2025-03-31-1034-41",
             "input tokens": 0,
             "output tokens": 0,
             "input cost $": 0,
             "output cost $": 0,
             "time to create/edit (mins)": 0,
-            "overall input tokens": 5014,
-            "overall output tokens": 496,
-            "overall input cost $": 0.014,
-            "overall output cost $": 0.006,
-            "overall time to create/edit (mins)": 0.3481897552808126
+            "overall input tokens": 25070,
+            "overall output tokens": 2468,
+            "overall input cost $": 0.07,
+            "overall output cost $": 0.032,
+            "overall time to create/edit (mins)": 0.3664714137713114
         }
     ],
     "notes": [
         {
-            "version name": "claude-3.5-sonnet-2025-03-31-1033-26",
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-41",
             "verbatimCollectors": "",
             "collectedBy": "",
             "secondaryCollectors": "",
@@ -456,7 +456,7 @@
             "typeStatus": ""
         },
         {
-            "version name": "gpt-4o-2025-03-31-1033-26",
+            "version name": "gpt-4o-2025-03-31-1034-41",
             "verbatimCollectors": "",
             "collectedBy": "",
             "secondaryCollectors": "",
@@ -484,7 +484,7 @@
             "typeStatus": ""
         },
         {
-            "version name": "dan-2025-03-31-1033-26",
+            "version name": "dan-2025-03-31-1034-41",
             "verbatimCollectors": "",
             "collectedBy": "",
             "secondaryCollectors": "",
@@ -514,19 +514,19 @@
     ],
     "editing": [
         {
-            "version name": "claude-3.5-sonnet-2025-03-31-1033-26",
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-41",
             "time started": "",
             "time editing": 0,
             "chats": ""
         },
         {
-            "version name": "gpt-4o-2025-03-31-1033-26",
+            "version name": "gpt-4o-2025-03-31-1034-41",
             "time started": "",
             "time editing": 0,
             "chats": ""
         },
         {
-            "version name": "dan-2025-03-31-1033-26",
+            "version name": "dan-2025-03-31-1034-41",
             "time started": "",
             "time editing": 0,
             "chats": ""
@@ -534,71 +534,71 @@
     ],
     "generation info": [
         {
-            "version name": "claude-3.5-sonnet-2025-03-31-1033-26",
-            "image ref": "C0268502F_p.jpg",
-            "image source": "local: C0268502F_p.jpg",
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-41",
+            "image ref": "C0268544F.jpg",
+            "image source": "local: C0268544F.jpg",
             "created by": "claude-3.5-sonnet",
-            "time created": "2025-03-31-1033-32",
+            "time created": "2025-03-31-1034-49",
             "is ai generated": true,
             "prompt name": "1.1Stripped.txt",
             "old version name": "base",
             "created by type": "model"
         },
         {
-            "version name": "gpt-4o-2025-03-31-1033-26",
-            "image ref": "C0268502F_p.jpg",
-            "image source": "local: C0268502F_p.jpg",
+            "version name": "gpt-4o-2025-03-31-1034-41",
+            "image ref": "C0268544F.jpg",
+            "image source": "local: C0268544F.jpg",
             "created by": "gpt-4o",
-            "time created": "2025-03-31-1033-47",
+            "time created": "2025-03-31-1035-03",
             "is ai generated": true,
             "prompt name": "1.1Stripped.txt",
-            "old version name": "claude-3.5-sonnet-2025-03-31-1033-26",
+            "old version name": "claude-3.5-sonnet-2025-03-31-1034-41",
             "created by type": "model"
         },
         {
-            "version name": "dan-2025-03-31-1033-26",
-            "image ref": "C0268502F_p.jpg",
-            "image source": "local: C0268502F_p.jpg",
+            "version name": "dan-2025-03-31-1034-41",
+            "image ref": "C0268544F.jpg",
+            "image source": "local: C0268544F.jpg",
             "created by": "dan",
-            "time created": "2025-03-31-1033-47",
+            "time created": "2025-03-31-1035-03",
             "is ai generated": false,
             "prompt name": "1.1Stripped.txt",
-            "old version name": "gpt-4o-2025-03-31-1033-26",
+            "old version name": "gpt-4o-2025-03-31-1034-41",
             "created by type": "user"
         }
     ],
     "comparisons": [
         {
-            "version name": "claude-3.5-sonnet-2025-03-31-1033-26",
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-41",
             "alignment rating": 0.48,
             "number matches": 12,
             "alignment type": [
                 "model",
                 "model"
             ],
-            "verbatimCollectors": 0.4,
-            "collectedBy": 0.75,
+            "verbatimCollectors": 0.9090909090909091,
+            "collectedBy": 0.9090909090909091,
             "secondaryCollectors": true,
-            "recordNumber": 0.5,
-            "verbatimEventDate": 0.6666666666666667,
-            "minimumEventDate": 0.9,
+            "recordNumber": 0,
+            "verbatimEventDate": 0.8461538461538461,
+            "minimumEventDate": true,
             "maximumEventDate": true,
-            "verbatimIdentification": 0.5,
-            "latestScientificName": 0.5,
-            "identifiedBy": 0,
-            "verbatimDateIdentified": true,
+            "verbatimIdentification": 0.8888888888888888,
+            "latestScientificName": true,
+            "identifiedBy": 0.125,
+            "verbatimDateIdentified": 0.23076923076923073,
             "associatedTaxa": true,
-            "country": 0,
+            "country": true,
             "firstPoliticalUnit": true,
-            "secondPoliticalUnit": true,
-            "municipality": true,
-            "verbatimLocality": 0.9130434782608696,
-            "locality": 0.6,
-            "habitat": true,
-            "substrate": 0,
-            "verbatimElevation": true,
+            "secondPoliticalUnit": 0,
+            "municipality": 0.375,
+            "verbatimLocality": 0.3076923076923077,
+            "locality": 0.26315789473684215,
+            "habitat": 0.7058823529411764,
+            "substrate": true,
+            "verbatimElevation": 0.9,
             "verbatimCoordinates": true,
-            "otherCatalogNumbers": 0.5714285714285714,
+            "otherCatalogNumbers": true,
             "originalMethod": true,
             "typeStatus": true
         }

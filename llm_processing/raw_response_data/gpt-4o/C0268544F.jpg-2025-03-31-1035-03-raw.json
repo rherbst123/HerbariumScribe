@@ -1,0 +1,36 @@
+{
+    "id": "chatcmpl-BHBRzC7TGg9cKRaW7ngiDrCabpBMv",
+    "object": "chat.completion",
+    "created": 1743435291,
+    "model": "gpt-4o-2024-08-06",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "verbatimCollectors: T. Nakajima\ncollectedBy: T. Nakajima\nsecondaryCollectors: N/A\nrecordNumber: 1229\nverbatimEventDate: Mar. 27, 1971\nminimumEventDate: 1971-03-27\nmaximumEventDate: 1971-03-27\nverbatimIdentification: Macromitrium gymnostomum Sull. et Lesq. e-fr.\nlatestScientificName: Macromitrium gymnostomum\nidentifiedBy: T. Nakajima\nverbatimDateIdentified: Mar. 27, 1971\nassociatedTaxa: N/A\ncountry: Japan\nfirstPoliticalUnit: Wakayama Prefecture\nsecondPoliticalUnit: Nishimuro-gun\nmunicipality: Oto-mura\nverbatimLocality: Ohara Yuya Oto-mura\nlocality: Ohara Yuya Oto-mura\nhabitat: On vertical face of rock\nsubstrate: rock\nverbatimElevation: 330 m alt.\nverbatimCoordinates: N/A\notherCatalogNumbers: 1043494\noriginalMethod: Typed\ntypeStatus: no type status",
+                "refusal": null,
+                "annotations": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 2225,
+        "completion_tokens": 246,
+        "total_tokens": 2471,
+        "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+        }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_de57b65c90"
+}

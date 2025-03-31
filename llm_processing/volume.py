@@ -50,7 +50,7 @@ class Volume:
         costs_list.append(overall_costs_dict)
         for page in self.pages:
             transcript_obj = page["transcript_obj"]
-            transcript_costs_dict = transcript_obj.versions["costs"][-1]
+            transcript_costs_dict = transcript_obj.versions["costs"][-2]
             transcript_name = transcript_obj.image_ref
             d = {"transcript": transcript_name}
             for cost_name in cost_names:
