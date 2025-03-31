@@ -1,0 +1,606 @@
+{
+    "version name": [
+        "claude-3.5-sonnet-2025-03-31-1033-47",
+        "gpt-4o-2025-03-31-1033-47",
+        "dan-2025-03-31-1033-47"
+    ],
+    "content": [
+        {
+            "verbatimCollectors": {
+                "value": "M Fleischer nr B 2692",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "M Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2692",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "25.3.1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-03-25",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "1903-03-25",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "Queensland",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Eumundi (ca 100 km nordlich Brisbane), Urwald",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Eumundi (about 100 km north of Brisbane)",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "Urwald (primeval forest)",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076699, 1411225",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "no type status",
+                "notes": "",
+                "new notes": ""
+            }
+        },
+        {
+            "verbatimCollectors": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2692",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "25.3.1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-03-25",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "Unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "Queensland",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "Eumundi",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Eumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Eumundi",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "Urwald",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076699",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "No type status",
+                "notes": "",
+                "new notes": ""
+            }
+        },
+        {
+            "verbatimCollectors": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2692",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "25.3.1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-03-25",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "Unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "Queensland",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "Eumundi",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Eumundi (ca. 100 km nördlich Brisbane) Urwald",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Eumundi",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "Urwald",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076699",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "No type status",
+                "notes": "",
+                "new notes": ""
+            }
+        }
+    ],
+    "costs": [
+        {
+            "time to create/edit (mins)": 0.11715350945790609,
+            "input tokens": 5578,
+            "output tokens": 577,
+            "input cost $": 0.017,
+            "output cost $": 0.009,
+            "overall input tokens": 5578,
+            "overall output tokens": 577,
+            "overall input cost $": 0.017,
+            "overall output cost $": 0.009,
+            "overall time to create/edit (mins)": 0.11715350945790609
+        },
+        {
+            "time to create/edit (mins)": 0.1946328639984131,
+            "input tokens": 4450,
+            "output tokens": 417,
+            "input cost $": 0.011,
+            "output cost $": 0.004,
+            "overall input tokens": 10028,
+            "overall output tokens": 994,
+            "overall input cost $": 0.028,
+            "overall output cost $": 0.013,
+            "overall time to create/edit (mins)": 0.3117863734563192
+        },
+        {
+            "version name": "dan-2025-03-31-1033-47",
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "time to create/edit (mins)": 0,
+            "overall input tokens": 10028,
+            "overall output tokens": 994,
+            "overall input cost $": 0.028,
+            "overall output cost $": 0.013,
+            "overall time to create/edit (mins)": 0.3117863734563192
+        }
+    ],
+    "notes": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1033-47",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1033-47",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        },
+        {
+            "version name": "dan-2025-03-31-1033-47",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        }
+    ],
+    "editing": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1033-47",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1033-47",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        },
+        {
+            "version name": "dan-2025-03-31-1033-47",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        }
+    ],
+    "generation info": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1033-47",
+            "image ref": "C0268508F_p.jpg",
+            "image source": "local: C0268508F_p.jpg",
+            "created by": "claude-3.5-sonnet",
+            "time created": "2025-03-31-1033-54",
+            "is ai generated": true,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "base",
+            "created by type": "model"
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1033-47",
+            "image ref": "C0268508F_p.jpg",
+            "image source": "local: C0268508F_p.jpg",
+            "created by": "gpt-4o",
+            "time created": "2025-03-31-1034-05",
+            "is ai generated": true,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "claude-3.5-sonnet-2025-03-31-1033-47",
+            "created by type": "model"
+        },
+        {
+            "version name": "dan-2025-03-31-1033-47",
+            "image ref": "C0268508F_p.jpg",
+            "image source": "local: C0268508F_p.jpg",
+            "created by": "dan",
+            "time created": "2025-03-31-1034-05",
+            "is ai generated": false,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "gpt-4o-2025-03-31-1033-47",
+            "created by type": "user"
+        }
+    ],
+    "comparisons": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1033-47",
+            "alignment rating": 0.6,
+            "number matches": 15,
+            "alignment type": [
+                "model",
+                "model"
+            ],
+            "verbatimCollectors": 0.47619047619047616,
+            "collectedBy": 0.9166666666666666,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": true,
+            "minimumEventDate": true,
+            "maximumEventDate": 0,
+            "verbatimIdentification": true,
+            "latestScientificName": 0.0625,
+            "identifiedBy": 0,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": true,
+            "municipality": 0,
+            "verbatimLocality": 0.9333333333333333,
+            "locality": 0.17500000000000004,
+            "habitat": 0.25,
+            "substrate": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": 0.4375,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    ]
+}

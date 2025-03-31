@@ -1,0 +1,17 @@
+{
+    "content": {
+        "content": "Here is the information extracted from the herbarium label:\n\nverbatimCollectors: leg H Fleischer nr 3-2734\ncollectedBy: Fleischer\nsecondaryCollectors: N/A\nrecordNumber: 3-2734\nverbatimEventDate: 25 9 1903\nminimumEventDate: 1903-09-25\nmaximumEventDate: N/A\nverbatimIdentification: Macromitrium austraileni\nlatestScientificName: Macromitrium austraileni\nidentifiedBy: N/A\nverbatimDateIdentified: N/A\nassociatedTaxa: N/A\ncountry: N/A\nfirstPoliticalUnit: Queensland\nsecondPoliticalUnit: N/A\nmunicipality: N/A\nverbatimLocality: Eumundi (ca 100 km nordlich Brisbane) Urwald\nlocality: Eumundi (about 100 km north of Brisbane)\nhabitat: Urwald\nsubstrate: N/A\nverbatimElevation: N/A\nverbatimCoordinates: N/A\notherCatalogNumbers: 1044984\noriginalMethod: Typed\ntypeStatus: no type status"
+    },
+    "metadata": {
+        "model": "claude-3-5-sonnet-20240620",
+        "role": "assistant",
+        "usage": {
+            "input_tokens": 2789,
+            "output_tokens": 286
+        },
+        "id": "msg_016a6TZUDCqUZHxMtfBHndsp",
+        "type": "message",
+        "stop_reason": "end_turn",
+        "stop_sequence": null
+    }
+}

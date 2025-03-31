@@ -1,0 +1,17 @@
+{
+    "content": {
+        "content": "Here is the transcribed and expanded information from the herbarium label:\n\nverbatimCollectors: M Fleischer nr B 2692\ncollectedBy: M Fleischer\nsecondaryCollectors: N/A\nrecordNumber: B 2692\nverbatimEventDate: 25.3.1903\nminimumEventDate: 1903-03-25\nmaximumEventDate: 1903-03-25\nverbatimIdentification: Macromitrium\nlatestScientificName: Macromitrium\nidentifiedBy: N/A\nverbatimDateIdentified: N/A\nassociatedTaxa: N/A\ncountry: Australia\nfirstPoliticalUnit: Queensland\nsecondPoliticalUnit: N/A\nmunicipality: N/A\nverbatimLocality: Eumundi (ca 100 km nordlich Brisbane), Urwald\nlocality: Eumundi (about 100 km north of Brisbane)\nhabitat: Urwald (primeval forest)\nsubstrate: N/A\nverbatimElevation: N/A\nverbatimCoordinates: N/A\notherCatalogNumbers: 1076699, 1411225\noriginalMethod: Typed\ntypeStatus: no type status"
+    },
+    "metadata": {
+        "model": "claude-3-5-sonnet-20240620",
+        "role": "assistant",
+        "usage": {
+            "input_tokens": 2789,
+            "output_tokens": 291
+        },
+        "id": "msg_01NRJGCEMq6SGKyC3AkwkBzG",
+        "type": "message",
+        "stop_reason": "end_turn",
+        "stop_sequence": null
+    }
+}

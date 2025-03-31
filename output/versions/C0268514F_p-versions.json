@@ -1,0 +1,606 @@
+{
+    "version name": [
+        "claude-3.5-sonnet-2025-03-31-1034-05",
+        "gpt-4o-2025-03-31-1034-05",
+        "dan-2025-03-31-1034-05"
+    ],
+    "content": [
+        {
+            "verbatimCollectors": {
+                "value": "Leg M Fleischer nr B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "6 4 1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-04-06",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "New South Wales",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Blue Mountains bei Sydney Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Blue Mountains near Sydney Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076821",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "no type status",
+                "notes": "",
+                "new notes": ""
+            }
+        },
+        {
+            "verbatimCollectors": {
+                "value": "leg. M. Fleischer nr. B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "6.4.1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-04-06",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "New South Wales",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Blue Mountains bei Sydney, Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Blue Mountains, Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076824",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "no type status",
+                "notes": "",
+                "new notes": ""
+            }
+        },
+        {
+            "verbatimCollectors": {
+                "value": "leg. M. Fleischer nr. B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "collectedBy": {
+                "value": "M. Fleischer",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondaryCollectors": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "recordNumber": {
+                "value": "B 2552",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimEventDate": {
+                "value": "6.4.1903",
+                "notes": "",
+                "new notes": ""
+            },
+            "minimumEventDate": {
+                "value": "1903-04-06",
+                "notes": "",
+                "new notes": ""
+            },
+            "maximumEventDate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimIdentification": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "latestScientificName": {
+                "value": "Macromitrium",
+                "notes": "",
+                "new notes": ""
+            },
+            "identifiedBy": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimDateIdentified": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "associatedTaxa": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "country": {
+                "value": "Australia",
+                "notes": "",
+                "new notes": ""
+            },
+            "firstPoliticalUnit": {
+                "value": "New South Wales",
+                "notes": "",
+                "new notes": ""
+            },
+            "secondPoliticalUnit": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "municipality": {
+                "value": "unsure and check",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimLocality": {
+                "value": "Blue Mountains bei Sydney, Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "locality": {
+                "value": "Blue Mountains, Wentworth Falls",
+                "notes": "",
+                "new notes": ""
+            },
+            "habitat": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "substrate": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimElevation": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "verbatimCoordinates": {
+                "value": "N/A",
+                "notes": "",
+                "new notes": ""
+            },
+            "otherCatalogNumbers": {
+                "value": "1076824",
+                "notes": "",
+                "new notes": ""
+            },
+            "originalMethod": {
+                "value": "Typed",
+                "notes": "",
+                "new notes": ""
+            },
+            "typeStatus": {
+                "value": "no type status",
+                "notes": "",
+                "new notes": ""
+            }
+        }
+    ],
+    "costs": [
+        {
+            "time to create/edit (mins)": 0.10252725680669149,
+            "input tokens": 8367,
+            "output tokens": 845,
+            "input cost $": 0.025,
+            "output cost $": 0.013,
+            "overall input tokens": 8367,
+            "overall output tokens": 845,
+            "overall input cost $": 0.025,
+            "overall output cost $": 0.013,
+            "overall time to create/edit (mins)": 0.10252725680669149
+        },
+        {
+            "time to create/edit (mins)": 0.22408500115076702,
+            "input tokens": 6675,
+            "output tokens": 628,
+            "input cost $": 0.017,
+            "output cost $": 0.006,
+            "overall input tokens": 15042,
+            "overall output tokens": 1473,
+            "overall input cost $": 0.042,
+            "overall output cost $": 0.019,
+            "overall time to create/edit (mins)": 0.3266122579574585
+        },
+        {
+            "version name": "dan-2025-03-31-1034-05",
+            "input tokens": 0,
+            "output tokens": 0,
+            "input cost $": 0,
+            "output cost $": 0,
+            "time to create/edit (mins)": 0,
+            "overall input tokens": 15042,
+            "overall output tokens": 1473,
+            "overall input cost $": 0.042,
+            "overall output cost $": 0.019,
+            "overall time to create/edit (mins)": 0.3266122579574585
+        }
+    ],
+    "notes": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-05",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1034-05",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        },
+        {
+            "version name": "dan-2025-03-31-1034-05",
+            "verbatimCollectors": "",
+            "collectedBy": "",
+            "secondaryCollectors": "",
+            "recordNumber": "",
+            "verbatimEventDate": "",
+            "minimumEventDate": "",
+            "maximumEventDate": "",
+            "verbatimIdentification": "",
+            "latestScientificName": "",
+            "identifiedBy": "",
+            "verbatimDateIdentified": "",
+            "associatedTaxa": "",
+            "country": "",
+            "firstPoliticalUnit": "",
+            "secondPoliticalUnit": "",
+            "municipality": "",
+            "verbatimLocality": "",
+            "locality": "",
+            "habitat": "",
+            "substrate": "",
+            "verbatimElevation": "",
+            "verbatimCoordinates": "",
+            "otherCatalogNumbers": "",
+            "originalMethod": "",
+            "typeStatus": ""
+        }
+    ],
+    "editing": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-05",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1034-05",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        },
+        {
+            "version name": "dan-2025-03-31-1034-05",
+            "time started": "",
+            "time editing": 0,
+            "chats": ""
+        }
+    ],
+    "generation info": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-05",
+            "image ref": "C0268514F_p.jpg",
+            "image source": "local: C0268514F_p.jpg",
+            "created by": "claude-3.5-sonnet",
+            "time created": "2025-03-31-1034-11",
+            "is ai generated": true,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "base",
+            "created by type": "model"
+        },
+        {
+            "version name": "gpt-4o-2025-03-31-1034-05",
+            "image ref": "C0268514F_p.jpg",
+            "image source": "local: C0268514F_p.jpg",
+            "created by": "gpt-4o",
+            "time created": "2025-03-31-1034-25",
+            "is ai generated": true,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "claude-3.5-sonnet-2025-03-31-1034-05",
+            "created by type": "model"
+        },
+        {
+            "version name": "dan-2025-03-31-1034-05",
+            "image ref": "C0268514F_p.jpg",
+            "image source": "local: C0268514F_p.jpg",
+            "created by": "dan",
+            "time created": "2025-03-31-1034-25",
+            "is ai generated": false,
+            "prompt name": "1.1Stripped.txt",
+            "old version name": "gpt-4o-2025-03-31-1034-05",
+            "created by type": "user"
+        }
+    ],
+    "comparisons": [
+        {
+            "version name": "claude-3.5-sonnet-2025-03-31-1034-05",
+            "alignment rating": 0.64,
+            "number matches": 16,
+            "alignment type": [
+                "model",
+                "model"
+            ],
+            "verbatimCollectors": 0.8571428571428572,
+            "collectedBy": 0.75,
+            "secondaryCollectors": true,
+            "recordNumber": true,
+            "verbatimEventDate": 0.75,
+            "minimumEventDate": true,
+            "maximumEventDate": true,
+            "verbatimIdentification": true,
+            "latestScientificName": true,
+            "identifiedBy": 0,
+            "verbatimDateIdentified": true,
+            "associatedTaxa": true,
+            "country": true,
+            "firstPoliticalUnit": true,
+            "secondPoliticalUnit": 0,
+            "municipality": 0,
+            "verbatimLocality": 0.9761904761904762,
+            "locality": 0.7142857142857143,
+            "habitat": true,
+            "substrate": true,
+            "verbatimElevation": true,
+            "verbatimCoordinates": true,
+            "otherCatalogNumbers": 0.8571428571428572,
+            "originalMethod": true,
+            "typeStatus": true
+        }
+    ]
+}

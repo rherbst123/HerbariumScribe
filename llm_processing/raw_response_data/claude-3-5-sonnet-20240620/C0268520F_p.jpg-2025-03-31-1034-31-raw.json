@@ -1,0 +1,17 @@
+{
+    "content": {
+        "content": "Here is the information extracted from the herbarium label:\n\nverbatimCollectors: M. Fleischer nr. B 2697\ncollectedBy: Fleischer\nsecondaryCollectors: N/A\nrecordNumber: B 2697\nverbatimEventDate: 20.3.1903\nminimumEventDate: 1903-03-20\nmaximumEventDate: 1903-03-20\nverbatimIdentification: Macromitrium\nlatestScientificName: Macromitrium\nidentifiedBy: N/A\nverbatimDateIdentified: N/A\nassociatedTaxa: N/A\ncountry: Australia\nfirstPoliticalUnit: Queensland\nsecondPoliticalUnit: N/A\nmunicipality: Brisbane\nverbatimLocality: bei Brisbane\nlocality: near Brisbane\nhabitat: N/A\nsubstrate: N/A\nverbatimElevation: N/A\nverbatimCoordinates: N/A\notherCatalogNumbers: 1076705, 1044145\noriginalMethod: Mix of Handwritten and Typed\ntypeStatus: no type status"
+    },
+    "metadata": {
+        "model": "claude-3-5-sonnet-20240620",
+        "role": "assistant",
+        "usage": {
+            "input_tokens": 2789,
+            "output_tokens": 261
+        },
+        "id": "msg_01XpAXV14cP37XkqDxuYEv7N",
+        "type": "message",
+        "stop_reason": "end_turn",
+        "stop_sequence": null
+    }
+}

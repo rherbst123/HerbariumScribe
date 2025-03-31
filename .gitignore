@@ -1,2 +1,7 @@
 keys/creds.yaml
 /HerbScribe
+.env
+venv/
+temp_images/
+__pycache__/
+*/__pycache__/
