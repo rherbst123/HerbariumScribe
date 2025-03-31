@@ -26,66 +26,90 @@ def get_package_manager():
         return "pip3"
     return "pip"
 
-def select_folder():
-    system = platform.system()
-    
-    if system == "Windows":
-        try:
-            import tkinter as tk
-            from tkinter import filedialog
-            root = tk.Tk()
-            root.attributes('-topmost', True)
-            root.withdraw()
-            folder_path = filedialog.askdirectory(parent=root)
-            root.destroy()
-            return folder_path
-        except Exception as e:
-            st.error(f"Error selecting folder: {str(e)}")
-            return None
-    else:
-        # Alternative folder selection for Mac/Linux
-        return st.text_input("Enter folder path:", 
-                           help="Enter the full path to your folder")
+def convert_dict_to_string(config_dict):
+    """
+    Converts a dictionary of configuration values to environment file format.
+    Example: {'API_KEY': 'xyz'} becomes 'API_KEY=xyz'
+    """
+    return '\n'.join([f'{key}={value}' for key, value in config_dict.items()])
 
-def install_requirements():
-    system = platform.system()
-    pip_cmd = get_package_manager()
-    
-    if system == "Darwin":  # MacOS
-        try:
-            # Check if tkinter is available
-            import tkinter
-        except ImportError:
-            st.error("""
-            Tkinter is not installed. You can install it using one of these methods:
-            1. Using Homebrew: `brew install python-tk`
-            2. Using Python.org installer
-            3. Continue without GUI folder selection
-            """)
-    
+def save_to_env(contents):
+    """
+    Saves the configuration string to a .env file.
+    Creates the file if it doesn't exist, overwrites if it does.
+    """
     try:
-        with st.spinner("Installing requirements..."):
-            subprocess.run([pip_cmd, "install", "-r", "requirements.txt"])
-            subprocess.run([pip_cmd, "install", "--upgrade", "streamlit"])
-        st.success("Requirements installed successfully!")
+        with open('.env', 'w') as f:
+            f.write(contents)
     except Exception as e:
-        st.error(f"Error installing requirements: {str(e)}")
+        raise Exception(f"Failed to save configuration: {str(e)}")
+
 
 def main():
     st.title("HerbariumScribe Setup")
     
+    # Initialize session state if not already done
+    if 'step' not in st.session_state:
+        st.session_state.step = 1
+    if 'config' not in st.session_state:
+        st.session_state.config = {}
+
     # Display system information
     system = platform.system()
     st.write(f"Detected Operating System: {system}")
     
-    # Create virtual environment first
-    if st.button("Create Virtual Environment"):
-        create_virtual_environment()
-        st.success("Virtual environment created successfully!")
+    # Step 1: Create virtual environment
+    if st.session_state.step == 1:
+        st.header("Step 1: Create Virtual Environment")
+        if st.button("Create Virtual Environment"):
+            create_virtual_environment()
+            st.success("Virtual environment created successfully!")
+            st.session_state.step = 2
+            st.rerun()
 
-    # Rest of your existing setup.py code...
-    
-    # Modify the final step to use the new install_requirements function
+    # Step 2: OpenAI API Configuration
+    elif st.session_state.step == 2:
+        st.header("Step 2: OpenAI API Configuration")
+        input_method = st.radio("Choose input method for OpenAI API Key:", 
+                              ["Enter manually", "Load from file"])
+        
+        if input_method == "Enter manually":
+            api_key = st.text_input("Enter your OpenAI API Key:", type="password")
+        else:
+            api_file = st.file_uploader("Upload file containing OpenAI API Key", type=['txt'])
+            if api_file is not None:
+                api_key = api_file.getvalue().decode().strip()
+            else:
+                api_key = None
+
+        if st.button("Save API Key") and api_key:
+            st.session_state.config['OPENAI_API_KEY'] = api_key
+            st.success("API Key saved!")
+            st.session_state.step = 3
+            st.rerun()
+
+    # Step 3: Anthropic Configuration
+    elif st.session_state.step == 3:
+        st.header("Step 3: Anthropic Configuration")
+        input_method = st.radio("Choose input method for Anthropic API Key:", 
+                              ["Enter manually", "Load from file"])
+        
+        if input_method == "Enter manually":
+            anthropic_key = st.text_input("Enter your Anthropic API Key:", type="password")
+        else:
+            api_file = st.file_uploader("Upload file containing Anthropic API Key", type=['txt'])
+            if api_file is not None:
+                anthropic_key = api_file.getvalue().decode().strip()
+            else:
+                anthropic_key = None
+        
+        if st.button("Save Anthropic Configuration") and anthropic_key:
+            st.session_state.config['ANTHROPIC_API_KEY'] = anthropic_key
+            st.success("Anthropic configuration saved!")
+            st.session_state.step = 4
+            st.rerun()
+
+    # Step 4: Final Configuration
     elif st.session_state.step == 4:
         st.header("Final Step: Save Configuration")
         
@@ -102,9 +126,6 @@ def main():
                 contents = convert_dict_to_string(st.session_state.config)
                 save_to_env(contents)
                 st.success("Configuration saved successfully!")
-                
-                # Install requirements using the new function
-                install_requirements()
                 
                 st.success("""
                 Setup complete! You can now:
