@@ -13,10 +13,9 @@ from streamlit.components.v1 import html
 
 from llm_processing.llm_manager4 import ProcessorManager
 from llm_processing.claude_interface3 import ClaudeImageProcessor
-from llm_processing.transcript6 import Transcript
+from llm_processing.transcript5 import Transcript
 from llm_processing.utility import extract_info_from_text
-from llm_processing.session2 import Session
-from llm_processing.volume import Volume
+from llm_processing.session import Session
 
 # Constants
 ENV_FILE = ".env"
@@ -62,8 +61,6 @@ def set_up():
         st.session_state.reedit_mode = False
     if "fullscreen" not in st.session_state:
         st.session_state.fullscreen = False
-    if "table_type" not in st.session_state:
-        st.session_state.table_type = "page"    
 
 def reset_states():
     st.session_state.editor_enabled = False
@@ -154,42 +151,28 @@ def open_fullscreen():
     st.session_state.fullscreen = True
 
 def process_images_callback():
-    "volume_name_input"
-    volume_name = st.session_state.get("volume_name_input", "volume_name")
-    st.session_state.session_obj.process_images(volume_name)
-    msg = st.session_state.session_obj.msg
+    msg = st.session_state.session_obj.process_images(msg={})
     display_messages(msg)
     st.session_state.pause_button_enabled = msg["pause_button_enabled"]
     st.session_state.status_msg = "\n".join(msg["status"])
-    st.session_state.session_obj.reset_msg()
  
 def reset_status_bar_message():
-    st.session_state.status_msg = ""
+    st.session_state.status_msg = ""       
 
-def save_table_edits():
-    edited_elements = st.session_state["my_key"]["edited_rows"]
-    print(f"{edited_elements = }")
-    st.session_state.session_obj.save_table_edits(edited_elements)
-    
 def show_fullscreen_image():
     st.write("## Full-Screen Image Viewer")
-    image = st.session_state.session_obj.volume.current_image
+    current_image_idx = st.session_state.session_obj.current_transcript_idx
+    image = st.session_state.session_obj.processed_images[current_image_idx]
     st.image(image, caption=f"Full Screen of Image {current_image_idx + 1}", use_container_width=True)
     st.button("Close Full Screen", on_click=close_fullscreen)
 
-def update_table_content_option():
-    st.session_state.session_obj.table_content_option = "content" if st.session_state.show_content_type=="transcript" else st.session_state.show_content_type
-    #st.rerun()
+def update_content_option():
+    st.session_state.session_obj.content_option = "content" if st.session_state.show_content_type=="transcript" else st.session_state.show_content_type
+    st.rerun()
 
 def update_fieldvalue():
     fieldvalue = st.session_state.fieldvalue_key
-    st.session_state.session_obj.update_fieldvalue(fieldvalue)
-
-def update_table_type():
-    st.session_state.session_obj.table_type = st.session_state.show_table_type
-    #update_table_content_option()
-    st.rerun()
-            
+    st.session_state.session_obj.update_fieldvalue(fieldvalue) 
 
 def update_text_output():
     current_output_as_text = st.session_state.text_output_key
@@ -279,6 +262,7 @@ def main():
         padding-bottom: 0.0rem !important;
     }
 
+        
         </style>
     
         <meta name="color-scheme" content="only light">
@@ -366,32 +350,16 @@ def main():
 # Process Images Button
         process_container = st.container(border=True)
         if all(list(st.session_state.session_obj.input_dict.values())):
-            process_container = st.container(border=True)
-            if all(list(st.session_state.session_obj.input_dict.values())):
-                with process_container:
+            with process_container:
+                process_button_col, status_bar_col, pause_button_col = st.columns([1, 4, 1])
+                with process_button_col:
                     st.container(height=20, border=False)
-                    
-                    # Initialize the volume name in session state if it doesn't exist
-                    if 'volume_name' not in st.session_state:
-                        st.session_state.volume_name = f"{st.session_state.session_obj.user_name}-{get_timestamp()}"
-                    
-                    st.write("Accept or Change this name for this run:")
-                    # Use session state for the text input
-                    st.session_state.volume_name = st.text_input(
-                        "Enter a name for the volume and click Ctrl+Enter to accept", 
-                        value=st.session_state.volume_name,
-                        key="volume_name_input"
-                    )
-                    
                     st.button(
-                        f"Process Images for {st.session_state.volume_name}",
-                        on_click=process_images_callback
-                    )
-                    
-                    status_bar_col, pause_button_col = st.columns([4, 2])
-                    with status_bar_col:        
-                        status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
-            
+                            "Process Images",
+                            on_click=process_images_callback,
+                            )
+                with status_bar_col:        
+                    status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
                 if st.session_state.pause_button_enabled:
                     with pause_button_col:
                         proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"])
@@ -411,49 +379,64 @@ def main():
                             st.session_state.pause_button_enabled = False
                             st.session_state.status_msg = "Cancelling remaining jobs..."
                             st.wait(3)
-                            st.session_state.session_obj.reset_inputs()
-                else:
-                    st.session_state.session_obj.volume.save_volume_to_json()              
+                            st.session_state.session_obj.reset_inputs()  
         ##############################                         
     else:
         if not st.session_state.reedit_mode:
             st.session_state.reedit_mode = True
         load_saved_edits_container = st.container(border=True)     
         with load_saved_edits_container:
-            volume_files = [f for f in os.listdir(f"{TRANCRIPTION_FOLDER}/volumes") if f.endswith(".json")]
-            if volume_files:
-                sorted_volume_files = st.session_state.session_obj.sort_filenames_by_timestamp(volume_files)
-                selected_volume_file = st.radio("Select Volume File:", sorted_volume_files)
-                col1, col2 = st.columns(2)
-                with col1:
-                    if selected_volume_file:
-                        if st.button(f"Load: {selected_volume_file}"):
-                            st.session_state.session_obj.re_edit_volume(selected_volume_file=selected_volume_file)
-                            msg = st.session_state.session_obj.msg
-                            display_messages(msg)
-                            st.session_state.session_obj.reset_msg()
-                with col2:
+            loading_option = st.radio("Select Loading Option:", ["Session", "Selected File(s)"])
+            if loading_option == "Session":
+                session_files = [f for f in os.listdir(f"{TRANCRIPTION_FOLDER}/sessions") if f.endswith(".json")]
+                if session_files:
+                    sorted_session_files = st.session_state.session_obj.sort_filenames_by_timestamp(session_files)
+                    selected_session_file = st.selectbox("Select Session File:", sorted_session_files)
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if selected_session_file:
+                            if st.button("Load Selected File"):
+                                msg = st.session_state.session_obj.re_edit_session(msg={}, selected_session_file=selected_session_file)
+                                display_messages(msg)
+                    with col2:
+                        if st.button("Cancel"):
+                            st.session_state.reedit_mode = False
+                            st.rerun()    
+                else:
+                    st.warning("No .json files found in the sessions folder.")
                     if st.button("Cancel"):
                         st.session_state.reedit_mode = False
-                        st.rerun()    
-            else:
-                st.warning("No .json files found in the volumes folder.")
-                if st.button("Cancel"):
-                    st.session_state.reedit_mode = False
-                    st.rerun()
-        
+                        st.rerun()
+            else:            
+                reedit_files = [f for f in os.listdir(f"{TRANCRIPTION_FOLDER}/versions") if f.endswith(".json")]
+                if reedit_files:
+                    selected_files = st.multiselect("Select Files:", reedit_files)
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if selected_files:
+                            if st.button("Load Selected Files"):
+                                msg = st.session_state.session_obj.re_edit_saved_versions(msg={}, selected_reedit_files=selected_files)
+                                display_messages(msg)
+                    with col2:
+                        if st.button("Cancel"):
+                            st.session_state.reedit_mode = False
+                            st.rerun()
+                else:
+                    st.warning("No .json files found in the versions folder.")
+                    if st.button("Cancel"):
+                        st.session_state.reedit_mode = False
+                        st.rerun()
             # end load_saved_edits_container
     # ---------------
     # Output Display
     #---------------
-    if st.session_state.session_obj.pages:
-        st.session_state.session_obj.volume.set_current_page()
+    if st.session_state.session_obj.transcript_objs:
         editor_container = st.container(border=False) 
         with editor_container:
-            current_image_idx = st.session_state.session_obj.volume.current_page_idx
+            current_image_idx = st.session_state.session_obj.current_transcript_idx
             col_image, col_editor = st.columns([4,3])
             with col_image:
-                image = st.session_state.session_obj.volume.current_image
+                image = st.session_state.session_obj.processed_images[current_image_idx]
                 st.image(image, caption=None, use_container_width=True)
             with col_editor:            
                 col_text, col_fullscreen_button = st.columns([2,1])
@@ -466,25 +449,24 @@ def main():
                 st.write("https://translate.google.com/") 
                 st.session_state.editing_view_option = st.radio("Select Editor View:",  ["Full Text", "Fieldname"], key="editing_option", index=0)
                 if st.session_state.editing_view_option == "Fieldname":
-                    #st.session_state.session_obj.load_current_transcript_obj()
+                    st.session_state.session_obj.load_current_transcript_obj()
                     col_prev_field, col_next_field, __ = st.columns(3)
                     with col_next_field:
                         st.button("next field", on_click=st.session_state.session_obj.go_to_next_field)         
                     with col_prev_field:       
                         st.button("prev field", on_click=st.session_state.session_obj.go_to_previous_field)
-                    fieldname = st.session_state.session_obj.volume.get_current_fieldname()
-                    fieldvalue = st.session_state.session_obj.volume.get_current_fieldvalue()       
-                    emoji = st.session_state.session_obj.get_validation_rating_with_emoji(fieldname)
-                    md_fieldname = f"{fieldname} {emoji}"
+                    st.session_state.session_obj.load_current_transcript_obj()    
+                    emoji = st.session_state.session_obj.get_validation_rating_with_emoji(st.session_state.session_obj.current_fieldname)
+                    md_fieldname = f"{st.session_state.session_obj.current_fieldname} {emoji}"
                     st.write(f"#### {md_fieldname}")
-                    st.session_state.field_text_area = st.text_area("*Press Ctrl+Enter to accept edits*", fieldvalue, on_change=update_fieldvalue, key="fieldvalue_key", height=68)
+                    st.session_state.field_text_area = st.text_area("*Press Ctrl+Enter to accept edits*", st.session_state.session_obj.current_fieldvalue, on_change=update_fieldvalue, key="fieldvalue_key", height=68)
                 nav_prev, nav_next, image_ref_column = st.columns([1,1,2])
                 with nav_prev:
                     st.button("Prev", on_click=st.session_state.session_obj.go_previous_image)
                 with nav_next:
                     st.button("Next", on_click=st.session_state.session_obj.go_next_image)
                 with image_ref_column:
-                    image_ref = st.session_state.session_obj.volume.current_image_ref
+                    image_ref = st.session_state.session_obj.current_transcript_obj.image_ref
                     st.write(f"#### {image_ref}")
                 if st.session_state.editing_view_option == "Full Text":
                     text_container = st.container(border=False)
@@ -507,10 +489,9 @@ def main():
         # end editor_container
         table_column, table_display_options = st.columns([5,1])
         with table_column:
-            table_type = st.session_state.session_obj.table_type
-            content_type = st.session_state.session_obj.table_content_option
-            if table_type == "page" and content_type == "content":
-                current_output_dict = st.session_state.session_obj.volume.current_output_dict
+            content_type = st.session_state.get("show_content_type", "content")
+            if content_type == "content" or content_type == "transcript":
+                current_output_dict = st.session_state.session_obj.current_output_dict
                 fieldnames = [k for k in current_output_dict.keys()]
                 validation_ratings = [st.session_state.session_obj.get_validation_rating_with_emoji(fieldname) for fieldname in fieldnames]
                 data = {"fieldname": [], "rating": validation_ratings}
@@ -544,7 +525,7 @@ def main():
                         disabled=True  # Make notes column non-editable
                     ),
                     "new notes": st.column_config.TextColumn(
-                        "new notes",
+                        "add notes",
                         width="medium"
                     )
                 }    
@@ -559,7 +540,7 @@ def main():
                 table_height = st.slider("table height", min_value=100, max_value=600, value=225, label_visibility="collapsed", key="table_height")
                 st.session_state.edited_elements = st.session_state["my_key"]["edited_rows"]
             else:
-                data = st.session_state.session_obj.get_data_for_table()
+                data = st.session_state.session_obj.get_data_for_table(st.session_state.session_obj.content_option)
                 df = pd.DataFrame(data)
                 edited_df = st.data_editor(
                     df, 
@@ -569,29 +550,24 @@ def main():
                 )    
         # end table_column
         with table_display_options:
-            selected_table_type = st.radio(
-                "Table Type:",
-                ["page", "volume"],
-                key="show_table_type",
-                on_change=update_table_type
-            )
-            content_options = st.session_state.session_obj.get_table_content_options()
+            content_options = st.session_state.session_obj.get_content_options()
             selected_content = st.radio(
                 "Table Option:", 
                 content_options, 
                 key="show_content_type",
-                on_change=update_table_content_option  # Add this callback
+                on_change=update_content_option  # Add this callback
             )
-            if st.session_state.session_obj.table_type == "page" and st.session_state.session_obj.table_content_option == "content":
+            if st.session_state.session_obj.content_option == "content":
                 st.button(st.session_state.show_notes_msg, on_click=enable_notes_display)
-            
+        
         bottom_buttons_container = st.container(border=False)
         with bottom_buttons_container:
             col_save_table_edits, col_save_text, col_download, col_save_to_json, col_chat_button = st.columns(5)
             with col_save_table_edits:
-                if st.session_state.session_obj.table_content_option == "content":
+                if st.session_state.session_obj.content_option == "content":
                     st.button(label="Save Table Changes", 
-                    on_click=save_table_edits,
+                    on_click=st.session_state.session_obj.save_table_edits, 
+                    args=(st.session_state.edited_elements, current_output_dict),
                     help="Save the table edits to the current transcript"
                     )
             with col_save_text:
@@ -600,18 +576,18 @@ def main():
                 help="Reflect edits to text output"
                 )
             with col_download:
-                session_filename = st.session_state.session_obj.get_volume_filename()
+                session_filename = st.session_state.session_obj.get_session_filename()
                 st.download_button(
                     label="Download Session as TXT",
                     data=st.session_state.session_obj.final_output,
-                    file_name=volume_filename,
+                    file_name=session_filename,
                     mime="text/plain",
                     help="Save the combined output file to your local machine"
                 )
             with col_save_to_json:
-                st.button(label="Commit and Save Volume", 
+                st.button(label="Save edits to JSON", 
                 on_click=st.session_state.session_obj.save_edits_to_json,
-                help="Finalizes edits and data and saves individual transcript JSONs and a volume JSON file"
+                help="Save the edits to individual transcript JSONs and a session JSON file"
                 )
             with col_chat_button:
                 msg = "Chat with LLM" if not st.session_state.show_chat_area else "Send Chat"
@@ -640,7 +616,7 @@ def main():
         # end bottom_buttons_container
     else:
         st.write("No transcription to display.")    
-    if st.session_state.fullscreen and st.session_state.session_obj.volume.current_transcript_obj:
+    if st.session_state.fullscreen and st.session_state.session_obj.current_transcript_obj:
         show_fullscreen_image()
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
 keys/creds.yaml
 /HerbScribe
 .env
+venv/
+temp_images/

@@ -30,26 +30,27 @@ class TranscriptComparer:
         return sum([val if use_graded_match else math.floor(val) for val in d.values()]) 
 
     def compare_all_versions(self):
-        new_version = self.transcript.versions[0]
-        old_versions = self.transcript.versions[1:]
-        d = {}
-        for old_version in old_versions:
-            old_version_name = old_version["new version name"]
-            d[f"compared to {old_version_name}"] = self.compare_versions(new_version, old_version)
-        return d    
+        print(f"compare_all_versions called")
+        new_version_name, *old_version_names = self.transcript.versions["version name"][-2::-1]
+        new_version_content, *old_version_contents = self.transcript.versions["content"][-2::-1]
+        new_version_gen_info, *old_version_gen_infos = self.transcript.versions["generation info"][-2::-1]
+        comparisons_dicts = []
+        for old_version_name, old_version_content, old_version_gen_info in zip(old_version_names, old_version_contents, old_version_gen_infos):
+            d = self.compare_versions(new_version_content, old_version_content, new_version_gen_info, old_version_gen_info)
+            comparisons_dicts.append({"version name": old_version_name} | d)
+        return comparisons_dicts    
                 
-    def compare_versions(self, versionA, versionB):
-        created_by_typeA, created_by_typeB = versionA["generation info"]["created by type"], versionB["generation info"]["created by type"]
+    def compare_versions(self, versionA_content, versionB_content, versionA_gen_info, versionB_gen_info):
+        created_by_typeA, created_by_typeB = versionA_gen_info["created by type"], versionB_gen_info["created by type"]
         alignment_type = [created_by_typeA, created_by_typeB]
         d = {}
-        contentA, contentB = versionA["content"], versionB["content"]
-        for fieldname in contentA:
-            valA = contentA[fieldname]["value"]
-            valB = contentB[fieldname]["value"]
+        for fieldname in versionA_content:
+            valA = versionA_content[fieldname]["value"]
+            valB = versionB_content[fieldname]["value"]
             is_a_match = self.is_match(valA, valB) or self.get_graded_match(valA, valB, is_a_match=False)
             d[fieldname] = is_a_match
         num_matches = self.tally(d)
-        alignment_rating = num_matches / len(contentA)
+        alignment_rating = num_matches / len(versionA_content)
         return {"alignment rating": alignment_rating, "number matches": num_matches, "alignment type": alignment_type} | d    
 
 if __name__ == "__main__":

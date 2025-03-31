@@ -26,15 +26,16 @@ class ClaudeImageProcessor(ImageProcessor):
         self.input_tokens += usage.input_tokens
         self.output_tokens += usage.output_tokens
 
-    def format_response(self, image_name, response_data, image_ref):
+    def get_content_from_response(self, response_data):
         text_block = response_data[0].text
-        lines = text_block.split("\n")
-        formatted_result = f"{image_name}\n"
-        formatted_result += f"image ref: {image_ref}\n\n"
-        formatted_result += "\n".join(lines)
-        return formatted_result   
+        return text_block 
 
-    def process_image(self, base64_image, image_ref, index, old_version_name):
+    def extract_json(self, response):
+        json_start = response.index("{")
+        json_end = response.rfind("}")
+        return json.loads(response[json_start:json_end + 1])    
+
+    def process_image(self, base64_image, image_ref, index):
         start_time = time.time()
         try:
             message = self.client.messages.create(
@@ -63,31 +64,23 @@ class ClaudeImageProcessor(ImageProcessor):
                     }
                 ],
             )
+            end_time = time.time()
+            elapsed_time = (end_time - start_time) / 60
+            response_data = self.extract_json(message)
+            self.save_raw_response(response_data, image_ref)
+            self.update_usage(message)
+            transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
             if not message.content or not message.content[0].text:
                 error_message = f"Error processing image {index + 1} image '{image_ref}': {response_data}"
-                return error_message, None 
-            output = self.format_response(f"Image {index + 1}", message.content, image_ref)
-            self.update_usage(message)
-            transcription_dict = extract_info_from_text(output)
-            transcript_obj = Transcript(image_ref, self.prompt_name, model=self.modelname)
-            end_time = time.time()
-            elapsed_time = end_time - start_time
-            transcript_processing_data = self.get_transcript_processing_data(elapsed_time)
-            try:
-                version_name = transcript_obj.create_version(created_by=self.modelname, content=transcription_dict, costs=transcript_processing_data, is_ai_generated=True, old_version_name=old_version_name, editing = {}, new_notes = {})
-            except Exception as e:
-                trace = traceback.format_exc()
-                error_message = (
-                    f"Error processing image {index + 1} '{image_ref}': {str(e)}\n{trace}"
-                )
-                print(f"ERROR: {error_message}")
-                return f"{error_message}\n{transcription_dict}", None
-            return transcript_obj, version_name
+                return error_message, transcript_processing_data 
+            content = self.get_content_from_response(message.content)
+            return content, transcript_processing_data
         except requests.exceptions.RequestException as e:
             error_message = (
                 f"Error processing image {index + 1} from image '{image_ref}': {str(e)}"
             )
             print(f"ERROR: {error_message}")
+            return error_message, None
 
     def get_image_content_dict(self, image):
         buffered = BytesIO()
