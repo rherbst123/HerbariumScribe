@@ -61,7 +61,7 @@ Run the installation wizard. In your Command Line Interface:
 
 Run the application Transcriber.py. In your Command Line Intterface, type:
 
-`streamlit run Transcriber.py`
+`streamlit run transcriber.py`
 
 Runtime of application is overviewed below.
 
