@@ -47,5 +47,5 @@ class ImageProcessor:
     def update_usage(self, response_data):
         if "usage" in response_data:
             usage = response_data["usage"]
-            self.input_tokens += int(usage.get("prompt_tokens", 0))
-            self.output_tokens += int(usage.get("completion_tokens", 0))                           
+            self.input_tokens = int(usage.get("prompt_tokens", 0))
+            self.output_tokens = int(usage.get("completion_tokens", 0))                           

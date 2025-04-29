@@ -24,17 +24,19 @@ HerbariumScribe provides a user interface to take label transcription through th
 
  3) Re-editing of transcripts from saved volumes, with fields which carry over unchanged from session to session marked with a cross-validation rating.
 
- 4) Multiple means of viewing and editing transcripts in order to more closely focus on individual fields or more quickly edit full transcripts. An editable output table enabled with notetaking is also provided beneath the transcript.
+ 4) Importing CSVs and converting them into volumes for viewing and editing. Images need to be in the `temp_images` folder.
 
- 5) Saving a user's edited transcripts, i.e., their session's work, to their local machine.
+ 5) Multiple means of viewing and editing transcripts in order to more closely focus on individual fields or more quickly edit full transcripts. An editable output table enabled with notetaking is also provided beneath the transcript.
+
+ 6) Saving a user's edited transcripts, i.e., their session's work, to their local machine.
 
  Additonally, the interface provides:
 
- 6) the option of displaying LLM token usage and costs, time spent creating and/or editing each individual version and the volume as a whole.
+ 7) the option of displaying LLM token usage and costs, time spent creating and/or editing each individual version and the volume as a whole.
 
- 7) the option of displaying the degree of alignment--field by field and overall--of the most recent version with all previous versions
+ 8) the option of displaying the degree of alignment--field by field and overall--of the most recent version with all previous versions
 
- 8) the chance to "chat" with an LLM to answer questions about an image or its transcription. Currently the chat is with Anthropic's claude-3.5-sonnet, so an Anthropic api key must be provided at some point.
+ 9) the chance to "chat" with an LLM to answer questions about an image or its transcription. Currently the chat is with Anthropic's claude-3.5-sonnet, so an Anthropic api key must be provided at some point.
 
  
 ## Quickstart
@@ -83,13 +85,36 @@ First, clone the repository. In the your command line interface, type:
 
  An installation wizard has been provided to install all necessary packages and to create the local variables which will make the runtime startup process faster.
 
- It is HIGHLY RECOMMENDED to run the installation wizard. Beyond installing requirements, the user will be prompted to enter api keys that will be stored on their local machine and not accidentally shared.
+ It is HIGHLY RECOMMENDED to run the installation wizard. Beyond installing requirements, directories will be created and the user will be prompted to enter api keys that will be stored on their local machine and not accidentally shared.
 
  To run the installation wizard, type into you Command Line Interface:
 
  `streamlit run setup.py`
 
  The installation wizard must run with streamlit. The installation wizard will open up in a tab in your browser.
+
+ Or you can run the CLI based script:
+
+ `python setup_cli.py`
+
+If you need to set things up manually, these are the steps you must take:
+
+1) Install streamlit, and upgrade it
+
+2) Install all packages in `requirement.txt`. If `pip install -r requirements.txt` doesn't work right away, try creating a virtual environment first, and then install those packages.
+
+3) Created `.env` file in the root directory, with:
+
+`OPENAI_API_KEY="your key"`
+`ANTHROPIC_API_KEY="your key"`
+
+An API_KEY can be left as an empty string if you don't plan on using those models from that provider
+
+4) Created these empty folders, if they don't already exist:
+
+`temp_images`, `llm_processing/raw_response_data`,
+
+`output/raw_llm_responses`, `output/transcripts`, `output/versions`, `output/volumes`
 
 ### Runtime
 

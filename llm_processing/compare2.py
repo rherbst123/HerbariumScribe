@@ -5,10 +5,6 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 
-import re
-import csv
-import json
-import time
 import math
 from llm_processing.edit_distance import WeightedLevenshtein
 
@@ -30,7 +26,7 @@ class TranscriptComparer:
         return sum([val if use_graded_match else math.floor(val) for val in d.values()]) 
 
     def compare_all_versions(self):
-        print(f"compare_all_versions called")
+        #print(f"compare_all_versions called")
         new_version_name, *old_version_names = self.transcript.versions["version name"][-2::-1]
         new_version_content, *old_version_contents = self.transcript.versions["content"][-2::-1]
         new_version_gen_info, *old_version_gen_infos = self.transcript.versions["generation info"][-2::-1]

@@ -2,25 +2,21 @@ import streamlit as st
 import os
 from datetime import datetime
 from PIL import Image
-from io import BytesIO, StringIO
+from io import BytesIO
 import requests
 import time
 import json
 import re
 import pandas as pd
-import csv
 from dotenv import load_dotenv
 from streamlit.components.v1 import html
-import threading
 
+from llm_processing.llm_manager4 import ProcessorManager
 from llm_processing.claude_interface3 import ClaudeImageProcessor
 from llm_processing.transcript6 import Transcript
 from llm_processing.utility import extract_info_from_text
-from llm_processing.session3 import Session
+from llm_processing.session2 import Session
 from llm_processing.volume import Volume
-import llm_processing.convert_csv_to_volume as convert_csv_to_volume
-import llm_processing.utility as utility
-import time
 
 # Constants
 ENV_FILE = ".env"
@@ -104,6 +100,7 @@ def chat_with_llm():
             try:
                 api_key = st.session_state.api_key_dict["claude-3.5-sonnet"].read().decode("utf-8").strip()
                 processor = ClaudeImageProcessorThread(api_key, None, None)
+                # use a selectbox to ask user if they want to include the url
                 if st.session_state.include_image and st.session_state.current_transcript_obj:
                     image = st.session_state.processed_images[st.session_state.current_image_index]
                     response, costs = processor.chat(new_message, image)
@@ -131,36 +128,11 @@ def display_messages(msg):
     if "success" in msg and msg["success"]:
         st.success(msg["success"])
     elif "warning" in msg and msg["warning"]:
-        st.warning(msg["warning"]) 
+        st.warning(msg["warning"])  
 
-def download_images_to_temp_folder(data, image_ref_name, image_dict):
-    for d in data:
-        url = d[image_ref_name]
-        image_name = utility.get_image_name_url(url)
-        if image_name in image_dict["not_found"]:
-            image = utility.get_image_from_url(url)
-            if image:
-                image_dict["found"].append(image_name)
-                image_dict["not_found"].remove(image_name)
-                image.save(f"temp_images/{image_name}")
-                print(f"downloaded {image_name}")
-    return image_dict            
-         
 def enable_notes_display():
     st.session_state.show_notes = not st.session_state.show_notes
-    st.session_state.show_notes_msg = "Hide Notes" if st.session_state.show_notes else "Show Notes" 
-
-def find_image_ref_name(data):
-    for fieldname, val in data[0].items():
-        if val.split(r".")[-1].lower() in ["jpg", "jpeg", "png"] or fieldname in ["imageName", "docName", "accessURI"]:
-            return fieldname 
-    print(f"no image_ref_name found")            
-
-def get_image_names_from_dicts(data, image_ref_name):
-    if "http" in data[0][image_ref_name]:
-        urls = [d[image_ref_name] for d in data]
-        return [utility.get_image_name_url(url) for url in urls]
-    return [d[image_ref_name] for d in data]      
+    st.session_state.show_notes_msg = "Hide Notes" if st.session_state.show_notes else "Show Notes"    
 
 def get_legal_json_filename(image_ref):
     ref = re.sub(r"[\/]", "#", image_ref)
@@ -169,79 +141,9 @@ def get_legal_json_filename(image_ref):
     filename = f"{TRANCRIPTION_FOLDER}/transcripts/{ref}-transcript.json" 
     return filename  
 
-def get_timestamp_sec():
-    return  time.strftime("%Y-%m-%d-%H%M-%S")
+def get_timestamp():
+    return  time.strftime("%Y-%m-%d-%H%M-%S")      
 
-def get_timestamp_min():
-    return  time.strftime("%Y-%m-%d-%H%M")     
-
-def handle_proceed_option():
-    proceed_option = st.session_state.get("proceed_option", "")
-    st.session_state.proceed_option = None
-    remaining_initial_batch_size = 3 if not st.session_state.session_obj.pages else max(0, 3 - len(st.session_state.session_obj.pages))
-    if proceed_option == "Pause":
-        st.session_state.status_msg = "Pausing..."
-        return 
-    if proceed_option == "Finish Remaining Jobs":
-        st.session_state.status_msg = "Skipping Failed Jobs and Finishing remaining jobs..."
-        try_failed_jobs = False
-        if remaining_initial_batch_size:
-            st.session_state.session_obj.resume_jobs(try_failed_jobs, remaining_initial_batch_size)
-            msg = st.session_state.session_obj.msg
-            display_messages(msg)
-            update_status_bar_msg()
-            process_2nd_batch()
-        else:
-            st.session_state.session_obj.background_processing = True
-            thread = threading.Thread(target=st.session_state.session_obj.resume_jobs, args=(try_failed_jobs,), daemon=True)
-            thread.start()
-            update_status_bar_msg()
-    elif proceed_option == "Retry Failed and Remaining Jobs":
-        st.session_state.status_msg = "Retrying Failed Jobs and Finishing remaining jobs..."
-        try_failed_jobs = True
-        if remaining_initial_batch_size:
-            st.session_state.session_obj.resume_jobs(try_failed_jobs, remaining_initial_batch_size)
-            msg = st.session_state.session_obj.msg
-            display_messages(msg)
-            update_status_bar_msg()
-            process_2nd_batch()
-        else:
-            st.session_state.session_obj.background_processing = True
-            thread = threading.Thread(target=st.session_state.session_obj.resume_jobs, args=(try_failed_jobs,), daemon=True)
-            thread.start()
-            msg = st.session_state.session_obj.msg
-            display_messages(msg)
-            update_status_bar_msg()
-    elif proceed_option == "Cancel all Jobs and Abort Editing":
-        st.session_state.pause_button_enabled = False
-        st.session_state.background_processing = False
-        st.session_state.status_msg = "Cancelling remaining jobs and aborting editing..."
-        time.sleep(3)
-        st.session_state.session_obj.reset_inputs()
-        reset_states()
-    elif proceed_option == "Cancel All Jobs":
-        st.session_state.pause_button_enabled = False
-        st.session_state.background_processing = False
-        st.session_state.status_msg = "Cancelling remaining jobs..."
-        time.sleep(3)
-        st.session_state.session_obj.reset_inputs()
-
-def locate_images_in_temp_folder(csv_file):
-    csv_content = StringIO(csv_file.getvalue().decode('utf-8'))
-    data = list(csv.DictReader(csv_content))
-    image_ref_name = find_image_ref_name(data)
-    image_names = get_image_names_from_dicts(data, image_ref_name)
-    temp_images = [f.split(r".")[0].lower() for f in os.listdir("temp_images")]
-    d = {"found": [], "not_found": [], "image_names": image_names, "temp_images": temp_images}
-    for image_name in image_names:
-        if image_name.split(r".")[0].lower() in temp_images:
-            d["found"].append(image_name)
-        else:
-            d["not_found"].append(image_name) 
-    if "http" in data[0][image_ref_name] and d["not_found"]:
-        d = download_images_to_temp_folder(data, image_ref_name, d)
-    return d, data, image_ref_name            
-        
 def new_chat():
     st.session_state.chat_history = ""
     st.session_state.chat_area = ""
@@ -254,41 +156,19 @@ def open_fullscreen():
 def process_images_callback():
     "volume_name_input"
     volume_name = st.session_state.get("volume_name_input", "volume_name")
-    initial_batch_size = 3
-    st.session_state.session_obj.process_initial_batch(volume_name, initial_batch_size)
+    st.session_state.session_obj.process_images(volume_name)
     msg = st.session_state.session_obj.msg
     display_messages(msg)
-    update_status_bar_msg()
-    if not st.session_state.pause_button_enabled and len(st.session_state.session_obj.input_dict["selected_images_info"]) > 3:
-        process_2nd_batch()   
-
-def process_2nd_batch():
-    try:
-        st.session_state.session_obj.background_processing = True
-        thread = threading.Thread(target=st.session_state.session_obj.processing_manager.start_background_processing, daemon=True)
-        thread.start()
-        update_status_bar_msg()
-    except Exception as e:
-        st.session_state.session_obj.msg["errors"].append(f"Error processing images: {str(e)}")
-    msg = st.session_state.session_obj.msg
-    display_messages(msg)
-    update_status_bar_msg()
-
-def prompt_check(prompt_filename, data):
-    prompt_text = utility.get_contents(f"prompts/{prompt_filename}")
-    prompt_fieldnames = utility.get_fieldnames_from_prompt(prompt_text)
-    missing = [fieldname for fieldname in prompt_fieldnames if fieldname not in data[0]]
-    return missing   
-    
+    st.session_state.pause_button_enabled = msg["pause_button_enabled"]
+    st.session_state.status_msg = "\n".join(msg["status"])
+    st.session_state.session_obj.reset_msg()
+ 
 def reset_status_bar_message():
     st.session_state.status_msg = ""
 
-def reset_session_obj():
-    st.session_state.session_obj = Session(st.session_state.session_obj.user_name)
-    st.rerun()
-
 def save_table_edits():
     edited_elements = st.session_state["my_key"]["edited_rows"]
+    print(f"{edited_elements = }")
     st.session_state.session_obj.save_table_edits(edited_elements)
     
 def show_fullscreen_image():
@@ -297,22 +177,20 @@ def show_fullscreen_image():
     st.image(image, caption=f"Full Screen of Image {current_image_idx + 1}", use_container_width=True)
     st.button("Close Full Screen", on_click=close_fullscreen)
 
-def update_fieldvalue():
-    fieldvalue = st.session_state.fieldvalue_key
-    st.session_state.session_obj.update_fieldvalue(fieldvalue) 
-
-def update_status_bar_msg():
-    msg = st.session_state.session_obj.msg
-    st.session_state.pause_button_enabled = msg["pause_button_enabled"]
-    st.session_state.status_msg = "\n".join(msg["status"][::-1]) if "status" in msg else ""      
-
 def update_table_content_option():
     st.session_state.session_obj.table_content_option = "content" if st.session_state.show_content_type=="transcript" else st.session_state.show_content_type
+    #st.rerun()
+
+def update_fieldvalue():
+    fieldvalue = st.session_state.fieldvalue_key
+    st.session_state.session_obj.update_fieldvalue(fieldvalue)
 
 def update_table_type():
     st.session_state.session_obj.table_type = st.session_state.show_table_type
+    #update_table_content_option()
     st.rerun()
             
+
 def update_text_output():
     current_output_as_text = st.session_state.text_output_key
     st.session_state.session_obj.update_text_output(current_output_as_text)         
@@ -345,6 +223,10 @@ def load_env_to_session():
 
 def main():
     st.set_page_config(page_title="Herbarium Parser (Callbacks, with Model & Prompt in Output)", layout="wide")
+    init_session_state()
+    if not st.session_state.env_loaded and load_env_to_session():
+        st.success("Existing configuration loaded from .env file")
+    
     st.markdown("""
         <style>
         /* Override dark mode */
@@ -402,10 +284,7 @@ def main():
         <meta name="color-scheme" content="only light">
     """, unsafe_allow_html=True)
     
-    st.write("If page display is too dark, go to your browser settings and select 'light mode'")
-    init_session_state()
-    if not st.session_state.env_loaded and not load_env_to_session():
-        st.warning("Configuration not loaded from .env file!! Run setup.py or consult README on how to set up .env file")
+
     set_up()
     user_name = st.text_input("username:", value="")
     if user_name == "":
@@ -413,8 +292,7 @@ def main():
         st.stop()
     if "session_obj" not in st.session_state or st.session_state.session_obj is None:
         st.session_state.session_obj = Session(user_name)
-    update_status_bar_msg()    
-    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images (a.k.a. Volume)", "Import CSV (converts to Volume)"])
+    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images"])
     if processing_type == "Process New Images":
         # Input Settings
         input_settings_container = st.container(border=True)
@@ -455,8 +333,8 @@ def main():
                 # Input type selection
                 input_type = st.radio(
                     "Select Image Input Type:",
-                    ["URL List", "Local Images"],
-                    index=None,
+                    ["", "URL List", "Local Images"],
+                    index=0,
                     label_visibility="visible"
                 )
                 if input_type == "URL List":
@@ -495,13 +373,12 @@ def main():
                     
                     # Initialize the volume name in session state if it doesn't exist
                     if 'volume_name' not in st.session_state:
-                        modelname = "-".join(st.session_state.session_obj.input_dict["selected_llms"])
-                        st.session_state.volume_name = f"{modelname}-{get_timestamp_min()}"
+                        st.session_state.volume_name = f"{st.session_state.session_obj.user_name}-{get_timestamp()}"
                     
-                    st.write("Accept or Change the name for this run:")
+                    st.write("Accept or Change this name for this run:")
                     # Use session state for the text input
                     st.session_state.volume_name = st.text_input(
-                        "click Ctrl+Enter to accept changes", 
+                        "Enter a name for the volume and click Ctrl+Enter to accept", 
                         value=st.session_state.volume_name,
                         key="volume_name_input"
                     )
@@ -511,59 +388,33 @@ def main():
                         on_click=process_images_callback
                     )
                     
-                status_bar_col, pause_button_col = st.columns([4, 2])
-                with status_bar_col:
-                    if st.session_state.session_obj.background_processing and st.button("Update Background Processing Status"):
-                        update_status_bar_msg()
-                        total_images = 3 - len(st.session_state.session_obj.input_dict["selected_images_info"])
-                        processed_images = len(st.session_state.session_obj.pages)
-                        remaining = total_images - processed_images
-                        if remaining > 0:
-                            st.info(f"Background processing: {processed_images}/{total_images} images processed")
-                        else:
-                            st.success("Initial batch of images processed!")
-                            st.session_state.session_obj.background_processing = False
-                    status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
+                    status_bar_col, pause_button_col = st.columns([4, 2])
+                    with status_bar_col:        
+                        status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
+            
                 if st.session_state.pause_button_enabled:
                     with pause_button_col:
-                        proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"], index=None, key="proceed_option", on_change=handle_proceed_option)           
-    elif processing_type == "Import CSV (converts to Volume)":
-        csv_file = st.file_uploader("Upload CSV File", type=["csv"])
-        if csv_file:
-            temp_images_dict, data, image_ref_name = locate_images_in_temp_folder(csv_file)
-            num_images_missing = len(temp_images_dict["not_found"])
-            if num_images_missing > 0:
-                st.warning(f"{num_images_missing} images not found in temp_images folder")
-                st.warning(f"Missing images: {', '.join(temp_images_dict['not_found'])}")
-                st.warning("Please copy the images to the 'temp_images' folder and try again")
-                if not st.button("Continue"):
-                    st.stop()     
-            prompt_files = [f for f in os.listdir(PROMPT_FOLDER) if f.endswith(".txt")]
-            prompt_filename = st.radio("Select the Prompt to Align Transcripts With:", prompt_files[::-1])
-            missing_fieldnames = prompt_check(prompt_filename, data)
-            if missing_fieldnames:
-                st.warning(f"The fieldnames in {prompt_filename} are different than the fieldnames in {csv_file.name}!!!")
-                st.warning(f"These fieldnames from the prompt could not be found in the CSV: {','.join(missing_fieldnames)}")
-                if not st.button("Continue"):
-                    st.stop()
-            modelname, created_by_name = "", ""
-            created_by_option = st.radio("Who was transcripts created by", ["", "AI", "User"])
-            if not created_by_option:
-                st.warning("Please select an option")
-                st.stop()
-            if created_by_option == "AI":
-                modelname = st.text_input("Enter the name of model that created this data: ")
-                is_ai_generated = True
-            else:
-                created_by_name = st.text_input("Enter the name of the user that created this data: ")
-                is_ai_generated = False
-            temp_name = csv_file.name.split(r".")[0]
-            st.write("Accept or Edit the below name for this Volume")
-            volume_name = st.text_input("Click Ctrl+Enter to Accept Edits: ", temp_name)
-            if st.button(f"Create {volume_name}"):
-                convert_csv_to_volume.convert(data=data, prompt_folder="prompts/", prompt_filename=prompt_filename, image_ref_name=image_ref_name, volume_name=volume_name, modelname=modelname or created_by_name, is_ai_generated=is_ai_generated)
-                st.session_state.session_obj.re_edit_volume(selected_volume_file=f"{volume_name}-volume.json")
-
+                        proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"])
+                        if proceed_option == "Finish Remaining Jobs":
+                            st.session_state.status_msg = "Skipping Failed Jobs and Finishing remaining jobs..."
+                            st.session_state.session_obj.resume_jobs(try_failed_jobs=False)
+                        elif proceed_option == "Retry Failed and Remaining Jobs":
+                            st.session_state.status_msg = "Retrying Failed Jobs and Finishing remaining jobs..."
+                            st.session_state.session_obj.resume_jobs(try_failed_jobs=True)
+                        elif proceed_option == "Cancel all Jobs and Abort Editing":
+                            st.session_state.pause_button_enabled = False
+                            st.session_state.status_msg = "Cancelling remaining jobs and aborting editing..."
+                            st.wait(3)
+                            st.session_state.session_obj.reset_inputs()
+                            reset_states()
+                        elif proceed_option == "Cancel All Jobs":
+                            st.session_state.pause_button_enabled = False
+                            st.session_state.status_msg = "Cancelling remaining jobs..."
+                            st.wait(3)
+                            st.session_state.session_obj.reset_inputs()
+                elif st.session_state.session_obj.volume and st.session_state.session_obj.volume.pages:
+                    st.session_state.session_obj.volume.commit_volume()              
+        ##############################                         
     else:
         if not st.session_state.reedit_mode:
             st.session_state.reedit_mode = True
@@ -590,35 +441,41 @@ def main():
                 if st.button("Cancel"):
                     st.session_state.reedit_mode = False
                     st.rerun()
+        
             # end load_saved_edits_container
     # ---------------
     # Output Display
     #---------------
     if st.session_state.session_obj.pages:
-        if st.session_state.session_obj.background_processing:
-            update_status_bar_msg()
-            total_images = 3 - len(st.session_state.session_obj.input_dict["selected_images_info"])
-            processed_images = len(st.session_state.session_obj.pages)
-            remaining = total_images - processed_images
-            if remaining > 0:
-                st.info(f"Background processing: {processed_images}/{total_images} images processed")
-            else:
-                st.success("All images processed!")
-                st.session_state.session_obj.background_processing = False
         st.session_state.session_obj.volume.set_current_page()
         editor_container = st.container(border=False) 
         with editor_container:
             current_image_idx = st.session_state.session_obj.volume.current_page_idx
             col_image, col_editor = st.columns([4,3])
+            #with col_image:
+            #    image = st.session_state.session_obj.volume.current_image
+            #    st.image(image, caption=None, use_container_width=True)
             with col_image:
                 image = st.session_state.session_obj.volume.current_image
+                # Get original image dimensions
                 orig_width, orig_height = image.size
+                print(f"{orig_width = }, {orig_height = }, {current_image_idx = }")
+                
+                # Calculate displayed height based on column width and aspect ratio
+                # You may need to adjust the column_width estimation
                 column_width = 600  # Estimate of your column width in pixels
                 display_height = int((column_width / orig_width) * orig_height)
+                print(f"{column_width/orig_width = }")
+                print(f"{display_height = }")
+                # Calculate blank space height
                 target_position = 900  # Adjust this value
                 blank_space_height = max(0, target_position - display_height)
                 blank_space_height = blank_space_height + 50 if blank_space_height != 0 else 0
+                print(f"{blank_space_height = }")
+                
+                # Add the blank space container with calculated height
                 blank_space = st.container(height=blank_space_height, border=False)
+                
                 st.image(image, caption=None, use_container_width=True)
             with col_editor:            
                 col_text, col_fullscreen_button = st.columns([2,1])
@@ -767,7 +624,7 @@ def main():
             with col_download:
                 volume_filename = st.session_state.session_obj.get_volume_filename()
                 st.download_button(
-                    label="Download Volume as TXT",
+                    label="Download Session as TXT",
                     data=st.session_state.session_obj.final_output,
                     file_name=volume_filename,
                     mime="text/plain",

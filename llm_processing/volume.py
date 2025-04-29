@@ -1,6 +1,6 @@
 from llm_processing.transcript6 import Transcript
 import json
-import json
+import csv
 
 class Volume:
     def __init__(self, msg, name):
@@ -18,12 +18,12 @@ class Volume:
 
     def commit_volume(self):
         self.compile_volume_data()
-        self.save_volume_to_json()    
+        self.save_volume_to_json()
+        self.save_volume_to_csv()    
 
     def compile_volume_data(self):
         self.data["costs"] = self.get_volume_costs()
         
-
     def dict_to_text(self, d):
         return "\n".join([f"{k}: {v['value']}" for k, v in d.items()]) + 8*"\n" 
 
@@ -42,22 +42,48 @@ class Volume:
     def get_current_fieldvalue(self):
         return self.current_fieldvalue 
 
+    def get_most_recent_costs_dict(self, transcript_obj):
+        for costs_dict in transcript_obj.versions["costs"][::-1]:
+            if "overall input tokens" in costs_dict.keys():
+                return costs_dict
+        print("no costs found")
+
+    def get_values_from_content(self, content_dict):
+        return {k: v["value"] for k, v in content_dict.items()}                
+
     def get_volume_costs(self):
         costs_list = []
-        overall_costs_dict = self.get_blank_overall_costs_dict()
-        cost_names = list(overall_costs_dict.keys())
-        overall_costs_dict["transcript"] = self.name
+        blank_overall_costs_dict = self.get_blank_overall_costs_dict()
+        cost_names = list(blank_overall_costs_dict.keys())
+        overall_costs_dict = {"transcript": f"{self.name}-volume"} | blank_overall_costs_dict
         costs_list.append(overall_costs_dict)
         for page in self.pages:
             transcript_obj = page["transcript_obj"]
-            transcript_costs_dict = transcript_obj.versions["costs"][-2]
+            transcript_costs_dict = self.get_most_recent_costs_dict(transcript_obj)
             transcript_name = transcript_obj.image_ref
             d = {"transcript": transcript_name}
             for cost_name in cost_names:
                 d[cost_name] = transcript_costs_dict[cost_name] 
                 overall_costs_dict[cost_name] += transcript_costs_dict[cost_name] 
             costs_list.append(d)
-        return costs_list          
+        return costs_list
+
+    def save_to_csv(self, csv_file_path, data):
+        fields = list(data[0].keys())
+        with open(csv_file_path, 'w', encoding='utf-8', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(data)    
+
+    def save_volume_to_csv(self):
+        output_dicts = []
+        for page in self.pages:
+            transcript_obj = page["transcript_obj"]
+            image_ref = page["image_ref"]
+            d = {"image name": image_ref} | self.get_values_from_content(transcript_obj.versions["content"][-1])
+            output_dicts.append(d)
+        csv_file_path = f"{self.volumes_folder}/{self.name}-volume.csv"
+        self.save_to_csv(csv_file_path, output_dicts)         
 
     def save_volume_to_json(self):
         output_dict = {}
