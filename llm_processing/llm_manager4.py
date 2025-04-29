@@ -12,7 +12,7 @@ from llm_processing.transcript6 import Transcript
 import llm_processing.utility as utility
 import json
 
-class ProcessorManager:
+class LLMManager:
     def __init__(self, msg, api_key_dict, selected_llms, selected_prompt, prompt_text):
         self.msg = msg
         self.api_key_dict = api_key_dict
@@ -66,8 +66,9 @@ class ProcessorManager:
         return version_name
     
     def process_one_image(self, image_ref_idx, image_info):
-        base64_image, image_ref, image = image_info
-        transcript_obj = Transcript(image_ref, self.selected_prompt)
+        base64_image, image_filename, image = image_info
+        transcript_obj = Transcript(image_filename, self.selected_prompt)
+        image_ref = transcript_obj.image_ref
         transcript_obj.initialize_versions()
         version_name = "base"
         for proc_idx, processor in enumerate(self.processors):

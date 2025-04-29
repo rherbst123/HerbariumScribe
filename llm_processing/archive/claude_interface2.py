@@ -17,6 +17,8 @@ class ClaudeImageProcessorThread:
         self.client = anthropic.Anthropic(api_key=self.api_key)
         self.model = "claude-3-5-sonnet-20240620"
         self.modelname = "claude-3.5-sonnet"
+        #self.model = "claude-3-7-sonnet-20250219"
+        #self.modelname = "claude-3.7-sonnet"
         self.client = anthropic.Anthropic(api_key=api_key)
         self.input_tokens = 0
         self.output_tokens = 0

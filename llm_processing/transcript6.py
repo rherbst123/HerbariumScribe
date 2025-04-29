@@ -16,14 +16,18 @@ import math
 import copy
 from llm_processing.compare2 import TranscriptComparer
 from llm_processing.utility import get_fieldnames_from_prompt
+from llm_processing.utility import get_image_from_url
 
 
 class Transcript:
     def __init__(self, image_filename: str, prompt_name: str):
-        self.image_ref, self.image_source = self.get_image_ref(image_filename)
         self.transcription_folder = "output"
         self.ensure_directory_exists(self.transcription_folder)
+        self.images_folder = "temp_images"
+        self.ensure_directory_exists(self.images_folder)
+        self.image_ref = self.get_image_ref(image_filename)
         self.versions =  self.load_versions()
+        self.image_source = self.ensure_image_saved(image_filename)
         self.time_started = self.get_timestamp()
         self.prompt_name = prompt_name or self.get_prompt_name_from_base()
         prompt_text = self.get_contents_from_txt("prompts/" + self.prompt_name)
@@ -38,6 +42,17 @@ class Transcript:
         self.finalize_version(new_notes)
         self.save_to_json(self.versions)
 
+    def create_transcription_from_ai(self, content_dict_without_notes, modelname, costs, old_version_name="base", is_ai_generated=True):
+        version_name = self.get_version_name(modelname)
+        self.intialize_new_version(version_name)
+        content_dict = self.fill_out_content_dict(content_dict_without_notes)
+        self.versions["content"][-1] = content_dict
+        generation_info_dict = self.fill_out_generation_info_dict(new_version_name=version_name, old_version_name=old_version_name, created_by=modelname, is_ai_generated=is_ai_generated)
+        self.versions["generation info"][-1] = generation_info_dict
+        self.versions["costs"][-1] = costs
+        self.commit_version()
+        return version_name
+
     def create_new_version_for_user(self, created_by):
         if self.is_same_user(created_by):
             return self.versions["generation info"][-1]["version name"]
@@ -49,14 +64,28 @@ class Transcript:
         self.versions["generation info"][-1] = self.fill_out_generation_info_dict(new_version_name, old_version_name, created_by, is_ai_generated=False)
         return new_version_name
     
-
     def ensure_directory_exists(self, directory):
         if not os.path.exists(directory):
             os.makedirs(directory)
 
+    def ensure_image_saved(self, image_filename):
+        image_is_saved = self.is_in_images_folder(self.image_ref)
+        image_source = image_filename if not self.versions else self.versions["generation info"][0]["image source"]
+        if not image_is_saved and "http" in image_source:
+            print(f"downloading image: {image_source = }")
+            image = get_image_from_url(image_source)
+            image.save(f"{self.images_folder}/{self.image_ref}")
+        return image_source            
+
+    def file_exists(self, filename):
+        return os.path.exists(filename)         
+
     def fill_out_generation_info_dict(self, new_version_name, old_version_name, created_by, is_ai_generated):
         time_created = self.get_timestamp()
-        return self.get_generation_info_dict(created_by, new_version_name, old_version_name, time_created, is_ai_generated)         
+        return self.get_generation_info_dict(created_by, new_version_name, old_version_name, time_created, is_ai_generated)
+
+    def fill_out_content_dict(self, content_dict_without_notes):
+        return {fieldname: {"value": value, "notes": "", "new notes": ""} for fieldname, value in content_dict_without_notes.items()}                  
 
     def finalize_version(self, new_notes):
         self.tally_overall_costs()
@@ -94,7 +123,7 @@ class Transcript:
 
     def get_comparisons_dicts(self):
         old_version_name = self.versions["generation info"][-1]["old version name"]
-        if old_version_name == "base":
+        if old_version_name == "base" or len(self.versions["generation info"]) < 2:
             return {}
         comparer = TranscriptComparer(self)  
         return comparer.compare_all_versions()
@@ -122,18 +151,11 @@ class Transcript:
         return {"version name": new_version_name} | d
 
     def get_image_ref(self, image_filename):
-        try:        
-            mtch = re.search(r"(.+[/\\])?(.+(jpg)|(jpeg)|(png))", image_filename)
-            image_source = mtch.group(1) or "local: " + mtch.group(0)
-            image_name = mtch.group(2)
-        except:
-            image_name = image_filename
-            image_source = "undefined"
-            print(f"ERROR: current regex does not capture image_ref: {image_filename}")
-        return image_name, image_source   
-
-    def get_legal_json_filename(self):
-        ref = re.sub(r"\.(jpg)|(jpeg)|(png)", "", self.image_ref, flags=re.IGNORECASE)
+        image_name = image_filename.split("/")[-1]
+        return image_name
+        
+    def get_legal_json_filename(self, image_name):
+        ref = re.sub(r"\.(jpg)|(jpeg)|(png)", "", image_name, flags=re.IGNORECASE)
         directory = f"{self.transcription_folder}/versions"
         self.ensure_directory_exists(directory)
         filename = f"{directory}/{ref}-versions.json" 
@@ -147,7 +169,7 @@ class Transcript:
         return self.versions["generation info"][0]["prompt name"]
 
     def get_timestamp(self):
-        return time.strftime("%Y-%m-%d-%H%M-%S")
+        return time.strftime("%Y-%m-%d-%H%M")
 
     def get_version_name(self, created_by):
         return f"{created_by}-{self.time_started}"                 
@@ -174,23 +196,24 @@ class Transcript:
         self.versions["costs"].append({"version name": version_name} | self.get_blank_costs_dict())
         self.versions["notes"].append({"version name": version_name} | self.get_blank_notes_dict())
         self.versions["editing"].append({"version name": version_name} | self.get_blank_editing_dict())
-        self.versions["generation info"].append({"version name": version_name} | self.get_blank_generation_info_dict())     
+        self.versions["generation info"].append({"version name": version_name} | self.get_blank_generation_info_dict()) 
+
+    def is_in_images_folder(self, image_ref):
+        return os.path.exists(f"{self.images_folder}/{image_ref}")        
 
     def is_same_user(self, created_by):
         return self.versions["generation info"] and self.versions["generation info"][-1]["created by"] == created_by
 
     def load_versions(self):
-        filename = self.get_legal_json_filename()
-        print(f"Loading {filename}")
+        filename = self.get_legal_json_filename(self.image_ref)
         try:
             with open(filename, "r", encoding="utf-8") as f:
                 return json.load(f)
         except FileNotFoundError:
-            print(f"ERROR!!! No filename: {filename}")
             return {} 
 
     def save_to_json(self, content):
-        filename = self.get_legal_json_filename()
+        filename = self.get_legal_json_filename(self.image_ref)
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(content, f, ensure_ascii=False, indent=4)           
 

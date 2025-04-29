@@ -44,6 +44,14 @@ def save_to_env(contents):
     except Exception as e:
         raise Exception(f"Failed to save configuration: {str(e)}")
 
+def ensure_directory_exists(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)   
+
+def create_directories(directories):
+    for directory in directories:
+        ensure_directory_exists(directory)          
+
 
 def main():
     st.title("HerbariumScribe Setup")
@@ -53,7 +61,9 @@ def main():
         st.session_state.step = 1
     if 'config' not in st.session_state:
         st.session_state.config = {}
-
+    directories = ["temp_images", "llm_processing/raw_reponse_data", "output", "output/raw_llm_responses", "output/transcripts", "output/versions", "output/volumes"]
+    create_directories(directories)
+    st.success("Directories created successfully!")
     # Display system information
     system = platform.system()
     st.write(f"Detected Operating System: {system}")

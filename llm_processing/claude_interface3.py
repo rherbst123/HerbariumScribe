@@ -13,18 +13,19 @@ from llm_processing.llm_interface import ImageProcessor
 
 class ClaudeImageProcessor(ImageProcessor):
     def __init__(self, api_key, prompt_name, prompt_text, model="claude-3-5-sonnet-20240620", modelname="claude-3.5-sonnet"):
+    #def __init__(self, api_key, prompt_name, prompt_text, model="claude-3-7-sonnet-20250219", modelname="claude-3.7-sonnet"):    
         super().__init__(api_key, prompt_name, prompt_text, model, modelname)
         self.client = anthropic.Anthropic(api_key=api_key)
 
     def set_token_costs_per_mil(self):
-        if "3-5-sonnet" in self.model:
+        if "3-5-sonnet" in self.model or "3-7-sonnet" in self.model:
             self.input_cost_per_mil = 3.00
             self.output_cost_per_mil = 15.00
 
     def update_usage(self, message):
         usage = message.usage
-        self.input_tokens += usage.input_tokens
-        self.output_tokens += usage.output_tokens
+        self.input_tokens = usage.input_tokens
+        self.output_tokens = usage.output_tokens
 
     def get_content_from_response(self, response_data):
         text_block = response_data[0].text
