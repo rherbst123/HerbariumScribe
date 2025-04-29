@@ -188,8 +188,9 @@ class Session:
         
     def recreate_transcript_obj(self, transcript_dict):
         image_name = transcript_dict["generation info"][-1]["image ref"]
+        image_source = transcript_dict["generation info"][-1]["image source"]
         prompt_name = transcript_dict["generation info"][-1]["prompt name"]
-        transcript_obj = Transcript(image_name, prompt_name)
+        transcript_obj = Transcript(image_source, prompt_name)
         transcript_obj.versions = transcript_dict
         version_name = transcript_obj.create_new_version_for_user(self.user_name)
         image = self.get_image_from_temp_folder(image_name)
