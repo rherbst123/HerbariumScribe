@@ -21,6 +21,7 @@ from llm_processing.volume import Volume
 import llm_processing.convert_csv_to_volume as convert_csv_to_volume
 import llm_processing.utility as utility
 import time
+import math
 
 # Constants
 ENV_FILE = ".env"
@@ -67,7 +68,10 @@ def set_up():
     if "fullscreen" not in st.session_state:
         st.session_state.fullscreen = False
     if "table_type" not in st.session_state:
-        st.session_state.table_type = "page"    
+        st.session_state.table_type = "page"
+    if "auto_rotate" not in st.session_state:
+        st.session_state.auto_rotate = False
+            
 
 def reset_states():
     st.session_state.editor_enabled = False
@@ -290,7 +294,72 @@ def reset_session_obj():
 def save_table_edits():
     edited_elements = st.session_state["my_key"]["edited_rows"]
     st.session_state.session_obj.save_table_edits(edited_elements)
+
+def rotate_image(image, angle):
+    """
+    Rotates an image by the specified angle while preserving dimensions
+    Args:
+        image: PIL Image object
+        angle: Rotation angle in degrees (positive = clockwise, negative = counterclockwise)
+    Returns: Rotated PIL Image
+    """
+    # Get image dimensions
+    width, height = image.size
     
+    # Create rotation matrix
+    angle_rad = math.radians(angle)
+    cos_theta = abs(math.cos(angle_rad))
+    sin_theta = abs(math.sin(angle_rad))
+    
+    # Calculate new dimensions that would avoid cropping
+    new_width = int((width * cos_theta) + (height * sin_theta))
+    new_height = int((width * sin_theta) + (height * cos_theta))
+    
+    # Create a new image with calculated dimensions (white background)
+    rotated = Image.new('RGB', (new_width, new_height), (255, 255, 255))
+    
+    # Paste the rotated image in the center
+    # Calculate position to paste
+    paste_x = (new_width - width) // 2
+    paste_y = (new_height - height) // 2
+    rotated.paste(image, (paste_x, paste_y))
+    
+    # Perform the rotation
+    rotated = rotated.rotate(angle, expand=True)
+    
+    # Crop back to original size if needed
+    if rotated.size != (width, height):
+        left = (rotated.width - width) // 2
+        top = (rotated.height - height) // 2
+        right = left + width
+        bottom = top + height
+        rotated = rotated.crop((left, top, right, bottom))
+    
+    return rotated
+
+def should_rotate_image(image):
+    """
+    Determines if an image should be rotated based on its dimensions and aspect ratio
+    Returns: True if image should be rotated, False otherwise
+    """
+    width, height = image.size
+    aspect_ratio = width / height
+    
+    # Only rotate if image is wider than tall and aspect ratio suggests it's a rotated portrait
+    # You may need to adjust this threshold based on your specific images
+    return width > height and aspect_ratio > 1.3
+
+def display_image_with_rotation(image):
+    """
+    Displays the image with automatic rotation if enabled and needed
+    Args:
+        image: PIL Image object
+    Returns: Rotated image if auto-rotation is enabled and needed, original image otherwise
+    """
+    if st.session_state.auto_rotate and should_rotate_image(image):
+        return rotate_image(image, 90)
+    return image
+
 def show_fullscreen_image():
     st.write("## Full-Screen Image Viewer")
     image = st.session_state.session_obj.volume.current_image
@@ -612,21 +681,31 @@ def main():
             col_image, col_editor = st.columns([4,3])
             with col_image:
                 image = st.session_state.session_obj.volume.current_image
-                orig_width, orig_height = image.size
+                # Add rotation check and processing
+                processed_image = display_image_with_rotation(image)
+                orig_width, orig_height = processed_image.size
                 column_width = 600  # Estimate of your column width in pixels
                 display_height = int((column_width / orig_width) * orig_height)
                 target_position = 900  # Adjust this value
                 blank_space_height = max(0, target_position - display_height)
                 blank_space_height = blank_space_height + 50 if blank_space_height != 0 else 0
                 blank_space = st.container(height=blank_space_height, border=False)
-                st.image(image, caption=None, use_container_width=True)
+                st.image(processed_image, caption=None, use_container_width=True)
             with col_editor:            
                 col_text, col_fullscreen_button = st.columns([2,1])
                 st.write(f"### Image {current_image_idx+1}")
-                st.button("Open Full Screen", on_click=open_fullscreen)
+                
+                # Add rotation controls in a row
+                rotation_col1, rotation_col2 = st.columns([1,2])
+                with rotation_col1:
+                    st.button("Open Full Screen", on_click=open_fullscreen)
+                with rotation_col2:
+                    st.toggle("Auto-rotate wide images", key="auto_rotate", help="Automatically rotate images that are wider than tall")
+                
                 blank_space_height = 170 if st.session_state.get("editing_option", "Full Text")=="Full Text" else 310    
                 blank_space = st.container(border=False, height=blank_space_height)
-                st.write("### Editor")
+                # ... rest of your editor column code ...
+                
                 st.write("https://ipa.typeit.org/full/")
                 st.write("https://translate.google.com/") 
                 st.session_state.editing_view_option = st.radio("Select Editor View:",  ["Full Text", "Fieldname"], key="editing_option", index=0)
