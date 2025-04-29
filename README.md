@@ -24,7 +24,7 @@ HerbariumScribe provides a user interface to take label transcription through th
 
  3) Re-editing of transcripts from saved volumes, with fields which carry over unchanged from session to session marked with a cross-validation rating.
 
- 4) Importing CSVs and converting them into volumes for viewing and editing.
+ 4) Importing CSVs and converting them into volumes for viewing and editing. Images need to be in the `temp_images` folder.
 
  5) Multiple means of viewing and editing transcripts in order to more closely focus on individual fields or more quickly edit full transcripts. An editable output table enabled with notetaking is also provided beneath the transcript.
 
