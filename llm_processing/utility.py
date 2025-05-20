@@ -5,6 +5,15 @@ from io import BytesIO
 import base64
 import csv
 
+def get_blank_transcript(prompt_text):
+    fieldnames = get_fieldnames_from_prompt_text(prompt_text)
+    return {fieldname: "" for fieldname in fieldnames}
+
+def get_fieldnames_from_prompt_text(prompt_text):
+    prompt_text = "\n".join(striplines(prompt_text))
+    fieldnames = re.findall(r"(^\w+):", prompt_text, flags=re.MULTILINE)
+    return fieldnames 
+
 def striplines(text):
     text = re.sub("[🥺👍]", "", text)
     return [s.strip() for s in text.splitlines()]

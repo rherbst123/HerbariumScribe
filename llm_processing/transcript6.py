@@ -69,7 +69,9 @@ class Transcript:
             os.makedirs(directory)
 
     def ensure_image_saved(self, image_filename):
+        print(f"{image_filename = }")
         image_is_saved = self.is_in_images_folder(self.image_ref)
+        print(f"{image_is_saved = }")
         image_source = image_filename if not self.versions else self.versions["generation info"][0]["image source"]
         if not image_is_saved and "http" in image_source:
             print(f"downloading image: {image_source = }")

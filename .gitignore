@@ -1,10 +1,50 @@
+# Credentials and API keys
 keys/creds.yaml
-/HerbScribe
 .env
+*.key
+
+# Virtual environments
 venv/
+env/
+.venv/
+.python-version
+
+# Temporary and output files
 temp_images/
-output/raw_llm_responses/
-output/transcripts/
-output/versions/
+output/
+test_results/
+llm_processing/raw_response_data
+logs/
+
+# Local environment files
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+
+# Python cache files
 __pycache__/
 */__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# AWS specific
+.aws/
+model_info/

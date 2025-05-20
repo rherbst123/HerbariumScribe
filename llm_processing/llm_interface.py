@@ -1,6 +1,7 @@
 import time
 import json
 import os
+import re
 
 class ImageProcessor:
 
@@ -16,6 +17,7 @@ class ImageProcessor:
         self.output_tokens = 0
         self.set_token_costs_per_mil()
         self.num_processed = 0
+        print(f"Initialized ImageProcessor with model: {self.model}")
 
     def ensure_directory_exists(self, directory):
         if not os.path.exists(directory):
@@ -38,7 +40,8 @@ class ImageProcessor:
                 } | self.get_token_costs()
 
     def save_raw_response(self, response_data, image_name):
-        directory = f"{self.raw_response_folder}/{self.model}"
+        model_name_safe = re.sub(r'[-\.: ]', '_', self.model)
+        directory = f"{self.raw_response_folder}/{model_name_safe}"
         self.ensure_directory_exists(directory)
         filename = f"{directory}/{image_name}-{self.get_timestamp()}-raw.json"
         with open(filename, 'w', encoding='utf-8') as f:
