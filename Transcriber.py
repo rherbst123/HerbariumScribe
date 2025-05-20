@@ -91,6 +91,13 @@ def reset_states():
 # Callback and Support Functions
 # ----------------
 
+def add_validator_model():
+    selected_llm2 = st.session_state.validator
+    st.session_state.selected_llms.append(selected_llm2)
+    st.session_state.session_obj.input_dict["selected_llms"].append(selected_llm2)
+    print(f"{st.session_state.selected_llms = }")
+    st.write(f"selected models: {', '.join(st.session_state.selected_llms)}")     
+
 def chat_with_llm():
     if not st.session_state.show_chat_area:
         st.session_state.chat_area = ""
@@ -200,6 +207,12 @@ def handle_proceed_option():
             thread = threading.Thread(target=st.session_state.session_obj.resume_jobs, args=(try_failed_jobs,), daemon=True)
             thread.start()
             update_status_bar_msg()
+    elif proceed_option == "Substitute Blank Transcript and Finish Remaining Jobs":
+        blank_transcript = utility.get_blank_transcript(st.session_state.selected_prompt_text)
+        for failed_job in st.session_state.session_obj.jobs_dict["failed"]:
+            idx, image_to_process = failed_job
+            # d = {"image": image, "transcript_obj": transcript_obj, "version_name": version_name, "image_ref": image_ref}
+       
     elif proceed_option == "Retry Failed and Remaining Jobs":
         st.session_state.status_msg = "Retrying Failed Jobs and Finishing remaining jobs..."
         try_failed_jobs = True
@@ -489,29 +502,49 @@ def main():
         input_settings_container = st.container(border=True)
         with input_settings_container:
             st.write("## Input Settings")
-            if not os.path.isdir(PROMPT_FOLDER):
-                st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
-                prompt_files = []
-            else:
-                prompt_files = [f for f in os.listdir(PROMPT_FOLDER) if f.endswith(".txt")]
-                prompt_files.sort()
-            if prompt_files:
-                selected_prompt_file = st.selectbox("Select a Prompt:", prompt_files)
-                with open(os.path.join(PROMPT_FOLDER, selected_prompt_file), "r", encoding="utf-8") as pf:
-                    st.session_state.session_obj.input_dict["prompt_text"] = pf.read().strip()
-                    st.session_state.session_obj.input_dict["selected_prompt_filename"] = selected_prompt_file
-            else:
-                st.warning("No .txt prompt files found in the prompt folder.")
-                selected_prompt_file = ""
-            if st.session_state.session_obj.input_dict["prompt_text"]:
+            if True:    # Standard LLM options
                 llm_options = ["claude-3.5-sonnet", "gpt-4o"]
-                selected_llms = st.multiselect("Select LLM(s):", llm_options, default=[llm_options[0]])
+                
+                # Add Bedrock models that passed the image test
+                try:
+                    vision_model_path = "llm_processing/bedrock/model_info/vision_model_info.json"
+                    if os.path.exists(vision_model_path):
+                        with open(vision_model_path, 'r') as f:
+                            models = json.load(f)
+                            for model in models:
+                                if model.get("image_test_success", False):
+                                    model_id = model.get("modelId", "")
+                                    bedrock_model_id = f"bedrock-{model_id}"
+                                    llm_options.append(bedrock_model_id)
+                except Exception as e:
+                    st.warning(f"Could not load Bedrock models: {str(e)}")
+                st.session_state.selected_llms = []    
+                selected_llm1 = st.radio("Select LLM:", llm_options, index=None)
+                if not selected_llm1:
+                    st.stop()
+                else:    
+                    st.session_state.selected_llms.append(selected_llm1)
+                    if selected_llm1 not in st.session_state.session_obj.input_dict["selected_llms"]:
+                        st.session_state.session_obj.input_dict["selected_llms"].append(selected_llm1)    
+                    if st.button("Add Model For Validation"):
+                        llm_options.remove(st.session_state.selected_llms[0])
+                        st.radio("Select Validator:", llm_options, key="validator", index=None, on_change=add_validator_model)
+                if len(st.session_state.session_obj.input_dict["selected_llms"]) > 1:
+                    llm1, *other_llms = st.session_state.session_obj.input_dict["selected_llms"]
+                    st.success(f"{llm1} is selected, and {' and '.join(other_llms)} will validate fields")       
+                            
+                            
+############################
+                selected_llms = st.session_state.session_obj.input_dict["selected_llms"]
+                print(f"setting api_key_dict: {selected_llms = }")
                 api_key_dict = {f"{llm}_key": None for llm in selected_llms}
                 if "OPENAI_API_KEY" in os.environ:
                     api_key_dict["gpt-4o_key"] = os.getenv("OPENAI_API_KEY")
                 if "ANTHROPIC_API_KEY" in os.environ:
                     api_key_dict["claude-3.5-sonnet_key"] = os.getenv("ANTHROPIC_API_KEY")
                 for llm in selected_llms:
+                    if llm.startswith("bedrock-"):
+                        continue
                     if f"{llm}_key" in api_key_dict:
                         continue
                     api_key_file = st.file_uploader(f"Upload API Key File For {llm} (TXT)", type=["txt"])
@@ -520,8 +553,25 @@ def main():
                         api_key_dict[llm] = api_key_file
                         api_key_dict[f"{llm}_key"] = api_key
                 st.session_state.session_obj.input_dict["api_key_dict"] = api_key_dict
-                st.session_state.session_obj.input_dict["selected_llms"] = selected_llms
+                #st.session_state.session_obj.input_dict["selected_llms"] = selected_llms
+                if st.session_state.session_obj.input_dict["selected_llms"]:
                 # Input type selection
+                    if not os.path.isdir(PROMPT_FOLDER):
+                        st.warning(f"Prompt folder '{PROMPT_FOLDER}' does not exist.")
+                        prompt_files = []
+                    else:
+                        prompt_files = [f for f in os.listdir(PROMPT_FOLDER) if f.endswith(".txt")]
+                        prompt_files.sort()
+                    if prompt_files:
+                        selected_prompt_file = st.selectbox("Select a Prompt:", prompt_files)
+                        with open(os.path.join(PROMPT_FOLDER, selected_prompt_file), "r", encoding="utf-8") as pf:
+                            st.session_state.session_obj.input_dict["prompt_text"] = pf.read().strip()
+                            st.session_state.session_obj.input_dict["selected_prompt_filename"] = selected_prompt_file
+                    else:
+                        st.warning("No .txt prompt files found in the prompt folder.")
+                        selected_prompt_file = ""
+            ############  
+             # Add this code to transcriber.py where LLM options are defined
                 input_type = st.radio(
                     "Select Image Input Type:",
                     ["URL List", "Local Images"],
@@ -564,7 +614,7 @@ def main():
                     
                     # Initialize the volume name in session state if it doesn't exist
                     if 'volume_name' not in st.session_state:
-                        modelname = "-".join(st.session_state.session_obj.input_dict["selected_llms"])
+                        modelname = st.session_state.session_obj.input_dict["selected_llms"][0]
                         st.session_state.volume_name = f"{modelname}-{get_timestamp_min()}"
                     
                     st.write("Accept or Change the name for this run:")

@@ -61,7 +61,7 @@ Run the installation wizard. In your Command Line Interface:
 
  The installation process is explained below.
 
-Run the application Transcriber.py. In your Command Line Intterface, type:
+Run the application Transcriber.py. In your Command Line Interface, type:
 
 `streamlit run transcriber.py`
 
@@ -101,21 +101,38 @@ If you need to set things up manually, these are the steps you must take:
 
 1) Install streamlit, and upgrade it
 
-2) Install all packages in `requirement.txt`. If `pip install -r requirements.txt` doesn't work right away, try creating a virtual environment first, and then install those packages.
+2) Install all packages in `requirements.txt`. If `pip install -r requirements.txt` doesn't work right away, try creating a virtual environment first, and then install those packages.
 
-3) Created `.env` file in the root directory, with:
+3) Create a `.env` file in the root directory, with:
 
       `OPENAI_API_KEY="your key"`
-      
+
       `ANTHROPIC_API_KEY="your key"`
 
 An API_KEY can be left as an empty string if you don't plan on using those models from that provider
 
-4) Created these empty folders, if they don't already exist:
+4) Create these empty folders, if they don't already exist:
 
 `temp_images`, `llm_processing/raw_response_data`, `output`
 
 `output/raw_llm_responses`, `output/transcripts`, `output/versions`, `output/volumes`
+
+### AWS Bedrock Integration
+
+HerbariumScribe now supports AWS Bedrock models for image processing. This allows you to use models like Claude 3 Haiku, Claude 3.5 Sonnet, and Amazon Nova directly through your AWS account without needing separate API keys.
+
+To set up and use AWS Bedrock models:
+
+1. Run the Bedrock setup script:
+   ```
+   python setup_bedrock.py
+   ```
+
+2. When prompted, test the Bedrock models to determine which ones work with image processing.
+
+3. When running the transcriber, Bedrock models that passed the image test will appear in the LLM selection dropdown.
+
+For detailed instructions, see [BEDROCK_SETUP.md](BEDROCK_SETUP.md).
 
 ### Runtime
 

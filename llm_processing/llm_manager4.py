@@ -8,6 +8,7 @@ sys.path.append(parent)
 
 from llm_processing.claude_interface3 import ClaudeImageProcessor
 from llm_processing.openai_interface3 import GPTImageProcessor
+from llm_processing.bedrock_interface import create_image_processor
 from llm_processing.transcript6 import Transcript
 import llm_processing.utility as utility
 import json
@@ -16,7 +17,7 @@ class LLMManager:
     def __init__(self, msg, api_key_dict, selected_llms, selected_prompt, prompt_text):
         self.msg = msg
         self.api_key_dict = api_key_dict
-        self.selected_llms = selected_llms
+        self.selected_llms = selected_llms[::-1] # treat the list like a stack: i.e., first selected is run last so that version is returned
         self.selected_prompt = selected_prompt
         self.prompt_text = prompt_text
         self.processors = self.set_processors()
@@ -38,10 +39,16 @@ class LLMManager:
     def set_processors(self):
         processors = []
         for llm in self.selected_llms:
-            if "sonnet" in llm:
+            if "sonnet" in llm and not "bedrock" in llm:
                 processors += [ClaudeImageProcessor(self.api_key_dict[f"{llm}_key"], self.selected_prompt, self.prompt_text)]
-            if "gpt" in llm:
+            elif "gpt" in llm:
                 processors += [GPTImageProcessor(self.api_key_dict[f"{llm}_key"], self.selected_prompt, self.prompt_text)]
+            elif "bedrock" in llm:
+                # Extract the model ID from the llm name (format: "bedrock-modelId")
+                model_id = llm.split("-", 1)[1] if "-" in llm else ""
+                # Create a shorter model name for display
+                model_name = model_id.split(".")[-1] if "." in model_id else model_id
+                processors += [create_image_processor("", self.selected_prompt, self.prompt_text, model_id, model_name)]
         return processors
 
     def fill_out_generation_info_dict(self, transcript_obj, version_name, prior_version_name, modelname):
@@ -75,50 +82,3 @@ class LLMManager:
             transcript_text, costs = processor.process_image(base64_image, image_ref, image_ref_idx)
             version_name = self.create_version(transcript_obj, transcript_text, costs, processor.modelname, version_name)
         return image, transcript_obj, version_name, image_ref
-
-if __name__ == "__main__":
-    text = """
-    verbatimCollectors: M. Fleischer
-    collectedBy: M. Fleischer
-    secondaryCollectors: N/A
-    recordNumber: B-2734
-    verbatimEventDate: 25.9.1903
-    minimumEventDate: 1903-09-25
-    maximumEventDate: N/A
-    verbatimIdentification: Macromitrium
-    latestScientificName: Macromitrium
-    identifiedBy: N/A
-    verbatimDateIdentified: N/A
-    associatedTaxa: N/A
-    country: Australia
-    firstPoliticalUnit: Queensland
-    secondPoliticalUnit: N/A
-    municipality: N/A
-    verbatimLocality: Eumundi (ca 100 km nordlich Brisbane)
-    locality: Eumundi (about 100 km north of Brisbane)
-    habitat: Urwald
-    verbatimElevation: N/A
-    verbatimCoordinates: N/A
-    otherCatalogNumbers: 1076713
-    originalMethod: Typed
-    typeStatus: N/A
-
-    ==================================================
-
-
-    """ 
-
-    costs_dict = {
-                "time to create/edit (mins)": 0.014347521464029948,
-                "input tokens": 2789,
-                "output tokens": 276,
-                "input cost $": 0.008,
-                "output cost $": 0.004,
-                }
-    prompt_name = "1.1Stripped.txt" 
-    image_ref = "C0268502F_p.jpg"
-    processor_manager = ProcessorManager(api_key_dict={}, selected_llms=[], selected_prompt=prompt_name, prompt_text="")
-    transcript_obj = Transcript(image_ref, prompt_name)
-    transcript_obj.initialize_versions()
-    processor_manager.create_version(transcript_obj, transcript_text=text, costs_dict=costs_dict, modelname="gpt-4o", prior_version_name="base")
-    
