@@ -22,6 +22,7 @@ import llm_processing.convert_csv_to_volume as convert_csv_to_volume
 import llm_processing.utility as utility
 import time
 import math
+import json
 
 # Constants
 ENV_FILE = ".env"
@@ -243,9 +244,15 @@ def handle_proceed_option():
         time.sleep(3)
         st.session_state.session_obj.reset_inputs()
 
-def locate_images_in_temp_folder(csv_file):
-    csv_content = StringIO(csv_file.getvalue().decode('utf-8'))
-    data = list(csv.DictReader(csv_content))
+def locate_images_in_temp_folder(data_file):
+    content = StringIO(data_file.getvalue().decode('utf-8'))
+    if "csv" in data_file.type:
+        data = list(csv.DictReader(content))
+    elif "json" in data_file.type:
+        data = []
+        temp_dict = json.load(content)
+        for image_name, val in temp_dict.items():
+            data.append({"imageName": image_name} | val)    
     image_ref_name = find_image_ref_name(data)
     image_names = get_image_names_from_dicts(data, image_ref_name)
     temp_images = [f.split(r".")[0].lower() for f in os.listdir("temp_images")]
@@ -496,7 +503,7 @@ def main():
     if "session_obj" not in st.session_state or st.session_state.session_obj is None:
         st.session_state.session_obj = Session(user_name)
     update_status_bar_msg()    
-    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images (a.k.a. Volume)", "Import CSV (converts to Volume)"])
+    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images (a.k.a. Volume)", "Import CSV (converts to Volume)", "Import JSON (converts to Volume)"])
     if processing_type == "Process New Images":
         # Input Settings
         input_settings_container = st.container(border=True)
@@ -646,10 +653,10 @@ def main():
                 if st.session_state.pause_button_enabled:
                     with pause_button_col:
                         proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"], index=None, key="proceed_option", on_change=handle_proceed_option)           
-    elif processing_type == "Import CSV (converts to Volume)":
-        csv_file = st.file_uploader("Upload CSV File", type=["csv"])
-        if csv_file:
-            temp_images_dict, data, image_ref_name = locate_images_in_temp_folder(csv_file)
+    elif processing_type == "Import CSV (converts to Volume)" or processing_type == "Import JSON (converts to Volume)":
+        data_file = st.file_uploader("Upload CSV File", type=["csv"]) if processing_type == "Import CSV (converts to Volume)" else st.file_uploader("Upload JSON File", type=["json"])
+        if data_file:
+            temp_images_dict, data, image_ref_name = locate_images_in_temp_folder(data_file)
             num_images_missing = len(temp_images_dict["not_found"])
             if num_images_missing > 0:
                 st.warning(f"{num_images_missing} images not found in temp_images folder")
@@ -676,7 +683,7 @@ def main():
             else:
                 created_by_name = st.text_input("Enter the name of the user that created this data: ")
                 is_ai_generated = False
-            temp_name = csv_file.name.split(r".")[0]
+            temp_name = data_file.name.split(r".")[0]
             st.write("Accept or Edit the below name for this Volume")
             volume_name = st.text_input("Click Ctrl+Enter to Accept Edits: ", temp_name)
             if st.button(f"Create {volume_name}"):
