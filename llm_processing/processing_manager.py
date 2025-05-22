@@ -31,7 +31,7 @@ class ProcessingManager:
         self.jobs_dict = self.get_blank_jobs_dict()
         selected_images_info = self.input_dict["selected_images_info"]
         images_info_type = self.input_dict["images_info_type"]
-        self.jobs_dict["to_process"] = self.get_local_images(selected_images_info) if images_info_type == "local" else self.get_images_from_url(selected_images_info)
+        self.jobs_dict["to_process"] = self.get_local_images(selected_images_info) if images_info_type == "local_images" else self.get_images_from_url(selected_images_info)
         self.jobs_runner = JobsRunner(self.msg, self.user_name, self.input_dict, self.volume)
         self.jobs_runner.load_jobs(self.jobs_dict)
 
