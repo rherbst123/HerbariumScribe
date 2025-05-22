@@ -104,7 +104,7 @@ class BedrockImageProcessor(ImageProcessor):
             "inputImage": base64_image,
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
-                "temperature": 0.7,
+                "temperature": 0.0,
                 "topP": 0.9
             }
         }
@@ -435,7 +435,7 @@ class BedrockImageProcessorTesting(ImageProcessor):
             "inputImage": base64_image,
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
-                "temperature": 0.7,
+                "temperature": 0.0,
                 "topP": 0.9
             }
         }
@@ -670,7 +670,7 @@ class AmazonImageProcessor(BedrockImageProcessor):
             "inputImage": base64_image,
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
-                "temperature": 0.7,
+                "temperature": 0.0,
                 "topP": 0.9
             }
         }

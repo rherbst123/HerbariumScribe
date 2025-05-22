@@ -102,7 +102,7 @@ class BedrockImageProcessor(ImageProcessor):
             "inputImage": base64_image,
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
-                "temperature": 0.7,
+                "temperature": 0.0,
                 "topP": 0.9
             }
         }
@@ -324,7 +324,7 @@ class NovaImageProcessor(BedrockImageProcessor):
                     }
                 ],
             }],
-            "inferenceConfig": {"max_new_tokens": 4096, "top_p": 0.9, "temperature": 0.}
+            "inferenceConfig": {"max_new_tokens": 4096, "top_p": 0.9, "temperature": 0.0}
         }
     
     def update_usage(self, response_data: Dict[str, Any]):
@@ -364,7 +364,7 @@ class AmazonImageProcessor(BedrockImageProcessor):
             "inputImage": base64_image,
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
-                "temperature": 0.7,
+                "temperature": 0.0,
                 "topP": 0.9
             }
         }
