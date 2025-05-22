@@ -6,7 +6,7 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 import math
-from llm_processing.edit_distance import WeightedLevenshtein
+from llm_processing.edit_distance import NLTKDistance
 
 class TranscriptComparer:
     def __init__(self, transcript, edit_distance_config=None):
@@ -17,10 +17,10 @@ class TranscriptComparer:
         return valA.strip().lower() == valB.strip().lower() 
 
     def get_graded_match(self, valA, valB, is_a_match):
-        wl = WeightedLevenshtein(self.edit_distance_config)
+        ed = NLTKDistance()
         if not is_a_match and (valA=="N/A" or valB=="N/A"):
             return 0
-        return 1 - wl.calculate_weighted_difference(valA, valB, scaled=True)
+        return 1 - ed.calculate_edit_distance(valA, valB, scaled=True)
 
     def tally(self, d: dict, use_graded_match=False):
         return sum([val if use_graded_match else math.floor(val) for val in d.values()]) 
