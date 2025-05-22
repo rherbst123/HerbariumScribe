@@ -156,6 +156,7 @@ class BedrockImageProcessor(ImageProcessor):
             return False
         
         inference_types = self.model_info.get("inferenceTypesSupported", [])
+        return "INFERENCE_PROFILE" in inference_types
         return "INFERENCE_PROFILE" in inference_types and "ON_DEMAND" not in inference_types
     
     def get_inference_profile_id(self) -> str:
@@ -629,7 +630,7 @@ class NovaImageProcessor(BedrockImageProcessor):
                     }
                 ],
             }],
-            "inferenceConfig": {"max_new_tokens": 4096, "top_p": 0.9, "temperature": 0.7}
+            "inferenceConfig": {"max_new_tokens": 4096, "top_p": 0.9, "temperature": 0.0}
         }
     
     def update_usage(self, response_data: Dict[str, Any]):
