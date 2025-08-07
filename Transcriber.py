@@ -244,9 +244,22 @@ def handle_proceed_option():
         time.sleep(3)
         st.session_state.session_obj.reset_inputs()
 
-def locate_images_in_temp_folder(data_file):
+def is_created_by_FMBT(data_file):
     content = StringIO(data_file.getvalue().decode('utf-8'))
-    if "csv" in data_file.type:
+    data = json.load(content)
+    if "created_by" in data and data["created_by"] == "FieldMuseumBedrockTranscription":
+        return True
+    st.write(f"{data_file.name} is not aligned with current configurations!!!")
+    return False
+
+def locate_images_in_temp_folder(data_file, is_FMBT=False):
+    content = StringIO(data_file.getvalue().decode('utf-8'))
+    if is_FMBT:
+        data = []
+        image_costs = json.load(content)["images"]
+        for image_name, costs in image_costs.items():
+            data.append({"imageName": image_name} | costs)
+    elif "csv" in data_file.type:
         data = list(csv.DictReader(content))
     elif "json" in data_file.type:
         data = []
@@ -503,7 +516,7 @@ def main():
     if "session_obj" not in st.session_state or st.session_state.session_obj is None:
         st.session_state.session_obj = Session(user_name)
     update_status_bar_msg()    
-    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images (a.k.a. Volume)", "Import CSV (converts to Volume)", "Import JSON (converts to Volume)"])
+    processing_type = st.radio("Select Processing Operation:", ["Process New Images", "Edit Saved Processed Images (a.k.a. Volume)", "Import CSV (converts to Volume)", "Import JSON (converts to Volume)", "Import Data+Transcriptions from FMBT"])
     if processing_type == "Process New Images":
         # Input Settings
         input_settings_container = st.container(border=True)
@@ -652,7 +665,32 @@ def main():
                     status_bar = st.text_area("Status:", st.session_state.status_msg, height=100)
                 if st.session_state.pause_button_enabled:
                     with pause_button_col:
-                        proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"], index=None, key="proceed_option", on_change=handle_proceed_option)           
+                        proceed_option = st.radio("How to Proceeed?:", ["Pause", "Retry Failed and Remaining Jobs", "Finish Remaining Jobs", "Cancel All Jobs", "Cancel All Jobs and Abort Editing"], index=None, key="proceed_option", on_change=handle_proceed_option)
+    elif processing_type == "Import Data+Transcriptions from FMBT":
+        data_file = st.file_uploader("Upload -data.json from FieldMusemumBedrockTranscription", type=["json"])
+        if data_file and is_created_by_FMBT(data_file):
+            temp_images_dict, __, image_ref_name = locate_images_in_temp_folder(data_file, is_FMBT=True)
+            num_images_missing = len(temp_images_dict["not_found"])
+            if num_images_missing > 0:
+                st.warning(f"{num_images_missing} images not found in temp_images folder")
+                st.warning(f"Missing images: {', '.join(temp_images_dict['not_found'])}")
+                st.warning("Please copy the images to the 'temp_images' folder and try again")
+                if not st.button("Continue"):
+                    st.stop()
+            content = StringIO(data_file.getvalue().decode('utf-8'))
+            data = json.load(content)        
+            prompt_filename = data["prompt_name"]
+            modelname = data["model_name"]
+            is_ai_generated = True
+            volume_name = data["run_id"]
+            transcriptions = []
+            for run_number, image_data in data["run_numbering"].items():
+                transcriptions.append({"imageName": image_data["image_name"]} | image_data["transcription"])
+            costs = data["images"]
+            if st.button(f"Create {volume_name}"):
+                convert_csv_to_volume.convert(data=transcriptions, prompt_folder="prompts/", prompt_filename=prompt_filename, image_ref_name=image_ref_name, volume_name=volume_name, modelname=modelname, is_ai_generated=is_ai_generated, all_costs=costs)
+                st.session_state.session_obj.re_edit_volume(selected_volume_file=f"{volume_name}-volume.json")
+
     elif processing_type == "Import CSV (converts to Volume)" or processing_type == "Import JSON (converts to Volume)":
         data_file = st.file_uploader("Upload CSV File", type=["csv"]) if processing_type == "Import CSV (converts to Volume)" else st.file_uploader("Upload JSON File", type=["json"])
         if data_file:
@@ -755,11 +793,11 @@ def main():
                 # Add rotation controls in a row
                 rotation_col1, rotation_col2 = st.columns([1,2])
                 with rotation_col1:
-                    st.button("Open Full Screen", on_click=open_fullscreen)
+                    st.button("Full Screen", on_click=open_fullscreen)
                 with rotation_col2:
                     st.toggle("Auto-rotate wide images", key="auto_rotate", help="Automatically rotate images that are wider than tall")
                 
-                blank_space_height = 170 if st.session_state.get("editing_option", "Full Text")=="Full Text" else 310    
+                blank_space_height = 140 if st.session_state.get("editing_option", "Full Text")=="Full Text" else 310    
                 blank_space = st.container(border=False, height=blank_space_height)
                 # ... rest of your editor column code ...
                 
