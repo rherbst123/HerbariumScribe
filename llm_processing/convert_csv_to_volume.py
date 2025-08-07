@@ -27,31 +27,34 @@ def confirm_volume_name(csv_filename):
     return volume_name, modelname
 
 def get_transcript_content(image_data, fieldnames):
-    return {fieldname: image_data[fieldname] for fieldname in fieldnames}   
+    return {fieldname: image_data[fieldname]  if fieldname in image_data else "" for fieldname in fieldnames}   
 
-def process_dicts(unprocessed_dicts, fieldnames, prompt_filename, modelname, image_ref_name, is_ai_generated):
+def process_dicts(unprocessed_dicts, fieldnames, prompt_filename, modelname, image_ref_name, is_ai_generated, all_costs=None):
     pages = []
+    print(f"{unprocessed_dicts = }")
     for image_data in unprocessed_dicts:
+        print(f"{image_data = }")
         image_ref = image_data[image_ref_name]
         image = utility.get_image_from_temp_folder(image_ref)
         transcript_obj = Transcript(image_ref, prompt_filename)
         transcript_obj.initialize_versions()
         content = get_transcript_content(image_data, fieldnames)
-        costs = transcript_obj.get_blank_costs_dict()
+        costs = transcript_obj.get_blank_costs_dict() if not all_costs else all_costs[image_ref]
         version_name = transcript_obj.create_transcription_from_ai(content, modelname, costs, old_version_name="base", is_ai_generated=is_ai_generated)
         page = {"image": image, "transcript_obj": transcript_obj, "version_name": version_name, "image_ref": image_ref}
         pages.append(page)
     return pages
 
-def convert(data, prompt_folder, prompt_filename, image_ref_name, volume_name, modelname, is_ai_generated=True):
+def convert(data, prompt_folder, prompt_filename, image_ref_name, volume_name, modelname, is_ai_generated=True, all_costs=None):
     msg = {}
     volume = Volume(msg, volume_name)
     prompt_text = get_contents_from_txt(prompt_folder+prompt_filename)
     fieldnames = utility.get_fieldnames_from_prompt(prompt_text)
-    pages = process_dicts(data, fieldnames, prompt_filename, modelname, image_ref_name, is_ai_generated)
+    pages = process_dicts(data, fieldnames, prompt_filename, modelname, image_ref_name, is_ai_generated, all_costs)
     for page in pages:
         volume.add_page(page)
-    volume.commit_volume()   
+    volume.commit_volume()  # committing volume saves the volume and all its pages
+    print("Volume committed")   
 
 def main(csv_filename, prompt_folder, prompt_filename, image_ref_name):
     volume_name, modelname = confirm_volume_name(csv_filename)
